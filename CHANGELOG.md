@@ -2,6 +2,10 @@
 
 This file records public changes that affect skill behavior, package structure, or the decision-record format.
 
+## 2.1.1, 2026-08-25
+
+- Updated GitHub Actions to their current Node.js 24 releases.
+
 ## 2.1.0, 2026-08-25
 
 ### Public tests now separate package validity from behavior

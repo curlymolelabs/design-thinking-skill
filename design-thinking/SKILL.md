@@ -3,7 +3,7 @@ name: design-thinking
 description: Frame uncertain product, service, workflow, policy, or experience decisions through user evidence, problem framing, distinct options, prototypes, tests, and explicit build, revise, retest, defer, or stop choices. Use when the right problem, response, or next experiment is unclear. Do not use for straightforward implementation against an accepted specification or for purely visual styling.
 license: MIT
 metadata:
-  version: "2.1.0"
+  version: "2.1.1"
   short-description: "Turn uncertainty into evidence-backed product decisions"
 ---
 
