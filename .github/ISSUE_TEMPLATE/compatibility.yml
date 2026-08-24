@@ -1,0 +1,49 @@
+name: Client compatibility report
+description: Report an install, discovery, invocation, or behavior problem in one agent client.
+title: "[client]: "
+labels:
+  - compatibility
+body:
+  - type: markdown
+    attributes:
+      value: Do not include credentials, private prompts, customer data, or personal information.
+  - type: input
+    id: client
+    attributes:
+      label: Client and version
+      placeholder: Gemini CLI 1.2.3
+    validations:
+      required: true
+  - type: input
+    id: skill_version
+    attributes:
+      label: Skill version or commit
+      placeholder: 2.0.0 or commit SHA
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction steps
+      description: Include the installation method and the smallest safe prompt that reproduces the problem.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: observed
+    attributes:
+      label: Observed behavior
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Public data check
+      options:
+        - label: I removed credentials, private data, and personal information.
+          required: true

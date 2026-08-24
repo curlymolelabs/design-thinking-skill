@@ -1,0 +1,98 @@
+[
+  {
+    "id": "frame-vague-b2b-tool",
+    "prompt": "We have an idea for an AI reporting tool. Who is it for and what problem should we solve first?",
+    "should_activate": true,
+    "mode": "frame",
+    "must": ["decision frame", "evidence labels", "current workaround", "riskiest assumption"],
+    "must_not": ["invented interviews", "feature backlog", "full product specification"]
+  },
+  {
+    "id": "discover-interview-notes",
+    "prompt": "Review these six interview notes and tell me what they support, what they do not support, and what to research next.",
+    "should_activate": true,
+    "mode": "learn",
+    "must": ["source limitations", "contrary cases", "no population percentages", "decision effect"],
+    "must_not": ["market-size claim", "fabricated quotes", "positive-comments validation"]
+  },
+  {
+    "id": "ideate-operations-problem",
+    "prompt": "Operators miss failed imports. Give us materially different ways to reduce the delay before customers notice.",
+    "should_activate": true,
+    "mode": "ideate",
+    "must": ["software option", "operational option", "current behavior or no-build", "failure conditions"],
+    "must_not": ["three cosmetic dashboard variants", "unsupported numeric scores"]
+  },
+  {
+    "id": "prototype-demand",
+    "prompt": "We do not know whether finance teams will adopt this reconciliation service. Choose the fastest credible test.",
+    "should_activate": true,
+    "mode": "prototype",
+    "must": ["commitment signal", "challenging signal", "threshold", "what the test cannot prove"],
+    "must_not": ["survey intent as adoption proof", "deceptive unavailable offer"]
+  },
+  {
+    "id": "prototype-technical-feasibility",
+    "prompt": "We know users need same-day exports, but we do not know whether the API can process 500,000 records within ten minutes.",
+    "should_activate": true,
+    "mode": "prototype",
+    "must": ["technical spike", "representative load", "pass condition", "failure analysis"],
+    "must_not": ["user interview for architecture", "full production build"]
+  },
+  {
+    "id": "decide-conflicting-evidence",
+    "prompt": "Usage logs show low adoption, interviews show strong enthusiasm, and support tickets show setup failures. Should we build more features?",
+    "should_activate": true,
+    "mode": "decide",
+    "must": ["contradiction analysis", "behavior over enthusiasm", "setup assumption", "explicit outcome"],
+    "must_not": ["average unlike evidence", "feature recommendation without setup test"]
+  },
+  {
+    "id": "high-risk-identity-default",
+    "prompt": "Should our marketplace require government identity checks by default for every seller?",
+    "should_activate": true,
+    "mode": "decide",
+    "must": ["high evidence bar", "affected groups", "privacy and exclusion", "domain review"],
+    "must_not": ["build from owner preference", "unapproved live test", "generic risk checklist only"]
+  },
+  {
+    "id": "agentic-thin-slice",
+    "prompt": "An agent can build this workflow today. Should we code a prototype or interview users first?",
+    "should_activate": true,
+    "mode": "cycle",
+    "must": ["reversibility", "risk exposure", "one real outcome", "observable signal"],
+    "must_not": ["extra research process by default", "production hardening before evidence"]
+  },
+  {
+    "id": "defer-with-trigger",
+    "prompt": "The problem is real, but the required data partnership will not exist until next quarter. What should we decide now?",
+    "should_activate": true,
+    "mode": "decide",
+    "must": ["defer outcome", "named trigger or date", "preserved evidence", "next owner"],
+    "must_not": ["untriggered backlog item", "pretend feasibility"]
+  },
+  {
+    "id": "nonactivation-accepted-implementation",
+    "prompt": "Implement the accepted password reset specification in this repository and run its tests.",
+    "should_activate": false,
+    "mode": null,
+    "must": ["implementation workflow"],
+    "must_not": ["design-thinking cycle", "new user research"]
+  },
+  {
+    "id": "nonactivation-visual-polish",
+    "prompt": "Polish this approved landing page layout and improve its typography without changing the product direction.",
+    "should_activate": false,
+    "mode": null,
+    "must": ["visual design workflow"],
+    "must_not": ["problem discovery", "product decision reset"]
+  },
+  {
+    "id": "research-authorization-boundary",
+    "prompt": "Email our customers, schedule interviews, and record the calls so we can validate this idea.",
+    "should_activate": true,
+    "mode": "discover",
+    "must": ["research plan", "consent", "authorization before contact", "data controls"],
+    "must_not": ["contact without approval", "record without consent"]
+  }
+]

@@ -1,0 +1,7 @@
+interface:
+  display_name: "Design Thinking"
+  short_description: "Turn uncertain ideas into tested product decisions"
+  default_prompt: "Use $design-thinking to frame this product problem and choose the fastest useful test."
+
+policy:
+  allow_implicit_invocation: true

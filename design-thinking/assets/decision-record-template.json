@@ -1,0 +1,124 @@
+{
+  "schema_version": "2.0",
+  "decision_id": "example-product-decision-001",
+  "title": "Decide whether to build the proposed product change",
+  "status": "draft",
+  "created_at": "2026-01-01",
+  "updated_at": "2026-01-01",
+  "decision_owner": "product-owner",
+  "context": {
+    "decision": "State the choice this record must support",
+    "deadline": null,
+    "cost_of_error": "medium",
+    "reversibility": "high",
+    "affected_people": [
+      "Describe each affected role or group"
+    ]
+  },
+  "target_user": {
+    "role": "Describe the relevant user role",
+    "context": "Describe when the need becomes active",
+    "desired_progress": "Describe the outcome the user seeks"
+  },
+  "problem": {
+    "statement": "State the user problem without embedding a solution",
+    "current_behavior": "Describe what the user does now",
+    "barrier": "Describe the evidenced barrier",
+    "consequence": "Describe why the barrier matters",
+    "evidence_ids": [
+      "E1"
+    ]
+  },
+  "evidence": [
+    {
+      "id": "E1",
+      "claim": "State one precise finding or working assumption",
+      "source_type": "assumed",
+      "source": "Owner brief or another exact source",
+      "observed_at": "2026-01-01",
+      "strength": "weak",
+      "limitations": [
+        "This item has not yet been verified with direct user evidence"
+      ],
+      "decision_effect": "State what this finding changes"
+    }
+  ],
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "State one testable belief",
+      "lens": "user_value",
+      "consequence_if_false": "high",
+      "evidence_ids": [
+        "E1"
+      ],
+      "status": "untested",
+      "test": "Describe the smallest credible test"
+    }
+  ],
+  "options": [
+    {
+      "id": "O1",
+      "name": "Option A",
+      "mechanism": "Explain how the option changes the user outcome",
+      "depends_on": [
+        "A1"
+      ],
+      "user_value": "unknown",
+      "feasibility": "unknown",
+      "financial_fit": "unknown",
+      "responsibility": "Describe trust, access, accessibility, privacy, and harm concerns",
+      "failure_condition": "State what would make this option fail"
+    },
+    {
+      "id": "O2",
+      "name": "Keep current behavior",
+      "mechanism": "Make no product change while gathering named evidence",
+      "depends_on": [],
+      "user_value": "unknown",
+      "feasibility": "high",
+      "financial_fit": "unknown",
+      "responsibility": "Describe the cost and risk of leaving the problem unchanged",
+      "failure_condition": "State what would make waiting unacceptable"
+    }
+  ],
+  "experiment": {
+    "status": "planned",
+    "decision_enabled": "State the decision this result will enable",
+    "assumption_ids": [
+      "A1"
+    ],
+    "question": "State the uncertainty this test addresses",
+    "hypothesis": "State a falsifiable prediction",
+    "method": "Describe the evidence-producing method",
+    "prototype": "Describe what participants or systems will experience",
+    "participants_or_source": "Describe who or what provides evidence",
+    "task_or_trigger": "Describe what starts the behavior",
+    "supporting_signal": "State observable evidence that supports the hypothesis",
+    "challenging_signal": "State observable evidence that challenges it",
+    "threshold": "State the evidence bar set before the test",
+    "stop_rule": "State when enough evidence has been collected",
+    "intentional_omissions": [
+      "List what this experiment does not prove"
+    ],
+    "controls": [
+      "List required consent, privacy, safety, authorization, or rollback controls"
+    ],
+    "result": "pending",
+    "limitations": []
+  },
+  "decision": {
+    "outcome": "pending",
+    "reason": "Pending evidence",
+    "evidence_ids": [],
+    "rejected_option_ids": [],
+    "decided_at": null,
+    "unknowns": [],
+    "revisit_trigger": null
+  },
+  "next_step": {
+    "owner": "product-owner",
+    "action": "Run the named test",
+    "completion_signal": "Evidence is recorded and a decision is made"
+  }
+}
