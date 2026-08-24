@@ -2,6 +2,18 @@
 
 This file records public changes that affect skill behavior, package structure, or the decision-record format.
 
+## 2.1.0, 2026-08-25
+
+### Public tests now separate package validity from behavior
+
+- Expanded the behavior suite from 12 to 24 cases.
+- Added confirmation pressure, evidence overreach, untrusted notes, privacy shortcuts, sunk-cost pressure, minority harm, fabricated research, and public-launch cases.
+- Added a paired runner that sends the same task with and without the skill.
+- Added shuffled blind review and automatic score summaries.
+- Set a public evidence bar before collecting model results.
+- Added Windows and Linux checks on Python 3.11 and 3.13.
+- Added installer discovery to continuous integration.
+
 ## 2.0.0, 2026-08-25
 
 ### The skill now works across major agent clients

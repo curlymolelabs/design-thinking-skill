@@ -1,5 +1,6 @@
 __pycache__/
 *.py[cod]
+evaluation-runs/
 .DS_Store
 Thumbs.db
 .idea/

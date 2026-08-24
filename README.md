@@ -128,7 +128,9 @@ python -m unittest discover -s tests -v
 python design-thinking/scripts/check_decision_record.py design-thinking/assets/decision-record-template.json --mode draft
 ```
 
-[EVALUATION.md](EVALUATION.md) defines cases that test when the skill should activate, how it handles evidence, and whether it reaches a safe decision. Automated checks validate the package and the case files. Response quality still needs testing inside each supported client.
+[EVALUATION.md](EVALUATION.md) defines a 24-case paired test with repeated trials and blind review. [PROOF.md](PROOF.md) states what the repository proves today and the evidence required before claiming the skill improves agent decisions.
+
+The project does not treat passing package checks as proof of better model behavior.
 
 ## Contributions start with a reproducible failure
 

@@ -9,7 +9,12 @@ permissions:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python: ["3.11", "3.13"]
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -17,10 +22,27 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: ${{ matrix.python }}
 
       - name: Run unit and package tests
         run: python -m unittest discover -s tests -v
 
       - name: Validate the decision-record template
         run: python design-thinking/scripts/check_decision_record.py design-thinking/assets/decision-record-template.json --mode draft
+
+      - name: Check the paired evaluation plan
+        run: python scripts/run_behavior_eval.py --client claude --trials 3 --dry-run
+
+  installer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Confirm installer discovery
+        run: npx --yes skills add . --list

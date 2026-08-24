@@ -76,6 +76,7 @@ class SkillPackageTests(unittest.TestCase):
         self.assertTrue(expected_modes.issubset(active_modes))
         self.assertGreaterEqual(sum(not case["should_activate"] for case in cases), 2)
         for case in cases:
+            self.assertTrue(case["category"].strip())
             self.assertTrue(case["prompt"].strip())
             self.assertTrue(case["must"])
             self.assertTrue(case["must_not"])
