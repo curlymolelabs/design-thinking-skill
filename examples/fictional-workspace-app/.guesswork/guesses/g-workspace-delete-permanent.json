@@ -1,0 +1,33 @@
+{
+  "schema": "guesswork/1",
+  "id": "g-workspace-delete-permanent",
+  "title": "Deleting a workspace erases it immediately with no restore",
+  "why": "No retention rule was given, and a hard delete was the shortest path",
+  "category": "data",
+  "stakes": "high",
+  "reversible": false,
+  "basis": "assumed",
+  "where": [
+    "src/workspaces/delete.ts:14"
+  ],
+  "alternatives": [
+    "30-day restore window",
+    "Require typing the workspace name to confirm"
+  ],
+  "question": null,
+  "status": "open",
+  "resolution": null,
+  "test": null,
+  "superseded_by": null,
+  "created_by": "agent",
+  "created_at": "2026-10-26T08:20:11Z",
+  "updated_at": "2026-10-26T08:20:11Z",
+  "history": [
+    {
+      "at": "2026-10-26T08:20:11Z",
+      "status": "open",
+      "by": "agent",
+      "note": "recorded"
+    }
+  ]
+}

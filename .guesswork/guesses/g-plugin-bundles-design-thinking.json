@@ -1,0 +1,44 @@
+{
+  "schema": "guesswork/1",
+  "id": "g-plugin-bundles-design-thinking",
+  "title": "The Claude Code plugin installs both the Guesswork and Design Thinking skills",
+  "why": null,
+  "category": "ux",
+  "stakes": "low",
+  "reversible": true,
+  "basis": "assumed",
+  "where": [
+    ".claude-plugin/plugin.json"
+  ],
+  "alternatives": [
+    "Ship Design Thinking as a separate plugin"
+  ],
+  "question": null,
+  "status": "decided",
+  "resolution": {
+    "choice": "a",
+    "decision": "The Claude Code plugin installs both the Guesswork and Design Thinking skills",
+    "by": "claude-code (delegated by owner)",
+    "at": "2026-10-26T09:18:01Z",
+    "note": "Owner delegated this call (\"you decide what is best\"). Low stakes and cheap to change later; kept as built."
+  },
+  "test": null,
+  "superseded_by": null,
+  "created_by": "claude-code",
+  "created_at": "2026-10-26T08:19:11Z",
+  "updated_at": "2026-10-26T09:18:01Z",
+  "history": [
+    {
+      "at": "2026-10-26T08:19:11Z",
+      "status": "open",
+      "by": "claude-code",
+      "note": "recorded"
+    },
+    {
+      "at": "2026-10-26T09:18:01Z",
+      "status": "decided",
+      "by": "claude-code (delegated by owner)",
+      "note": "Owner delegated this call (\"you decide what is best\"). Low stakes and cheap to change later; kept as built."
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "schema": "guesswork/1",
+  "id": "g-action-fails-on-high",
+  "title": "The GitHub Action fails a pull request while it adds open high-stakes guesses",
+  "why": "A gate makes the ledger matter in teams; this repository's own workflow uses report-only mode",
+  "category": "defaults",
+  "stakes": "medium",
+  "reversible": true,
+  "basis": "assumed",
+  "where": [
+    "action.yml"
+  ],
+  "alternatives": [
+    "Report only by default; teams opt in to failing"
+  ],
+  "question": null,
+  "status": "decided",
+  "resolution": {
+    "choice": "b",
+    "decision": "Report only by default; teams opt in to failing",
+    "by": "claude-code (delegated by owner)",
+    "at": "2026-10-26T09:18:00Z",
+    "note": "Owner delegated this call (\"you decide what is best\"). A first install should never turn CI red; teams opt in with fail-on: high."
+  },
+  "test": null,
+  "superseded_by": null,
+  "created_by": "claude-code",
+  "created_at": "2026-10-26T08:19:11Z",
+  "updated_at": "2026-10-26T09:18:00Z",
+  "history": [
+    {
+      "at": "2026-10-26T08:19:11Z",
+      "status": "open",
+      "by": "claude-code",
+      "note": "recorded"
+    },
+    {
+      "at": "2026-10-26T09:18:00Z",
+      "status": "decided",
+      "by": "claude-code (delegated by owner)",
+      "note": "Owner delegated this call (\"you decide what is best\"). A first install should never turn CI red; teams opt in with fail-on: high."
+    }
+  ]
+}

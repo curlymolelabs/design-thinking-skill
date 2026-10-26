@@ -1,0 +1,7 @@
+interface:
+  display_name: "Guesswork"
+  short_description: "Record the product decisions your agent made and answer them in one line"
+  default_prompt: "Use $guesswork to record the product decisions you made without instructions and end with the receipt."
+
+policy:
+  allow_implicit_invocation: true

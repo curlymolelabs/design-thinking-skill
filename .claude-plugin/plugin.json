@@ -1,0 +1,26 @@
+{
+  "name": "guesswork",
+  "displayName": "Guesswork",
+  "version": "0.1.0",
+  "description": "Review the decisions, not the diff. Your agent records every product decision it made without instructions, you answer the risky ones in one line, and every later session, pull request, and CI run respects your answers.",
+  "author": {
+    "name": "Curly Mole Labs",
+    "url": "https://github.com/curlymolelabs"
+  },
+  "homepage": "https://github.com/curlymolelabs/design-thinking-skill",
+  "repository": "https://github.com/curlymolelabs/design-thinking-skill",
+  "license": "MIT",
+  "keywords": [
+    "agents",
+    "decisions",
+    "code-review",
+    "vibe-coding",
+    "product",
+    "memory",
+    "design-thinking"
+  ],
+  "skills": [
+    "./guesswork",
+    "./design-thinking"
+  ]
+}

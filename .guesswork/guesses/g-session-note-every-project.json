@@ -1,0 +1,44 @@
+{
+  "schema": "guesswork/1",
+  "id": "g-session-note-every-project",
+  "title": "With the plugin installed, every project gets the recording convention at session start, before any ledger exists",
+  "why": null,
+  "category": "defaults",
+  "stakes": "low",
+  "reversible": true,
+  "basis": "assumed",
+  "where": [
+    "hooks/hooks.json"
+  ],
+  "alternatives": [
+    "Stay silent until a project runs guesswork init"
+  ],
+  "question": null,
+  "status": "decided",
+  "resolution": {
+    "choice": "a",
+    "decision": "With the plugin installed, every project gets the recording convention at session start, before any ledger exists",
+    "by": "claude-code (delegated by owner)",
+    "at": "2026-10-26T09:18:01Z",
+    "note": "Owner delegated this call (\"you decide what is best\"). Low stakes and cheap to change later; kept as built."
+  },
+  "test": null,
+  "superseded_by": null,
+  "created_by": "claude-code",
+  "created_at": "2026-10-26T08:19:11Z",
+  "updated_at": "2026-10-26T09:18:01Z",
+  "history": [
+    {
+      "at": "2026-10-26T08:19:11Z",
+      "status": "open",
+      "by": "claude-code",
+      "note": "recorded"
+    },
+    {
+      "at": "2026-10-26T09:18:01Z",
+      "status": "decided",
+      "by": "claude-code (delegated by owner)",
+      "note": "Owner delegated this call (\"you decide what is best\"). Low stakes and cheap to change later; kept as built."
+    }
+  ]
+}

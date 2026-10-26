@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "guesswork"
+version = "0.1.0"
+description = "Review the decisions your coding agent made, not just the diff."
+readme = "README.md"
+requires-python = ">=3.9"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Curly Mole Labs" }]
+keywords = ["agents", "ai", "code-review", "decisions", "claude-code", "vibe-coding"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Topic :: Software Development :: Quality Assurance",
+]
+
+[project.urls]
+Homepage = "https://github.com/curlymolelabs/design-thinking-skill"
+Issues = "https://github.com/curlymolelabs/design-thinking-skill/issues"
+
+[project.scripts]
+guesswork = "guesswork:main"
+
+[tool.setuptools]
+package-dir = { "" = "guesswork/scripts" }
+py-modules = ["guesswork"]

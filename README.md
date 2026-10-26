@@ -1,142 +1,170 @@
-# Design Thinking for AI Agents
+# Guesswork
 
-[![Verify skill package](https://github.com/curlymolelabs/design-thinking-skill/actions/workflows/verify.yml/badge.svg)](https://github.com/curlymolelabs/design-thinking-skill/actions/workflows/verify.yml)
+**Review the decisions, not the diff.**
+
+[![Verify package](https://github.com/curlymolelabs/design-thinking-skill/actions/workflows/verify.yml/badge.svg)](https://github.com/curlymolelabs/design-thinking-skill/actions/workflows/verify.yml)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-This skill helps AI agents turn uncertain product, service, workflow, policy, and experience ideas into decisions supported by evidence.
+Your coding agent makes dozens of product decisions you never asked for: how long a session lasts, who can invite whom, whether a delete can be undone, when a trial starts charging. Those decisions hide inside diffs nobody reads, and they cause the bugs that cost money, data, and trust.
 
-It helps an agent decide what deserves to be built, which assumption should be tested first, and when to build, revise, retest, defer, or stop.
+Guesswork makes the agent keep receipts. It records every decision it made without instructions, ranks them by what it costs if the guess is wrong, and ends the turn with a receipt you can answer in one line:
+
+```text
+Guesswork · 5 decisions need you (2 high stakes)
+
+1. Deleting a workspace erases it immediately with no restore (high stakes · data · hard to undo)
+   - a Keep as built
+   - b 30-day restore window
+   - c Require typing the workspace name to confirm
+2. CSV exports include every member's email address (high stakes · privacy)
+   - a Keep as built
+   - b Only admins can export email addresses
+   - c Leave email addresses out of exports
+3. Workspace names must be unique across the whole product (medium stakes · ux · hard to undo)
+   - a Keep as built
+   - b Names only need to be unique per owner
+
+Reply with your picks, like `1b 2a 3a`. `all a` keeps everything as built.
+```
+
+You reply `1b 2c 3b`. The agent changes the code, records your answers, and every later session, pull request, and CI run respects them.
+
+![Guesswork report for a fictional workspace app](docs/report.png)
+
+## It closes the loop that code review misses
+
+- **Receipts.** The agent records each unspecified decision as it works and ends the turn with the risky ones. Low-stakes guesses are counted, not shown.
+- **One-line answers.** Replies like `1b 2a`, `all a`, or `2: restore for 14 days` become code changes and permanent records.
+- **Decision memory.** In Claude Code, locked decisions load at session start and survive compaction. Editing a file that implements one reminds the agent that the owner chose it.
+- **A guardrail against forgetting.** Once per turn, a stop hook asks the agent to record guesses when code changed and nothing was recorded, or to show decisions it recorded but never showed you.
+- **Audit an existing app.** `/guesswork:audit` finds the decisions already hidden in your codebase, such as session lengths, deletion rules, export contents, and plan limits.
+- **Pull request review.** A GitHub Action summarizes the decisions in a pull request and can block merging while high-stakes guesses are open.
+- **Evidence when opinions are not enough.** When an answer depends on what users will do, the bundled [Design Thinking skill](docs/design-thinking.md) designs the smallest credible test.
+
+## Install it in under a minute
+
+### Claude Code gets the full loop
+
+```text
+/plugin marketplace add curlymolelabs/design-thinking-skill
+/plugin install guesswork@curlymolelabs
+```
+
+On Claude Code 2.1.275 or later, one step also works:
+
+```text
+/plugin install guesswork --marketplace curlymolelabs/design-thinking-skill
+```
+
+Then build something, or run `/guesswork:audit` in an existing project. To skip permission prompts for the CLI, allow `Bash(guesswork:*)`.
+
+### Codex, Cursor, Gemini CLI, OpenCode, and other Agent Skills clients
+
+```bash
+npx skills add https://github.com/curlymolelabs/design-thinking-skill --skill guesswork
+python3 <skill folder>/scripts/guesswork.py init --agents-md
+```
+
+`init --agents-md` adds a short convention to `AGENTS.md`, which most agents read on every task. These clients get receipts and memory through the skill but not the hooks. See [the client guide](guesswork/references/clients.md).
+
+### The CLI on its own
+
+```bash
+pipx install git+https://github.com/curlymolelabs/design-thinking-skill
+uvx --from git+https://github.com/curlymolelabs/design-thinking-skill guesswork status
+```
+
+The CLI is one Python file with no dependencies. It needs Python 3.9 or newer.
+
+## How the loop works
 
 ```mermaid
 flowchart LR
-    A[Uncertain decision] --> B[Evidence and affected people]
-    B --> C[Riskiest weak assumption]
-    C --> D[Smallest credible test]
-    D --> E{Evidence meets the declared bar?}
-    E -->|Yes| F[Build]
-    E -->|Response failed| G[Revise]
-    E -->|Evidence stayed weak| H[Retest]
-    E -->|Wait for a trigger| I[Defer]
-    E -->|Problem not justified| J[Stop]
+    A[Agent builds] --> B[Records each unspecified decision]
+    B --> C[Receipt ranked by stakes]
+    C --> D{You reply 1b 2a}
+    D --> E[Agent changes code and records answers]
+    E --> F[Locked decisions]
+    F --> G[Later sessions, pull requests, and CI respect them]
 ```
 
-## This skill changes product decisions, not just workshop output
+Agents are told to guess the safe way when they must guess: soft delete over hard delete, private over public, opt-in over opt-out, a reminder before any charge. They ask before building only when a decision is high stakes and expensive to reverse.
 
-The skill starts with the decision, affected people, current evidence, cost of error, and reversibility. It does not force every request through a five-stage workshop.
-
-It gives agents concrete rules for:
-
-- separating observation, first-hand reports, external evidence, inference, and assumption;
-- choosing research or prototyping methods from the uncertainty;
-- raising the evidence bar for money, identity, privacy, safety, public defaults, regulation, and costly foundations;
-- generating materially different responses, including service, policy, operational, and no-build options;
-- building disposable thin slices when real interaction can answer the question faster;
-- preserving evidence, rejected options, remaining risk, and the next decision for later agents.
-
-## Seven modes cover the useful entry points
-
-| Mode | Use it when | Result |
-|---|---|---|
-| `frame` | The user or problem remains unclear | Known evidence, affected user, desired progress, and a clear problem statement |
-| `discover` | More user or context evidence is needed | Research question, method, source plan, synthesis, limits |
-| `ideate` | The team needs distinct responses | Options that work in different ways, with a clear comparison |
-| `prototype` | One uncertainty needs a credible test | Prototype, prediction, task, signals, threshold, and stop rule |
-| `learn` | Findings need interpretation | Evidence synthesis, contradictions, changed assumptions |
-| `decide` | Investment needs a clear choice | Build, revise, retest, defer, or stop decision |
-| `cycle` | The request spans several uncertain steps | The shortest connected path to a decision |
-
-## Install it in Agent Skills clients
-
-From a cloned repository, the simplest installer is:
-
-```bash
-npx skills add https://github.com/curlymolelabs/design-thinking-skill --skill design-thinking
-```
-
-You can also copy the complete `design-thinking` folder into a client skill directory.
-
-Installation paths are included for Codex, Claude Code, Cursor, OpenCode, Grok Build, OpenClaw, Hermes Agent, DeepSeek Harness, ZCode, Gemini CLI, Google Antigravity, Pi, Orca ADE, and ChatGPT.
-
-Grok Bot uses product-managed saved skills instead of direct GitHub package imports. The repository includes a compact adapter for that client.
-
-See [the client compatibility guide](COMPATIBILITY.md) for exact commands, support levels, and limitations.
-
-ChatGPT users with Skills access can upload the skill folder or a zip from the Skills interface. Client support and account access can change, so check [the compatibility guide](COMPATIBILITY.md) before installation.
-
-The core instructions do not depend on one client's tool names.
-
-## Invoke it with a real decision
+## The ledger is plain files in your repository
 
 ```text
-Use $design-thinking to decide who this product is for, which problem is supported by evidence, and the fastest credible test.
+.guesswork/
+|-- config.json
+`-- guesses/
+    |-- g-workspace-delete-permanent.json
+    `-- g-trial-converts-silently.json
 ```
 
-```text
-Use $design-thinking in discover mode. Turn these interview notes into findings without treating anecdotes as market percentages.
+Each guess is one JSON file with the decision in plain language, why it was made, its category and stakes, whether it can be undone, the files that implement it, the alternatives, and the owner's answer. One file per guess keeps parallel agents and branches from colliding. Commit the folder with the code it describes. See [the ledger format](guesswork/references/ledger-format.md).
+
+Agents are told never to write secrets, credentials, or personal data into the ledger. In a public repository, the ledger is public too.
+
+## Commands
+
+| Command | What it does |
+|---|---|
+| `guesswork log` | Record guesses from flags or a JSON batch on standard input |
+| `guesswork receipt` | Show the open decisions that need you, numbered for one-line replies |
+| `guesswork decide 1b 2a` | Record answers to the latest receipt, or `g-id=b`, or `--custom "..."` |
+| `guesswork context <files>` | Show the decisions that cover some files |
+| `guesswork scan` | List code lines that often hide product decisions |
+| `guesswork report` | Write the HTML report to `.guesswork/report.html` |
+| `guesswork pr --base origin/main` | Summarize the decisions on a branch in Markdown |
+| `guesswork check --fail-on high` | Exit with an error while open guesses reach a stakes level |
+| `guesswork test <id> --plan "..."` | Mark a guess that needs evidence before anyone decides |
+| `guesswork status` | One-line summary, also usable in a status line |
+
+## Review decisions in pull requests
+
+```yaml
+name: Guesswork
+on: pull_request
+permissions:
+  contents: read
+  pull-requests: write
+jobs:
+  decisions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: curlymolelabs/design-thinking-skill@main
+        with:
+          comment: "true"
 ```
 
-```text
-Use $design-thinking to compare a software response, a service response, and keeping the current process.
-```
+The action writes the summary to the job summary and keeps one pull request comment up to date. By default it only reports. To block merging while a pull request adds open high-stakes guesses, add `fail-on: high`. Pin the action to a release tag once one exists.
 
-```text
-Use $design-thinking to choose whether we should build, revise, retest, defer, or stop this feature.
-```
+## How it differs from rules files and decision logs
 
-The skill can also activate automatically when a compatible client matches the request to its description.
+- **`CLAUDE.md` and `AGENTS.md`** hold rules you write before the work. Guesswork captures the decisions the agent made during the work that you never anticipated.
+- **Decision logs and ADRs** record what your team decided. Guesswork records what the agent decided for you, then asks you.
+- **Code review** reads the diff. Guesswork reads the decisions, so you can review a two-thousand-line change in five answers.
 
-[The fictional repair-cooperative example](examples/fictional-repair-handoff-decision-brief.md) shows how the skill compares software, service, policy, and no-build responses without treating assumptions as research.
+## What is proven so far
 
-## The package loads detail only when needed
+| Question | Current answer |
+|---|---|
+| Do the CLI, hooks, receipts, pull request summaries, and report behave as specified? | Yes, covered by unit tests on Linux and Windows in CI |
+| Does the Claude Code plugin pass Claude Code's own validator? | Yes, `claude plugin validate` passes for the plugin and the marketplace |
+| Do agents reliably record the decisions they make? | Not measured yet |
+| Do owners answer receipts and keep using them? | Not measured yet |
 
-```text
-design-thinking/
-|-- SKILL.md
-|-- agents/openai.yaml
-|-- assets/decision-record-template.json
-|-- references/
-|   |-- agentic-product-development.md
-|   |-- decision-output-guide.md
-|   |-- evidence-and-decisions.md
-|   |-- ideation-and-facilitation.md
-|   |-- methods.md
-|   `-- research-and-testing.md
-`-- scripts/check_decision_record.py
-```
+This repository uses Guesswork on itself. Its [`.guesswork/`](.guesswork/README.md) folder holds the real decisions made while building Guesswork and how each one was settled. The owner delegated those first calls to the agent, and every record says so. [PROOF.md](PROOF.md) describes the evidence bar for the behavior claims.
 
-`SKILL.md` stays short. Detailed methods remain in focused guides that agents read only when the task calls for them.
+## Design Thinking is the companion skill
 
-## Structured records keep later agents from guessing
+The original skill in this repository, Design Thinking, helps agents turn uncertain product ideas into decisions backed by evidence. Guesswork hands off to it when an owner's preference cannot settle a guess. Read [the Design Thinking guide](docs/design-thinking.md).
 
-Substantial decisions can use the JSON template:
+## Contribute
 
-```bash
-python design-thinking/scripts/check_decision_record.py path/to/record.json --mode draft
-python design-thinking/scripts/check_decision_record.py path/to/record.json --mode decision
-```
-
-The validator uses Python's standard library. It checks identifiers, dates, evidence labels, references between records, risk levels, option count, deferred revisit triggers, and the evidence bar for build decisions.
-
-Version 2.0 changes the decision-record structure. See [CHANGELOG.md](CHANGELOG.md) before migrating older records.
-
-## Checks cover package structure and agent behavior
-
-Run the repository checks with:
-
-```bash
-python -m unittest discover -s tests -v
-python design-thinking/scripts/check_decision_record.py design-thinking/assets/decision-record-template.json --mode draft
-```
-
-[EVALUATION.md](EVALUATION.md) defines a 24-case paired test with repeated trials and blind review. [PROOF.md](PROOF.md) states what the repository proves today and the evidence required before claiming the skill improves agent decisions.
-
-The project does not treat passing package checks as proof of better model behavior.
-
-## Contributions start with a reproducible failure
-
-[The contribution guide](CONTRIBUTING.md) explains how to report a cross-client failure without exposing private prompts or user data. Use the compatibility issue template when a client stops discovering or invoking the skill.
-
-Report vulnerabilities and private data exposure through [GitHub's private security reporting](SECURITY.md), not a public issue.
+Hook adapters for Cursor, Codex, Gemini CLI, and OpenCode are the most useful contributions right now, followed by scan rules for more frameworks. Read [the contribution guide](CONTRIBUTING.md). Report vulnerabilities through [private security reporting](SECURITY.md).
 
 ## License
 

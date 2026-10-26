@@ -1,0 +1,33 @@
+{
+  "schema": "guesswork/1",
+  "id": "g-invite-links-expire-7-days",
+  "title": "Invitation links expire after 7 days",
+  "why": null,
+  "category": "security",
+  "stakes": "medium",
+  "reversible": true,
+  "basis": "assumed",
+  "where": [
+    "src/invites/token.ts:3"
+  ],
+  "alternatives": [
+    "Links expire after 24 hours",
+    "Links work until used"
+  ],
+  "question": null,
+  "status": "open",
+  "resolution": null,
+  "test": null,
+  "superseded_by": null,
+  "created_by": "agent",
+  "created_at": "2026-10-26T08:20:11Z",
+  "updated_at": "2026-10-26T08:20:11Z",
+  "history": [
+    {
+      "at": "2026-10-26T08:20:11Z",
+      "status": "open",
+      "by": "agent",
+      "note": "recorded"
+    }
+  ]
+}

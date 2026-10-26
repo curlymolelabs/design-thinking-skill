@@ -1,6 +1,22 @@
-# Install Design Thinking in supported agent clients
+# Install the skills in supported agent clients
 
-This guide shows where each supported client loads the skill. Client behavior can change, so confirm the path if an installation stops working.
+This guide shows where each supported client loads the skills. Client behavior can change, so confirm the path if an installation stops working.
+
+## Guesswork works best with hooks
+
+| Client | Support | Installation |
+|---|---|---|
+| Claude Code | Full: skill, CLI on the path, hooks, and slash commands | `/plugin marketplace add curlymolelabs/design-thinking-skill`, then `/plugin install guesswork@curlymolelabs` |
+| Codex, Cursor, OpenCode, Gemini CLI, Grok Build, Pi, and other Agent Skills clients | Skill and CLI without hooks | `npx skills add https://github.com/curlymolelabs/design-thinking-skill --skill guesswork`, then `python3 <skill folder>/scripts/guesswork.py init --agents-md` |
+| Any CI system | CLI | `python3 guesswork/scripts/guesswork.py check --base origin/main` |
+
+Without hooks, agents rely on the skill and `AGENTS.md` to record guesses and show receipts, and nothing reminds them at the end of a turn. Hook adapters for these clients are welcome contributions.
+
+The CLI and hooks need Python 3.9 or newer. On Windows, Claude Code runs plugin hooks through Git Bash.
+
+## Design Thinking installs as a standalone skill
+
+The rest of this guide covers the Design Thinking skill. The Claude Code plugin above also installs it.
 
 Native support means the client discovers the complete `design-thinking` folder, including its guides, script, and template.
 

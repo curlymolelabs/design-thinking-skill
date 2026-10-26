@@ -1,0 +1,32 @@
+{
+  "schema": "guesswork/1",
+  "id": "g-export-timeout-30s",
+  "title": "Exports run while the user waits and stop after 30 seconds",
+  "why": null,
+  "category": "performance",
+  "stakes": "low",
+  "reversible": true,
+  "basis": "assumed",
+  "where": [
+    "src/export/members.ts:31"
+  ],
+  "alternatives": [
+    "Run exports in the background and email a link"
+  ],
+  "question": null,
+  "status": "open",
+  "resolution": null,
+  "test": null,
+  "superseded_by": null,
+  "created_by": "agent",
+  "created_at": "2026-10-26T08:20:11Z",
+  "updated_at": "2026-10-26T08:20:11Z",
+  "history": [
+    {
+      "at": "2026-10-26T08:20:11Z",
+      "status": "open",
+      "by": "agent",
+      "note": "recorded"
+    }
+  ]
+}

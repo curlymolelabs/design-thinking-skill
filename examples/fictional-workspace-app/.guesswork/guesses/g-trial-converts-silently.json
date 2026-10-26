@@ -1,0 +1,44 @@
+{
+  "schema": "guesswork/1",
+  "id": "g-trial-converts-silently",
+  "title": "Trials convert to paid on day 14 without a reminder email",
+  "why": "The request said 14-day trial and nothing about what happens at the end",
+  "category": "money",
+  "stakes": "high",
+  "reversible": true,
+  "basis": "assumed",
+  "where": [
+    "src/billing/trial.ts:22"
+  ],
+  "alternatives": [
+    "Email a reminder 3 days before the trial ends",
+    "Require an explicit upgrade"
+  ],
+  "question": null,
+  "status": "decided",
+  "resolution": {
+    "choice": "b",
+    "decision": "Email a reminder 3 days before the trial ends",
+    "by": "owner",
+    "at": "2026-10-26T08:20:11Z",
+    "note": null
+  },
+  "test": null,
+  "superseded_by": null,
+  "created_by": "agent",
+  "created_at": "2026-10-26T08:20:11Z",
+  "updated_at": "2026-10-26T08:20:11Z",
+  "history": [
+    {
+      "at": "2026-10-26T08:20:11Z",
+      "status": "open",
+      "by": "agent",
+      "note": "recorded"
+    },
+    {
+      "at": "2026-10-26T08:20:11Z",
+      "status": "decided",
+      "by": "owner"
+    }
+  ]
+}

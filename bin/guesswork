@@ -1,0 +1,27 @@
+#!/bin/sh
+# Run the Guesswork CLI with the first working Python 3.9 or newer on PATH.
+# Without one, hooks stay quiet apart from a single warning at session start.
+case "$0" in
+  */*) here=${0%/*} ;;
+  *) here=. ;;
+esac
+script="$here/../guesswork/scripts/guesswork.py"
+for candidate in python3 python py; do
+  if command -v "$candidate" >/dev/null 2>&1 && "$candidate" -c 'import sys; sys.exit(sys.version_info < (3, 9))' >/dev/null 2>&1; then
+    exec "$candidate" "$script" "$@"
+  fi
+done
+if [ "${1:-}" = "hook" ]; then
+  input=$(cat 2>/dev/null)
+  if [ "${2:-}" = "session-start" ]; then
+    case "$input" in
+      *'"source":"compact"'* | *'"source": "compact"'*) ;;
+      *)
+        printf '%s\n' '{"systemMessage": "Guesswork needs Python 3.9 or newer, and none was found on PATH. Its hooks stay off until Python is installed.", "hookSpecificOutput": {"hookEventName": "SessionStart", "additionalContext": "The guesswork command is unavailable in this session because Python 3.9 or newer was not found. If the user wants decisions recorded, write ledger files directly as described in the ledger format reference of the guesswork skill."}}'
+        ;;
+    esac
+  fi
+  exit 0
+fi
+echo "guesswork: Python 3.9 or newer is required, and none was found on PATH" >&2
+exit 1

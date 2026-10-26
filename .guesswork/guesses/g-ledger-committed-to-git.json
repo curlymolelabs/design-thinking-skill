@@ -1,0 +1,44 @@
+{
+  "schema": "guesswork/1",
+  "id": "g-ledger-committed-to-git",
+  "title": "Guesses are committed to the repository as one JSON file each, so public repositories publish them",
+  "why": "Shared history lets reviewers, CI, and later sessions see the same decisions; one file per guess avoids merge conflicts",
+  "category": "data",
+  "stakes": "medium",
+  "reversible": true,
+  "basis": "assumed",
+  "where": [
+    "guesswork/scripts/guesswork.py"
+  ],
+  "alternatives": [
+    "Keep the ledger local and gitignored by default"
+  ],
+  "question": null,
+  "status": "decided",
+  "resolution": {
+    "choice": "a",
+    "decision": "Guesses are committed to the repository as one JSON file each, so public repositories publish them",
+    "by": "claude-code (delegated by owner)",
+    "at": "2026-10-26T09:18:00Z",
+    "note": "Owner delegated this call (\"you decide what is best\"). Pull request summaries, CI checks, and shared memory need the committed ledger. Projects that want it private can gitignore .guesswork/, now documented."
+  },
+  "test": null,
+  "superseded_by": null,
+  "created_by": "claude-code",
+  "created_at": "2026-10-26T08:19:11Z",
+  "updated_at": "2026-10-26T09:18:00Z",
+  "history": [
+    {
+      "at": "2026-10-26T08:19:11Z",
+      "status": "open",
+      "by": "claude-code",
+      "note": "recorded"
+    },
+    {
+      "at": "2026-10-26T09:18:00Z",
+      "status": "decided",
+      "by": "claude-code (delegated by owner)",
+      "note": "Owner delegated this call (\"you decide what is best\"). Pull request summaries, CI checks, and shared memory need the committed ledger. Projects that want it private can gitignore .guesswork/, now documented."
+    }
+  ]
+}

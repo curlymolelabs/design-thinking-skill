@@ -1,6 +1,24 @@
-# Improve the skill with a reproducible case
+# Improve the skills with a reproducible case
 
 Contributions should make an agent's product decision clearer, safer, or easier to verify across clients.
+
+## Help is wanted on Guesswork
+
+These contributions are small, self-contained, and high impact:
+
+- **Hook adapters** for Cursor, Codex, Gemini CLI, and OpenCode. `guesswork hook <event>` reads the JSON shape Claude Code sends, so an adapter mostly maps event names and fields.
+- **Scan rules** in `guesswork scan` for more frameworks and languages, each with a test that shows a real decision it finds and a false positive it avoids.
+- **Receipt rendering** for chat surfaces that do not render Markdown lists well.
+- **Field reports** from real projects: a receipt that missed a decision, ranked something wrongly, or asked about noise.
+
+Run the Guesswork checks with:
+
+```bash
+python -m unittest tests.test_guesswork tests.test_plugin_package -v
+python guesswork/scripts/guesswork.py validate
+```
+
+Maintainers release new versions as described in [the release guide](docs/releasing.md).
 
 ## Start with the observed failure
 

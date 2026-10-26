@@ -1,0 +1,46 @@
+{
+  "schema": "guesswork/1",
+  "id": "g-repo-leads-with-guesswork",
+  "title": "The repository now leads with Guesswork, and Design Thinking becomes its companion skill",
+  "why": "Vibe coders search for review and memory tools, not design thinking; the existing skill keeps its full content",
+  "category": "content",
+  "stakes": "high",
+  "reversible": true,
+  "basis": "assumed",
+  "where": [
+    "README.md",
+    "docs/design-thinking.md"
+  ],
+  "alternatives": [
+    "Keep Design Thinking as the headline and add Guesswork as a feature",
+    "Move Guesswork to its own new repository"
+  ],
+  "question": null,
+  "status": "decided",
+  "resolution": {
+    "choice": "a",
+    "decision": "The repository now leads with Guesswork, and Design Thinking becomes its companion skill",
+    "by": "claude-code (delegated by owner)",
+    "at": "2026-10-26T09:18:00Z",
+    "note": "Owner delegated this call (\"you decide what is best\"). One repository keeps the history, stars, and contributors the open source program counts. Renaming the repository to guesswork is recommended; GitHub redirects old links."
+  },
+  "test": null,
+  "superseded_by": null,
+  "created_by": "claude-code",
+  "created_at": "2026-10-26T08:19:11Z",
+  "updated_at": "2026-10-26T09:18:00Z",
+  "history": [
+    {
+      "at": "2026-10-26T08:19:11Z",
+      "status": "open",
+      "by": "claude-code",
+      "note": "recorded"
+    },
+    {
+      "at": "2026-10-26T09:18:00Z",
+      "status": "decided",
+      "by": "claude-code (delegated by owner)",
+      "note": "Owner delegated this call (\"you decide what is best\"). One repository keeps the history, stars, and contributors the open source program counts. Renaming the repository to guesswork is recommended; GitHub redirects old links."
+    }
+  ]
+}

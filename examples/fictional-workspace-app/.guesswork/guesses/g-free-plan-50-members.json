@@ -1,0 +1,33 @@
+{
+  "schema": "guesswork/1",
+  "id": "g-free-plan-50-members",
+  "title": "A free workspace holds at most 50 members",
+  "why": null,
+  "category": "limits",
+  "stakes": "low",
+  "reversible": true,
+  "basis": "assumed",
+  "where": [
+    "src/billing/plans.ts:7"
+  ],
+  "alternatives": [
+    "10 members",
+    "No member limit"
+  ],
+  "question": null,
+  "status": "open",
+  "resolution": null,
+  "test": null,
+  "superseded_by": null,
+  "created_by": "agent",
+  "created_at": "2026-10-26T08:20:11Z",
+  "updated_at": "2026-10-26T08:20:11Z",
+  "history": [
+    {
+      "at": "2026-10-26T08:20:11Z",
+      "status": "open",
+      "by": "agent",
+      "note": "recorded"
+    }
+  ]
+}

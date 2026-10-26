@@ -1,0 +1,44 @@
+{
+  "schema": "guesswork/1",
+  "id": "g-removed-members-comments-stay",
+  "title": "Removed members lose access immediately, and their comments stay visible",
+  "why": null,
+  "category": "access",
+  "stakes": "medium",
+  "reversible": true,
+  "basis": "assumed",
+  "where": [
+    "src/members/remove.ts"
+  ],
+  "alternatives": [
+    "Hide their comments",
+    "Anonymize their comments"
+  ],
+  "question": null,
+  "status": "decided",
+  "resolution": {
+    "choice": "a",
+    "decision": "Removed members lose access immediately, and their comments stay visible",
+    "by": "owner",
+    "at": "2026-10-26T08:20:11Z",
+    "note": null
+  },
+  "test": null,
+  "superseded_by": null,
+  "created_by": "agent",
+  "created_at": "2026-10-26T08:20:11Z",
+  "updated_at": "2026-10-26T08:20:11Z",
+  "history": [
+    {
+      "at": "2026-10-26T08:20:11Z",
+      "status": "open",
+      "by": "agent",
+      "note": "recorded"
+    },
+    {
+      "at": "2026-10-26T08:20:11Z",
+      "status": "decided",
+      "by": "owner"
+    }
+  ]
+}
