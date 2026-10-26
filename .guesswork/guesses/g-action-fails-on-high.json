@@ -1,0 +1,32 @@
+{
+  "schema": "guesswork/1",
+  "id": "g-action-fails-on-high",
+  "title": "The GitHub Action fails a pull request while it adds open high-stakes guesses",
+  "why": "A gate makes the ledger matter in teams; this repository's own workflow uses report-only mode",
+  "category": "defaults",
+  "stakes": "medium",
+  "reversible": true,
+  "basis": "assumed",
+  "where": [
+    "action.yml"
+  ],
+  "alternatives": [
+    "Report only by default; teams opt in to failing"
+  ],
+  "question": null,
+  "status": "open",
+  "resolution": null,
+  "test": null,
+  "superseded_by": null,
+  "created_by": "claude-code",
+  "created_at": "2026-10-26T08:19:11Z",
+  "updated_at": "2026-10-26T08:19:11Z",
+  "history": [
+    {
+      "at": "2026-10-26T08:19:11Z",
+      "status": "open",
+      "by": "claude-code",
+      "note": "recorded"
+    }
+  ]
+}

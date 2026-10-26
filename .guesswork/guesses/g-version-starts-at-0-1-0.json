@@ -1,0 +1,33 @@
+{
+  "schema": "guesswork/1",
+  "id": "g-version-starts-at-0-1-0",
+  "title": "Guesswork starts at version 0.1.0, and Design Thinking keeps version 2.1.1",
+  "why": null,
+  "category": "content",
+  "stakes": "low",
+  "reversible": true,
+  "basis": "assumed",
+  "where": [
+    "pyproject.toml",
+    ".claude-plugin/plugin.json"
+  ],
+  "alternatives": [
+    "Release everything together as 3.0.0"
+  ],
+  "question": null,
+  "status": "open",
+  "resolution": null,
+  "test": null,
+  "superseded_by": null,
+  "created_by": "claude-code",
+  "created_at": "2026-10-26T08:19:11Z",
+  "updated_at": "2026-10-26T08:19:11Z",
+  "history": [
+    {
+      "at": "2026-10-26T08:19:11Z",
+      "status": "open",
+      "by": "claude-code",
+      "note": "recorded"
+    }
+  ]
+}

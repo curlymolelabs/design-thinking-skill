@@ -1,0 +1,33 @@
+{
+  "schema": "guesswork/1",
+  "id": "g-pypi-name",
+  "title": "The Python package name guesswork is unclaimed on PyPI and not yet published",
+  "why": "Installing from GitHub works today with pipx or uvx",
+  "category": "integration",
+  "stakes": "low",
+  "reversible": true,
+  "basis": "assumed",
+  "where": [
+    "pyproject.toml"
+  ],
+  "alternatives": [
+    "Publish 0.1.0 now to reserve the name",
+    "Rename the package to guesswork-cli"
+  ],
+  "question": null,
+  "status": "open",
+  "resolution": null,
+  "test": null,
+  "superseded_by": null,
+  "created_by": "claude-code",
+  "created_at": "2026-10-26T08:19:11Z",
+  "updated_at": "2026-10-26T08:19:11Z",
+  "history": [
+    {
+      "at": "2026-10-26T08:19:11Z",
+      "status": "open",
+      "by": "claude-code",
+      "note": "recorded"
+    }
+  ]
+}

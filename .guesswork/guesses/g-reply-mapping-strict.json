@@ -1,0 +1,32 @@
+{
+  "schema": "guesswork/1",
+  "id": "g-reply-mapping-strict",
+  "title": "Receipt replies are mapped automatically only when the whole message is picks like 1b 2a",
+  "why": null,
+  "category": "ux",
+  "stakes": "low",
+  "reversible": true,
+  "basis": "assumed",
+  "where": [
+    "guesswork/scripts/guesswork.py"
+  ],
+  "alternatives": [
+    "Also map picks inside longer messages"
+  ],
+  "question": null,
+  "status": "open",
+  "resolution": null,
+  "test": null,
+  "superseded_by": null,
+  "created_by": "claude-code",
+  "created_at": "2026-10-26T08:19:11Z",
+  "updated_at": "2026-10-26T08:19:11Z",
+  "history": [
+    {
+      "at": "2026-10-26T08:19:11Z",
+      "status": "open",
+      "by": "claude-code",
+      "note": "recorded"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+#!/bin/sh
+# Run the Guesswork CLI with the first Python 3 interpreter found on PATH.
+here=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+script="$here/../guesswork/scripts/guesswork.py"
+if command -v python3 >/dev/null 2>&1; then
+  exec python3 "$script" "$@"
+fi
+for candidate in python py; do
+  if command -v "$candidate" >/dev/null 2>&1 && "$candidate" -c 'import sys; sys.exit(sys.version_info < (3, 9))' >/dev/null 2>&1; then
+    exec "$candidate" "$script" "$@"
+  fi
+done
+echo "guesswork: Python 3.9 or newer is required" >&2
+exit 1

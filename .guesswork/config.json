@@ -1,0 +1,7 @@
+{
+  "hooks": true,
+  "stop_check": "nudge",
+  "fail_on": "high",
+  "receipt_limit": 5,
+  "ignore": []
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "guesswork/1",
+  "id": "g-name-guesswork",
+  "title": "The new tool is named Guesswork: the command, plugin, and Python package all use that name",
+  "why": "Short, memorable, and says what it surfaces; no naming direction was given",
+  "category": "content",
+  "stakes": "high",
+  "reversible": true,
+  "basis": "assumed",
+  "where": [
+    ".claude-plugin/plugin.json",
+    "pyproject.toml",
+    "guesswork/SKILL.md"
+  ],
+  "alternatives": [
+    "Name it Receipts",
+    "Name it Decision Inbox"
+  ],
+  "question": null,
+  "status": "open",
+  "resolution": null,
+  "test": null,
+  "superseded_by": null,
+  "created_by": "claude-code",
+  "created_at": "2026-10-26T08:19:11Z",
+  "updated_at": "2026-10-26T08:19:11Z",
+  "history": [
+    {
+      "at": "2026-10-26T08:19:11Z",
+      "status": "open",
+      "by": "claude-code",
+      "note": "recorded"
+    }
+  ]
+}

@@ -1,6 +1,30 @@
-# Changes to Design Thinking for AI Agents
+# Changes to Guesswork and Design Thinking for AI Agents
 
 This file records public changes that affect skill behavior, package structure, or the decision-record format.
+
+## Guesswork 0.1.0, 2026-10-26
+
+### Agents now keep receipts for the decisions nobody specified
+
+- Added the `guesswork` skill: what counts as a guess, how to rate stakes, how to guess safely, and how to end a turn with a receipt the owner answers in one line.
+- Added the `guesswork` CLI, one Python file with no dependencies: `log`, `receipt`, `decide`, `test`, `dismiss`, `reopen`, `context`, `status`, `check`, `pr`, `report`, `scan`, `validate`, and `init`.
+- Added the `.guesswork/` ledger: one JSON file per guess, committed with the code, with history for every status change.
+- Added an HTML report with filters, stakes breakdowns, hotspots, and options that copy the matching `decide` command.
+
+### Claude Code gets memory and a guardrail
+
+- Packaged the repository as a Claude Code plugin and marketplace with both skills.
+- Added hooks that load locked decisions at session start and after compaction, map replies like `1b 2a` to guesses, remind the agent when it edits a file that implements a locked decision, and check once per turn for unrecorded guesses or unshown receipts.
+- Added `/guesswork:audit`, `/guesswork:receipt`, and `/guesswork:report`.
+
+### Teams can review decisions in pull requests
+
+- Added a GitHub Action that summarizes the decisions in a pull request, keeps one comment up to date, and can fail while high-stakes guesses are open.
+
+### The repository now leads with Guesswork
+
+- Moved the Design Thinking overview to `docs/design-thinking.md`. The Design Thinking skill itself is unchanged at 2.1.1.
+- Recorded the decisions made while building Guesswork in this repository's own `.guesswork/` ledger.
 
 ## 2.1.1, 2026-08-25
 

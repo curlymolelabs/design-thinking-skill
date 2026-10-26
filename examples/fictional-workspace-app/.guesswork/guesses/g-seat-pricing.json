@@ -1,0 +1,43 @@
+{
+  "schema": "guesswork/1",
+  "id": "g-seat-pricing",
+  "title": "Workspaces are billed per active member each month",
+  "why": "Per-seat pricing is common for team tools, but no pricing was specified",
+  "category": "money",
+  "stakes": "high",
+  "reversible": true,
+  "basis": "assumed",
+  "where": [
+    "src/billing/plans.ts"
+  ],
+  "alternatives": [
+    "Flat price per workspace",
+    "Free up to 5 members, then per seat"
+  ],
+  "question": null,
+  "status": "testing",
+  "resolution": null,
+  "test": {
+    "plan": "Show per-seat and flat pricing to trial teams for two weeks; keep per-seat if upgrades do not drop",
+    "by": "owner",
+    "at": "2026-10-26T08:20:12Z"
+  },
+  "superseded_by": null,
+  "created_by": "agent",
+  "created_at": "2026-10-26T08:20:11Z",
+  "updated_at": "2026-10-26T08:20:12Z",
+  "history": [
+    {
+      "at": "2026-10-26T08:20:11Z",
+      "status": "open",
+      "by": "agent",
+      "note": "recorded"
+    },
+    {
+      "at": "2026-10-26T08:20:12Z",
+      "status": "testing",
+      "by": "owner",
+      "note": "Show per-seat and flat pricing to trial teams for two weeks; keep per-seat if upgrades do not drop"
+    }
+  ]
+}

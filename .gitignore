@@ -5,3 +5,6 @@ evaluation-runs/
 Thumbs.db
 .idea/
 .vscode/
+build/
+dist/
+*.egg-info/

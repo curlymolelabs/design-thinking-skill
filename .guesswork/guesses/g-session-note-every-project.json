@@ -1,0 +1,32 @@
+{
+  "schema": "guesswork/1",
+  "id": "g-session-note-every-project",
+  "title": "With the plugin installed, every project gets the recording convention at session start, before any ledger exists",
+  "why": null,
+  "category": "defaults",
+  "stakes": "low",
+  "reversible": true,
+  "basis": "assumed",
+  "where": [
+    "hooks/hooks.json"
+  ],
+  "alternatives": [
+    "Stay silent until a project runs guesswork init"
+  ],
+  "question": null,
+  "status": "open",
+  "resolution": null,
+  "test": null,
+  "superseded_by": null,
+  "created_by": "claude-code",
+  "created_at": "2026-10-26T08:19:11Z",
+  "updated_at": "2026-10-26T08:19:11Z",
+  "history": [
+    {
+      "at": "2026-10-26T08:19:11Z",
+      "status": "open",
+      "by": "claude-code",
+      "note": "recorded"
+    }
+  ]
+}

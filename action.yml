@@ -1,0 +1,94 @@
+name: Guesswork decision review
+description: Summarize the product decisions an agent made in a pull request and flag the open high-stakes guesses.
+author: Curly Mole Labs
+branding:
+  icon: check-square
+  color: purple
+
+inputs:
+  fail-on:
+    description: Fail while open guesses changed in this pull request reach this stakes level (high, medium, low, or never).
+    required: false
+    default: high
+  base:
+    description: Git ref to compare with. Defaults to the pull request base branch.
+    required: false
+    default: ""
+  comment:
+    description: Post the summary as a pull request comment and update it on later runs. Needs pull-requests write permission.
+    required: false
+    default: "false"
+  github-token:
+    description: Token used to post the comment.
+    required: false
+    default: ${{ github.token }}
+
+outputs:
+  summary-file:
+    description: Path of the Markdown summary.
+    value: ${{ steps.summary.outputs.file }}
+
+runs:
+  using: composite
+  steps:
+    - name: Summarize the decisions in this change
+      id: summary
+      shell: bash
+      env:
+        GUESSWORK_BASE: ${{ inputs.base }}
+        GUESSWORK_SCRIPT: ${{ github.action_path }}/guesswork/scripts/guesswork.py
+      run: |
+        set -euo pipefail
+        python_bin=$(command -v python3 || command -v python)
+        base="${GUESSWORK_BASE}"
+        if [ -z "$base" ] && [ -n "${GITHUB_BASE_REF:-}" ]; then
+          git fetch --no-tags origin "$GITHUB_BASE_REF" >/dev/null 2>&1 || true
+          base="origin/${GITHUB_BASE_REF}"
+        fi
+        file="${RUNNER_TEMP}/guesswork-summary.md"
+        if [ -n "$base" ]; then
+          "$python_bin" "$GUESSWORK_SCRIPT" pr --base "$base" --out "$file"
+        else
+          "$python_bin" "$GUESSWORK_SCRIPT" pr --out "$file"
+        fi
+        cat "$file" >> "$GITHUB_STEP_SUMMARY"
+        echo "file=$file" >> "$GITHUB_OUTPUT"
+        echo "base=$base" >> "$GITHUB_OUTPUT"
+
+    - name: Post or update the pull request comment
+      if: ${{ inputs.comment == 'true' && github.event.pull_request.number }}
+      shell: bash
+      env:
+        GH_TOKEN: ${{ inputs.github-token }}
+        PR_NUMBER: ${{ github.event.pull_request.number }}
+        SUMMARY_FILE: ${{ steps.summary.outputs.file }}
+      run: |
+        set -uo pipefail
+        marker='<!-- guesswork:pr-summary -->'
+        warning="::warning::Guesswork could not post its comment. Pull requests from forks get a read-only token; the job summary still has the full report."
+        if ! existing=$(gh api "repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments" --paginate \
+          --jq ".[] | select(.body | contains(\"${marker}\")) | .id"); then
+          echo "$warning"
+          exit 0
+        fi
+        existing=$(printf '%s\n' "$existing" | head -n 1)
+        if [ -n "$existing" ]; then
+          gh api -X PATCH "repos/${GITHUB_REPOSITORY}/issues/comments/${existing}" -F "body=@${SUMMARY_FILE}" >/dev/null || echo "$warning"
+        else
+          gh api -X POST "repos/${GITHUB_REPOSITORY}/issues/${PR_NUMBER}/comments" -F "body=@${SUMMARY_FILE}" >/dev/null || echo "$warning"
+        fi
+
+    - name: Check open guesses
+      shell: bash
+      env:
+        GUESSWORK_FAIL_ON: ${{ inputs.fail-on }}
+        GUESSWORK_BASE: ${{ steps.summary.outputs.base }}
+        GUESSWORK_SCRIPT: ${{ github.action_path }}/guesswork/scripts/guesswork.py
+      run: |
+        set -euo pipefail
+        python_bin=$(command -v python3 || command -v python)
+        if [ -n "$GUESSWORK_BASE" ]; then
+          "$python_bin" "$GUESSWORK_SCRIPT" check --base "$GUESSWORK_BASE" --fail-on "$GUESSWORK_FAIL_ON"
+        else
+          "$python_bin" "$GUESSWORK_SCRIPT" check --fail-on "$GUESSWORK_FAIL_ON"
+        fi

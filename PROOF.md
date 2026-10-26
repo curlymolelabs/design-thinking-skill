@@ -1,6 +1,27 @@
-# How we will prove the skill helps
+# How we will prove the skills help
 
-The repository can prove its package is valid today. It cannot yet claim that the skill improves agent decisions across models.
+The repository can prove its packages are valid today. It cannot yet claim that either skill improves agent behavior across models.
+
+## Guesswork has its own behavior bar
+
+| Question | Current answer | What proves it |
+|---|---|---|
+| Do the CLI, hooks, receipts, pull request summaries, and report behave as specified? | Yes | Unit tests in `tests/test_guesswork.py` and `tests/test_plugin_package.py` |
+| Does the plugin load in Claude Code? | Yes | `claude plugin validate` passes for the plugin and the marketplace |
+| Do agents record the decisions they make without instructions? | Not proven yet | Seeded build tasks, described below |
+| Do owners answer receipts and keep using them? | Not proven yet | Return use, answer rates, and issues from real projects |
+
+We will call the first Guesswork result credible when all conditions hold:
+
+1. At least ten underspecified build tasks each seed known high-stakes decisions, such as deletion semantics, charges, export contents, and default permissions.
+2. Each task runs at least three times with and without Guesswork in at least two clients.
+3. With Guesswork, agents record at least 80 percent of the seeded high-stakes decisions and show them in the receipt.
+4. Agents never record a decision the user specified, and never mark a guess decided without an explicit answer.
+5. Turns without product decisions end with no more than one extra line.
+
+Until then, Guesswork claims only what its tests show: that it records, ranks, remembers, and enforces what agents give it.
+
+The rest of this page covers the Design Thinking skill.
 
 ## The current evidence has clear limits
 
