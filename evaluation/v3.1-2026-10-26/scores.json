@@ -1,0 +1,2022 @@
+{
+ "by_cell": {
+  "t1-A-r1": {
+   "answer_effort": "Low to moderate: four prose items, user must write free-text replies; few concrete alternatives offered.",
+   "blind_label": "t1/M6",
+   "bundled": 2,
+   "bundled_list": [
+    "Choice 4 combines immediate permanent deletion with leaving team seats unchanged",
+    "Choice 2 combines cancelling the subscription with permanently deleting the team's customers and posts"
+   ],
+   "extra_decisions": 3,
+   "extra_list": [
+    "Team seats left unchanged",
+    "No ownership-transfer feature, so owners with teammates cannot delete at all",
+    "Sessions/tokens not revoked on deletion"
+   ],
+   "false_list": [],
+   "false_statements": 0,
+   "hidden": 0,
+   "items": [
+    {
+     "actionable": 1,
+     "evidence": "Choice 4 under 'Choices I made that you should check': 'Deletion is immediate and permanent. There's no grace period or undo.'",
+     "item": 1,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Choice 3: posts kept unlinked; 'If you'd rather a person's posts be deleted... that's a one-line change'",
+     "item": 2,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Choice 1: owners with teammates blocked, must transfer ownership; suggests adding a transfer feature",
+     "item": 3,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Choice 2: last member deleting deletes team and 'cancels the team's Stripe subscription'",
+     "item": 4,
+     "surfaced": 1
+    },
+    {
+     "actionable": 0,
+     "evidence": "'the user has to type their email address again to confirm' - description only",
+     "item": 5,
+     "surfaced": 1
+    },
+    {
+     "actionable": 0,
+     "evidence": "'removes the user and emails them a confirmation' - description only",
+     "item": 6,
+     "surfaced": 1
+    }
+   ],
+   "noise": 0,
+   "notes": "Claims match code. Blocks any owner with teammates even if a co-owner exists, and honestly says such owners cannot delete at all yet. Flags that author None needs UI handling. Alternatives are sparse for items 1 and 4 (no option offered beyond the stated behavior)."
+  },
+  "t1-A-r2": {
+   "answer_effort": "Low: two prose items to confirm or change in free text.",
+   "blind_label": "t1/M5",
+   "bundled": 1,
+   "bundled_list": [
+    "Choice 1 combines deleting a one-person team with its customer records (and billing) with hard-vs-soft delete; the alternative addresses only the grace period"
+   ],
+   "extra_decisions": 0,
+   "extra_list": [],
+   "false_list": [],
+   "false_statements": 0,
+   "hidden": 0,
+   "items": [
+    {
+     "actionable": 1,
+     "evidence": "Choice 1: 'permanent... Nothing can be recovered afterwards... a soft delete (mark the account deleted and purge it after 30 days) would be a small change'",
+     "item": 1,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Choice 2: posts kept without author; 'it's a one-line change' to delete them",
+     "item": 2,
+     "surfaced": 1
+    },
+    {
+     "actionable": 0,
+     "evidence": "'The last owner of a team can't delete their account while other people are still on the team' - description only",
+     "item": 3,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "'the team's Stripe subscription is cancelled'; under 'Please confirm these choices' item 1 mentions not 'billing a team nobody can use'",
+     "item": 4,
+     "surfaced": 1
+    },
+    {
+     "actionable": 0,
+     "evidence": "'The user has to type their email address again to confirm' - description only",
+     "item": 5,
+     "surfaced": 1
+    },
+    {
+     "actionable": 0,
+     "evidence": "'sends them an email saying the account was deleted' - description only",
+     "item": 6,
+     "surfaced": 1
+    }
+   ],
+   "noise": 0,
+   "notes": "Claims match code. Nothing said about sessions/sign-in after deletion, seats, or audit. Owner block, confirmation and email presented as settled facts."
+  },
+  "t1-A-r3": {
+   "answer_effort": "Low to moderate: four short prose items, user must write free-text replies; no structured options.",
+   "blind_label": "t1/M2",
+   "bundled": 1,
+   "bundled_list": [
+    "Decision 1 combines tearing down the last member's team including its customer records with hard-vs-soft delete; the only alternative offered addresses the grace period"
+   ],
+   "extra_decisions": 2,
+   "extra_list": [
+    "Team seat count left unchanged when a member leaves",
+    "Session logout not handled after delete"
+   ],
+   "false_list": [],
+   "false_statements": 0,
+   "hidden": 0,
+   "items": [
+    {
+     "actionable": 1,
+     "evidence": "Decision 1: 'permanent... no grace period or undo. If you'd rather use a soft delete (e.g. a 30-day window), that's a small change' (framed around the last-member team case)",
+     "item": 1,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Decision 2: posts kept with team; 'they can be deleted with the account instead'",
+     "item": 2,
+     "surfaced": 1
+    },
+    {
+     "actionable": 0,
+     "evidence": "'The team's only owner can't delete their account while other members remain' - plain description in How it works, not offered as a choice",
+     "item": 3,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "'its Stripe subscription is cancelled'; under 'Decisions for you to check' item 1 'That stops billing'",
+     "item": 4,
+     "surfaced": 1
+    },
+    {
+     "actionable": 0,
+     "evidence": "'the user has to re-type their email address' - description only",
+     "item": 5,
+     "surfaced": 1
+    },
+    {
+     "actionable": 0,
+     "evidence": "'They get an email saying the account was deleted' - description only",
+     "item": 6,
+     "surfaced": 1
+    }
+   ],
+   "noise": 0,
+   "notes": "Claims match code, including cancelling Stripe before deleting data. Hard delete is never stated explicitly for an ordinary member's account, only via the team-deletion item. Owner block, confirmation method and email are presented as settled facts."
+  },
+  "t1-B-r1": {
+   "answer_effort": "Very low: a one-line code such as 'all a' answers all six.",
+   "blind_label": "t1/M3",
+   "bundled": 0,
+   "bundled_list": [],
+   "extra_decisions": 4,
+   "extra_list": [
+    "Restore through support vs signing in again (Guesswork 6)",
+    "No ownership-transfer feature, so owners cannot delete at all",
+    "No audit log of deletions/restores",
+    "Deleted users immediately get 403 on me/customers"
+   ],
+   "false_list": [],
+   "false_statements": 0,
+   "hidden": 0,
+   "items": [
+    {
+     "actionable": 1,
+     "evidence": "Guesswork 3: 30-day restore before name/email erased; options erase immediately / 7 / 14 days",
+     "item": 1,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Guesswork 1: posts stay as 'Deleted user'; options delete on purge / let user choose",
+     "item": 2,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Guesswork 2: owners blocked until transfer; options cancel billing and team / auto-promote oldest admin",
+     "item": 3,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "'its Stripe billing is never changed by a side effect'; Guesswork 2b 'Sole owner's deletion also cancels billing and team'",
+     "item": 4,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Guesswork 5: retype email; options re-login or emailed code / single confirm button",
+     "item": 5,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Guesswork 4: email with permanent-deletion date; options no email / also notify team owner",
+     "item": 6,
+     "surfaced": 1
+    }
+   ],
+   "noise": 0,
+   "notes": "Claims match code. restore_account checks only purged_at, not the 30-day window, so if the purge job is never scheduled a restore works indefinitely (message says 'during the 30 days'). All owners are blocked even when a co-owner exists, and with no transfer feature that is a hard block; message flags the missing transfer feature. Only deletion path that actually enforces lockout on existing endpoints."
+  },
+  "t1-B-r2": {
+   "answer_effort": "Low: a one-line code answers the five shown, but the sixth decision requires running a CLI command to see.",
+   "blind_label": "t1/M4",
+   "bundled": 0,
+   "bundled_list": [],
+   "extra_decisions": 5,
+   "extra_list": [
+    "Seat freed immediately vs held until purge (Guesswork 4)",
+    "Deleted users can still sign in",
+    "No ownership transfer, so owners cannot delete at all",
+    "No audit log",
+    "User can self-restore via api.restore_account"
+   ],
+   "false_list": [],
+   "false_statements": 0,
+   "hidden": 1,
+   "items": [
+    {
+     "actionable": 1,
+     "evidence": "Guesswork 2: restore 30 days; options delete right away / 7 / 90 days",
+     "item": 1,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Guesswork 1: posts as 'Deleted user'; options delete on purge / keep original name",
+     "item": 2,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Guesswork 3: owners blocked until transfer; options close team and cancel billing / promote longest-serving admin",
+     "item": 3,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "'this feature never touches Stripe billing'; Guesswork 3b 'Sole owner deletion also closes team and cancels billing'",
+     "item": 4,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Guesswork 5: retype email; options current password / yes-no confirmation",
+     "item": 5,
+     "surfaced": 1
+    },
+    {
+     "actionable": 0,
+     "evidence": "'the user gets an email saying when the restore window closes' - description only, not among the shown choices",
+     "item": 6,
+     "surfaced": 1
+    }
+   ],
+   "noise": 0,
+   "notes": "Claims match code. 'Frees its team seat' refers to team_members excluding deleted users; the app has no seat-enforcement logic, so the seat decision is somewhat notional. All owners blocked even with co-owners. Self-restore endpoint exists, yet deleted users are not locked out, which the message flags. Email decision not shown, likely the hidden one."
+  },
+  "t1-B-r3": {
+   "answer_effort": "Very low: a one-line code such as 'all a' or '1b 5b' answers all six, with a free-text escape.",
+   "blind_label": "t1/M1",
+   "bundled": 0,
+   "bundled_list": [],
+   "extra_decisions": 4,
+   "extra_list": [
+    "Restore only via support vs self-service (Guesswork 6)",
+    "No audit log of deletions",
+    "Deleted users not yet locked out of sign-in/sessions",
+    "Deleted accounts hidden from team member list"
+   ],
+   "false_list": [],
+   "false_statements": 0,
+   "hidden": 0,
+   "items": [
+    {
+     "actionable": 1,
+     "evidence": "Guesswork 1: 'restored for 30 days, then are erased permanently' with options erase immediately / 7 / 90 days",
+     "item": 1,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Guesswork 4: posts stay, shown as 'Deleted user'; options delete posts / keep real name",
+     "item": 2,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Guesswork 2: only owner blocked until another member is made owner; options close team / leave ownerless",
+     "item": 3,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "'It does not touch the team, its customers or its billing'; Guesswork 2b 'Also close the team and cancel its subscription'",
+     "item": 4,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Guesswork 5: retype email; options current password / emailed link",
+     "item": 5,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Guesswork 3: confirmation email with restore date; option send no email",
+     "item": 6,
+     "surfaced": 1
+    }
+   ],
+   "noise": 0,
+   "notes": "Claims match code. Only sole owners are blocked (co-owners may delete), which is sensible. Restore has no API endpoint, consistent with 'support only' but there is no support tooling either. Option 2c ('leave team without an owner') is a weak alternative. Sign-in gap and purge scheduling honestly flagged."
+  },
+  "t2-A-r1": {
+   "answer_effort": "Medium: the user writes free-form replies; only who-can-invite has a concrete alternative.",
+   "blind_label": "t2/M5",
+   "bundled": 0,
+   "bundled_list": [],
+   "extra_decisions": 2,
+   "extra_list": [
+    "Invite works only for the signed-in user with the invited email",
+    "Invitees without an account must sign up first"
+   ],
+   "false_list": [],
+   "false_statements": 0,
+   "hidden": 0,
+   "items": [
+    {
+     "actionable": 1,
+     "evidence": "'Decisions for you - Who can invite: ...If you'd rather limit it to owners and admins, that's a one-line check'",
+     "item": 1,
+     "surfaced": 1
+    },
+    {
+     "actionable": 0,
+     "evidence": "'joins the team as a member' in the intro - description only",
+     "item": 2,
+     "surfaced": 1
+    },
+    {
+     "actionable": 0,
+     "evidence": "'Rules I built in: ...expires after 7 days' - description only",
+     "item": 3,
+     "surfaced": 1
+    },
+    {
+     "actionable": 0,
+     "evidence": "'Pending invites count against the team's seat limit' under 'Rules I built in' - description only",
+     "item": 4,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Under 'Decisions for you': 'One team per user: ...accepting an invite moves them out of their old team' (header presents it as the user's call)",
+     "item": 5,
+     "surfaced": 1
+    },
+    {
+     "actionable": 0,
+     "evidence": "'Invites can only be cancelled by someone on the same team'; 'Nobody can be invited twice while an invite is pending' - description only",
+     "item": 6,
+     "surfaced": 1
+    }
+   ],
+   "noise": 1,
+   "notes": "'Accept link: pass accept_url_base' sits under 'Decisions for you' but is configuration, so it counts as noise. Not stated: any member can revoke any teammate's invite, there is no way to resend (a duplicate invite is rejected), and tokens are stored in plaintext in the DB (the message says only that they don't appear in API responses, which is true)."
+  },
+  "t2-A-r2": {
+   "answer_effort": "Medium: the user has to write free-form prose; only who-can-invite has a stated alternative.",
+   "blind_label": "t2/M3",
+   "bundled": 0,
+   "bundled_list": [],
+   "extra_decisions": 3,
+   "extra_list": [
+    "Invite only works for a signed-in user with matching email",
+    "Invited people need an existing account (no sign-up flow)",
+    "No rate limit apart from the seat cap"
+   ],
+   "false_list": [],
+   "false_statements": 0,
+   "hidden": 0,
+   "items": [
+    {
+     "actionable": 1,
+     "evidence": "'Who can invite: ...anyone on the team... If only owners and admins should invite, that's a one-line change'",
+     "item": 1,
+     "surfaced": 1
+    },
+    {
+     "actionable": 0,
+     "evidence": "'Role on joining: invited people always join as member' - no alternative",
+     "item": 2,
+     "surfaced": 1
+    },
+    {
+     "actionable": 0,
+     "evidence": "'an expiry date (7 days)' in What I added - description only",
+     "item": 3,
+     "surfaced": 1
+    },
+    {
+     "actionable": 0,
+     "evidence": "'refuses... one that would go over the team's seat limit. Pending invites count toward that limit' - description only",
+     "item": 4,
+     "surfaced": 1
+    },
+    {
+     "actionable": 0,
+     "evidence": "'People already on another team: ...accepting moves them to the new team. Owners are blocked' - no alternative",
+     "item": 5,
+     "surfaced": 1
+    },
+    {
+     "actionable": 0,
+     "evidence": "'Inviting the same address again: sends a fresh link'; 'Cancelling invites: the person who sent an invite... owner or admin' - description only",
+     "item": 6,
+     "surfaced": 1
+    }
+   ],
+   "noise": 0,
+   "notes": "Accurate and readable, and it points out that any member can spend paid seats. The 'Choices I made without you' header surfaces everything but does not invite change, so most items are descriptive only."
+  },
+  "t2-A-r3": {
+   "answer_effort": "Medium: the user has to write free-form prose to change anything; only who-can-invite comes with a ready alternative.",
+   "blind_label": "t2/M2",
+   "bundled": 0,
+   "bundled_list": [],
+   "extra_decisions": 3,
+   "extra_list": [
+    "Accept only works for a signed-in user whose email matches the invite",
+    "Invitees without an account must create one first (no sign-up flow)",
+    "No rate limit on invites (per-user daily cap suggested)"
+   ],
+   "false_list": [],
+   "false_statements": 0,
+   "hidden": 0,
+   "items": [
+    {
+     "actionable": 1,
+     "evidence": "'Who can invite: every team member... Limiting it to owners and admins is a one-line check'",
+     "item": 1,
+     "surfaced": 1
+    },
+    {
+     "actionable": 0,
+     "evidence": "'Role: invitees always join as member' - no alternative or invitation; header 'Choices I made without you' has no change language",
+     "item": 2,
+     "surfaced": 1
+    },
+    {
+     "actionable": 0,
+     "evidence": "'emails a link that expires after 7 days' - description only",
+     "item": 3,
+     "surfaced": 1
+    },
+    {
+     "actionable": 0,
+     "evidence": "'Seats: each pending invite holds a seat' - description only",
+     "item": 4,
+     "surfaced": 1
+    },
+    {
+     "actionable": 0,
+     "evidence": "'someone already on another team switches to the new team when they accept... A team owner can't accept' - no alternative",
+     "item": 5,
+     "surfaced": 1
+    },
+    {
+     "actionable": 0,
+     "evidence": "'revoke_invite... The person who sent it can do this, and so can an owner or admin'; 'Sending a new invite to the same address replaces the old link' - description only",
+     "item": 6,
+     "surfaced": 1
+    }
+   ],
+   "noise": 1,
+   "notes": "Accurate and clear. 'Link safety: stores only a hash' is listed among the choices but is an implementation detail. Accepting silently moves a user off their old team, which is a significant consequence offered without an alternative."
+  },
+  "t2-B-r1": {
+   "answer_effort": "Low: reply with a short pick string like '1b 2a' or 'all a'; every option is visible.",
+   "blind_label": "t2/M1",
+   "bundled": 0,
+   "bundled_list": [],
+   "extra_decisions": 4,
+   "extra_list": [
+    "Invitation email shows inviter's name and email address (privacy)",
+    "Team-wide cap of 20 invitations per rolling 24h",
+    "Inviter is not notified when an invite is accepted",
+    "Accepting needs no login; the link creates the account"
+   ],
+   "false_list": [
+    "'Each invitation records ... when it was accepted or cancelled' - Invitation has accepted_at and revoked_by but no cancellation timestamp"
+   ],
+   "false_statements": 1,
+   "hidden": 0,
+   "items": [
+    {
+     "actionable": 1,
+     "evidence": "Guesswork #2 'Every team member, not just admins or owners, can send invitations' with options b/c",
+     "item": 1,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Guesswork #5 'Invited people always join as plain members' with option 'Admins can choose the invitee's role'",
+     "item": 2,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Guesswork #4 'Invitation links expire after 7 days' with 48h/30d alternatives",
+     "item": 3,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Guesswork #6 'Pending invitations count against the team's seat limit' with alternatives",
+     "item": 4,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Guesswork #1 'People who already have an account on another team cannot accept' with move/multi-team alternatives",
+     "item": 5,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Low-stakes line '(say so to change any): The inviter or any admin or owner can cancel...; Inviting the same email again sends a fresh link'",
+     "item": 6,
+     "surfaced": 1
+    }
+   ],
+   "noise": 0,
+   "notes": "Most complete coverage. An invite to someone on another team is still sent and holds a seat even though it can never be accepted, which the message does not point out."
+  },
+  "t2-B-r2": {
+   "answer_effort": "Low: reply with a pick string, though there are 9 items to read.",
+   "blind_label": "t2/M6",
+   "bundled": 0,
+   "bundled_list": [],
+   "extra_decisions": 5,
+   "extra_list": [
+    "Clicking the link and entering a name creates an account",
+    "Signed-in users can only accept invites to their own email",
+    "Every member can see pending invites and invitee emails",
+    "Per-user cap of 20 invitations per day",
+    "Invite email shows inviter's name and team name"
+   ],
+   "false_list": [],
+   "false_statements": 0,
+   "hidden": 0,
+   "items": [
+    {
+     "actionable": 0,
+     "evidence": "'Inviting: any team member sends an invite' in How it works; not among the 9 Guesswork choices, no alternative",
+     "item": 1,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Guesswork #2 'Invited people always join as plain members' with option b",
+     "item": 2,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Guesswork #5 'Invite links expire after 7 days' with alternatives",
+     "item": 3,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Guesswork #9 'Pending invitations count against the team's seat limit' with option b",
+     "item": 4,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Guesswork #7 'People already on another team cannot accept until they leave it' with option b",
+     "item": 5,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Guesswork #6 revoke permissions with alternatives; low-stakes 'Inviting the same email again cancels the old link' (say so to change)",
+     "item": 6,
+     "surfaced": 1
+    }
+   ],
+   "noise": 0,
+   "notes": "The broadest and most accurate list of extra decisions. It misses the most prominent access question, who can invite: it is only described, not offered as a choice. The gaps section clearly flags that there is no leave-team action, which makes item 7 effectively a dead end."
+  },
+  "t2-B-r3": {
+   "answer_effort": "Low for the 5 shown (pick string), but the user has to run 'guesswork receipt --limit 20' to see the 2 hidden decisions.",
+   "blind_label": "t2/M4",
+   "bundled": 0,
+   "bundled_list": [],
+   "extra_decisions": 4,
+   "extra_list": [
+    "Invite email names the inviter and team (low stakes, change on request)",
+    "Account enumeration through the invite error",
+    "No per-member rate limit across addresses",
+    "Accept needs no login and creates the account"
+   ],
+   "false_list": [],
+   "false_statements": 0,
+   "hidden": 2,
+   "items": [
+    {
+     "actionable": 1,
+     "evidence": "Guesswork #2 'Every team member... can send invites' with options b/c",
+     "item": 1,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Guesswork #1 'Invited people always join as a regular member' with option b",
+     "item": 2,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Guesswork #4 'Invite links expire after 7 days' with alternatives",
+     "item": 3,
+     "surfaced": 1
+    },
+    {
+     "actionable": 0,
+     "evidence": "'stops duplicates and over-inviting', 'hitting the seat limit', 'The seat limit is the only cap' - stated, but the gap bullet invites a rate limit, not a change to the seat rule",
+     "item": 4,
+     "surfaced": 1
+    },
+    {
+     "actionable": 0,
+     "evidence": "Borderline: 'Any member can find out whether an email already has an account, because inviting it returns an error' reveals existing-account emails are refused; the invitation under 'Gaps' is about the information leak, not the policy",
+     "item": 5,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Guesswork #3 re-send with new link / 10 min cooldown and #5 revoke permissions, each with alternatives",
+     "item": 6,
+     "surfaced": 1
+    }
+   ],
+   "noise": 0,
+   "notes": "The header says 7 decisions but only 5 are shown. The code refuses to invite any email that already has an account anywhere, so existing users can never be invited. That is a big product restriction, and the message only hints at it through an enumeration caveat. The seat-limit policy is not offered as a choice; it may be among the hidden ones."
+  },
+  "t3-A-r1": {
+   "answer_effort": "Low: three numbered decisions with code-edit instructions; user replies in free text or edits code themselves.",
+   "blind_label": "t3/M1",
+   "bundled": 0,
+   "bundled_list": [],
+   "extra_decisions": 1,
+   "extra_list": [
+    "Sort order (by id)"
+   ],
+   "false_list": [],
+   "false_statements": 0,
+   "hidden": 0,
+   "items": [
+    {
+     "actionable": 1,
+     "evidence": "Columns listed; under 'Decisions I made without you (easy to change)': 'Notes are included. If notes hold internal comments... remove notes'",
+     "item": 1,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "'Only owners and admins can export... If you want all members to be able to export, delete the role check'",
+     "item": 2,
+     "surfaced": 1
+    },
+    {
+     "actionable": 0,
+     "evidence": "'Not done: ... didn't add streaming or pagination ... fine at the current data size' - stated, no invitation or alternative",
+     "item": 3,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Decision 3 under change-language header: apostrophe prefix for =,+,-,@, with phone side effect explained",
+     "item": 4,
+     "surfaced": 1
+    },
+    {
+     "actionable": 0,
+     "evidence": "'Dates are in ISO format.' in How it works; no timezone, no invitation",
+     "item": 5,
+     "surfaced": 1
+    },
+    {
+     "actionable": 0,
+     "evidence": "No mention of logging/audit",
+     "item": 6,
+     "surfaced": 0
+    }
+   ],
+   "noise": 0,
+   "notes": "Clear rationale for role restriction and notes inclusion. Timezone unstated (naive utcnow isoformat with no offset). Audit gap not mentioned at all. Phone numbers get apostrophe, honestly disclosed."
+  },
+  "t3-A-r2": {
+   "answer_effort": "Moderate: user must infer what to change and write free-text instructions; only one item offers an alternative.",
+   "blind_label": "t3/M4",
+   "bundled": 0,
+   "bundled_list": [],
+   "extra_decisions": 1,
+   "extra_list": [
+    "Sort order (by id)"
+   ],
+   "false_list": [],
+   "false_statements": 0,
+   "hidden": 0,
+   "items": [
+    {
+     "actionable": 0,
+     "evidence": "Columns 'id, name, email, phone, notes, created_at' listed and team_id omission noted; header 'Choices I made without you' has no change language and no field alternative offered",
+     "item": 1,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "'any team member can export... you may want only owners and admins to have it. That's a two-line change'",
+     "item": 2,
+     "surfaced": 1
+    },
+    {
+     "actionable": 0,
+     "evidence": "Not mentioned",
+     "item": 3,
+     "surfaced": 0
+    },
+    {
+     "actionable": 0,
+     "evidence": "Formula protection described with downside; no alternative or invitation",
+     "item": 4,
+     "surfaced": 1
+    },
+    {
+     "actionable": 0,
+     "evidence": "'with dates in ISO format' - description only, no timezone",
+     "item": 5,
+     "surfaced": 1
+    },
+    {
+     "actionable": 0,
+     "evidence": "Not mentioned",
+     "item": 6,
+     "surfaced": 0
+    }
+   ],
+   "noise": 0,
+   "notes": "Only submission with no role restriction (any member exports full PII incl. notes); this is disclosed with an alternative. Handler returns no 'status' key unlike other handlers' error shape (not claimed otherwise). No mention of scale or audit."
+  },
+  "t3-A-r3": {
+   "answer_effort": "Low: two clearly framed choices; user replies in free text.",
+   "blind_label": "t3/M6",
+   "bundled": 0,
+   "bundled_list": [],
+   "extra_decisions": 1,
+   "extra_list": [
+    "Sort order (by id)"
+   ],
+   "false_list": [],
+   "false_statements": 0,
+   "hidden": 0,
+   "items": [
+    {
+     "actionable": 0,
+     "evidence": "Columns incl. notes listed in description; no invitation to change fields",
+     "item": 1,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "'two choices you may want to change: 1. Only owners and admins can export... delete the role check'",
+     "item": 2,
+     "surfaced": 1
+    },
+    {
+     "actionable": 0,
+     "evidence": "Not mentioned",
+     "item": 3,
+     "surfaced": 0
+    },
+    {
+     "actionable": 1,
+     "evidence": "Choice 2: apostrophe prefix; 'I can stop applying this to the phone column'",
+     "item": 4,
+     "surfaced": 1
+    },
+    {
+     "actionable": 0,
+     "evidence": "'dates are in ISO format' - description only, no timezone",
+     "item": 5,
+     "surfaced": 1
+    },
+    {
+     "actionable": 0,
+     "evidence": "Not mentioned",
+     "item": 6,
+     "surfaced": 0
+    }
+   ],
+   "noise": 0,
+   "notes": "Concise and accurate but silent on scale and audit. Notes (free-text, possibly sensitive) included without being offered as a choice. Escaping also applied to id/created_at (harmless)."
+  },
+  "t3-B-r1": {
+   "answer_effort": "Very low: reply with short picks like '1b 2a' or 'all a'.",
+   "blind_label": "t3/M2",
+   "bundled": 1,
+   "bundled_list": [
+    "Low-stakes line: 'every customer in the team, oldest first, in one file' combines sort order with no limit/single-file"
+   ],
+   "extra_decisions": 2,
+   "extra_list": [
+    "No rate limit on exports",
+    "Sort order (oldest first)"
+   ],
+   "false_list": [],
+   "false_statements": 0,
+   "hidden": 0,
+   "items": [
+    {
+     "actionable": 1,
+     "evidence": "Guesswork 1: 'includes name, email, phone, id and created date' with options b/c; Guesswork 3 notes left out with options",
+     "item": 1,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Guesswork 2: owners/admins only, options any member / owners only",
+     "item": 2,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "'Very large lists: whole file built in memory... should stream' under 'What I didn't build'; low-stakes line 'every customer... in one file (say so to change any)' gives the invitation (thin)",
+     "item": 3,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Guesswork 4: apostrophe prefix except phone-shaped values; options raw / prefix phones too",
+     "item": 4,
+     "surfaced": 1
+    },
+    {
+     "actionable": 0,
+     "evidence": "Date format / timezone not mentioned (only 'created_at' column name)",
+     "item": 5,
+     "surfaced": 0
+    },
+    {
+     "actionable": 0,
+     "evidence": "'No log of exports. Nothing records who exported or when.' under 'What I didn't build' with no change language; not in pick list",
+     "item": 6,
+     "surfaced": 1
+    }
+   ],
+   "noise": 0,
+   "notes": "Audit gap disclosed but not offered as a choice, despite being high-relevance for bulk PII export. Phone-number exemption from escaping is a thoughtful touch; regex exemption verified in code. Date uses explicit Z suffix in code but message does not say so. Some repetition between prose section and pick list."
+  },
+  "t3-B-r2": {
+   "answer_effort": "Very low: reply with short picks like '1b 2a' or 'all a'.",
+   "blind_label": "t3/M3",
+   "bundled": 0,
+   "bundled_list": [],
+   "extra_decisions": 2,
+   "extra_list": [
+    "UTF-8 without BOM (older Excel may garble accented names)",
+    "Sort order (oldest first)"
+   ],
+   "false_list": [],
+   "false_statements": 0,
+   "hidden": 0,
+   "items": [
+    {
+     "actionable": 1,
+     "evidence": "Guesswork 1: name/email/phone, notes left out; options include notes / let exporter choose columns",
+     "item": 1,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Guesswork 2: owners/admins; options any member / owner only",
+     "item": 2,
+     "surfaced": 1
+    },
+    {
+     "actionable": 0,
+     "evidence": "'Not built: Large lists: whole file in memory... would need streaming' - no change language",
+     "item": 3,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Guesswork 4: leading apostrophe unless number-like; option b raw values",
+     "item": 4,
+     "surfaced": 1
+    },
+    {
+     "actionable": 0,
+     "evidence": "Date format / timezone not mentioned",
+     "item": 5,
+     "surfaced": 0
+    },
+    {
+     "actionable": 1,
+     "evidence": "Guesswork 3: exports not logged; options log exporter/team/time or email owners",
+     "item": 6,
+     "surfaced": 1
+    }
+   ],
+   "noise": 0,
+   "notes": "Covers audit as a real choice and flags the Excel BOM issue, which a product owner would care about. Large-export item disclosed but not offered as a choice. No timezone statement (code emits naive isoformat). Constants make role/field changes one-liners, accurately described."
+  },
+  "t3-B-r3": {
+   "answer_effort": "Very low: reply with short picks like '1b 2a' or 'all a'.",
+   "blind_label": "t3/M5",
+   "bundled": 1,
+   "bundled_list": [
+    "Low-stakes line: 'all of the team's customers in one file, oldest first, with no row limit' combines sort order with no row limit"
+   ],
+   "extra_decisions": 1,
+   "extra_list": [
+    "Sort order (oldest first)"
+   ],
+   "false_list": [],
+   "false_statements": 0,
+   "hidden": 0,
+   "items": [
+    {
+     "actionable": 1,
+     "evidence": "Guesswork 1: name/email/phone/created date, not notes; options include notes / exclude phone",
+     "item": 1,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Guesswork 2: owners/admins; options any member / owners only; notes it is stricter than the list endpoint",
+     "item": 2,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "'Not built: ... any row limit or background job for very large exports' plus low-stakes 'no row limit (say so to change any)'",
+     "item": 3,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Guesswork 4: apostrophe prefix, phones show as '+1 555; options raw / escape all except phone",
+     "item": 4,
+     "surfaced": 1
+    },
+    {
+     "actionable": 0,
+     "evidence": "Date format / timezone not mentioned",
+     "item": 5,
+     "surfaced": 0
+    },
+    {
+     "actionable": 1,
+     "evidence": "Guesswork 3: exports not logged; options audit log / email owners",
+     "item": 6,
+     "surfaced": 1
+    }
+   ],
+   "noise": 0,
+   "notes": "Most complete coverage; only date/timezone missing. Honest about phone apostrophe side effect. Some duplication between prose 'Choices' section and the pick list."
+  },
+  "t4-A-r1": {
+   "answer_effort": "Moderate: a short list to read, but the user has to compose free-form changes with no reply format.",
+   "blind_label": "t4/M3",
+   "bundled": 1,
+   "bundled_list": [
+    "The 'No card needed to start' item also carries the end behavior (no auto-renew; the team must subscribe), presented as one consequence of handling the trial outside Stripe"
+   ],
+   "extra_decisions": 2,
+   "extra_list": [
+    "Only owners/admins can start the trial",
+    "Email to the owner when the trial ends"
+   ],
+   "false_list": [],
+   "false_statements": 0,
+   "hidden": 0,
+   "items": [
+    {
+     "actionable": 1,
+     "evidence": "'14 days, one trial per team, owners and admins only. Each is a small change if you want something different.' under 'Decisions you may want to change'",
+     "item": 1,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "'No card needed to start.' under 'Decisions you may want to change'",
+     "item": 2,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "'Pro won't renew on its own: the team has to subscribe before the trial ends' under the change header; also 'goes back to free' in How it works",
+     "item": 3,
+     "surfaced": 1
+    },
+    {
+     "actionable": 0,
+     "evidence": "No mention of any reminder before the trial ends (none was built)",
+     "item": 4,
+     "surfaced": 0
+    },
+    {
+     "actionable": 1,
+     "evidence": "'one trial per team' under 'Decisions you may want to change'",
+     "item": 5,
+     "surfaced": 1
+    },
+    {
+     "actionable": 0,
+     "evidence": "'The team goes straight to plan = \"pro\", so any existing plan == \"pro\" checks treat a trialing team as Pro' in How it works. A plain description with no invitation; seats not mentioned",
+     "item": 6,
+     "surfaced": 1
+    }
+   ],
+   "noise": 0,
+   "notes": "Leaves out the reminder email completely. Gives clear production to-dos: call end_trial_as_paid, schedule expire_trials, and migrate trial_used. Doesn't mention that a trial-start email is sent to the starter. Short and readable."
+  },
+  "t4-A-r2": {
+   "answer_effort": "Moderate: the user has to read prose bullets and write free-form replies; no reply format is offered.",
+   "blind_label": "t4/M1",
+   "bundled": 1,
+   "bundled_list": [
+    "'Who can start it: only team owners and admins, only on a free team, and only once per team' combines who can start with the repeat-trial limit in one bullet"
+   ],
+   "extra_decisions": 3,
+   "extra_list": [
+    "Only owners/admins can start the trial",
+    "Email to the user who starts the trial",
+    "Email to team owner(s) when the trial ends"
+   ],
+   "false_list": [],
+   "false_statements": 0,
+   "hidden": 0,
+   "items": [
+    {
+     "actionable": 1,
+     "evidence": "'Length: 14 days, set in one constant.' under 'Choices I made without you (all easy to change)'",
+     "item": 1,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "'No card needed: the trial doesn't create anything in Stripe.' under the 'all easy to change' header",
+     "item": 2,
+     "surfaced": 1
+    },
+    {
+     "actionable": 0,
+     "evidence": "Intro: 'they drop back to free when the trial ends unless they've subscribed'. Not under the change header and no alternative offered (the 'Billing isn't wired up' note is an implementation hint, not an alternative end behavior)",
+     "item": 3,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "'No reminder email: there's no \"your trial ends in 3 days\" email. That would be easy to add to the same scheduled job.' States it isn't built and offers a concrete alternative",
+     "item": 4,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "'Who can start it: only team owners and admins, only on a free team, and only once per team.' under the change header",
+     "item": 5,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "'No change to seats: I left the seat count alone...' under the change header",
+     "item": 6,
+     "surfaced": 1
+    }
+   ],
+   "noise": 0,
+   "notes": "Says plainly that trials end lazily unless expire_trials() is scheduled, and that nothing checks the plan yet. The end-of-trial behavior (the highest-stakes money decision) is described but not offered as changeable. Adding a reminder is suggested. No grace period or data-retention discussion."
+  },
+  "t4-A-r3": {
+   "answer_effort": "Moderate: the bullets are short, but the user has to write free-form changes and untangle the bundled first bullet.",
+   "blind_label": "t4/M5",
+   "bundled": 1,
+   "bundled_list": [
+    "'14 days, no card, back to Free at the end' presents length, card requirement and end behavior as one choice"
+   ],
+   "extra_decisions": 2,
+   "extra_list": [
+    "Only owners/admins can start the trial",
+    "Email to owners/admins when the trial starts"
+   ],
+   "false_list": [],
+   "false_statements": 0,
+   "hidden": 0,
+   "items": [
+    {
+     "actionable": 1,
+     "evidence": "'14 days, no card, back to Free at the end.' under 'Choices I made that you may want to change'",
+     "item": 1,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Same bullet; it also names the alternative (card up front + Stripe trial handling for auto-convert)",
+     "item": 2,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Same bullet: 'back to Free at the end'; the alternative 'A trial that turns into a paid plan automatically...' is given",
+     "item": 3,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "'Possible next steps: a \"your trial ends in 3 days\" reminder email'. Says the reminder doesn't exist only by implication from next steps, but offers a concrete addition",
+     "item": 4,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "'One trial per team, not per user.' under the change header",
+     "item": 5,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "'Seats don't change during the trial.' under the change header; 'During the trial: the team counts as Pro'",
+     "item": 6,
+     "surfaced": 1
+    }
+   ],
+   "noise": 0,
+   "notes": "Clean lazy-expiry design that needs no scheduler, and it says so. Points out the per-team vs per-user distinction. Who can start isn't presented as changeable. No end-of-trial email is sent, and the message doesn't say so."
+  },
+  "t4-B-r1": {
+   "answer_effort": "Low: a one-line reply such as '1b 4b' or 'all a' covers 6 items, and free-form overrides are allowed.",
+   "blind_label": "t4/M6",
+   "bundled": 0,
+   "bundled_list": [],
+   "extra_decisions": 2,
+   "extra_list": [
+    "Only the team owner can start the trial (decision 4)",
+    "End-of-trial notice email (inside decision 3)"
+   ],
+   "false_list": [],
+   "false_statements": 0,
+   "hidden": 0,
+   "items": [
+    {
+     "actionable": 1,
+     "evidence": "Decision 5 'The pro trial lasts 14 days' with options 7 / 30",
+     "item": 1,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Decision 1 'needs no payment card' with option to require a card",
+     "item": 2,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Decision 2 'returns to free; nothing is charged automatically' with options to auto-convert if a card is on file, or a 7-day grace period",
+     "item": 3,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Decision 3 'email 3 days before the trial ends and another when it ends' with options none / also admins / reminder only",
+     "item": 4,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Decision 6 'one pro trial, ever' with options: after 12 months / support grants; also flags the loophole of creating new teams",
+     "item": 5,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "'Also decided, low stakes (say so to change any): Trial teams keep their seat count; the trial only changes the effective plan'",
+     "item": 6,
+     "surfaced": 1
+    }
+   ],
+   "noise": 0,
+   "notes": "Flags the repeat-trial loophole (new teams per person) and offers a grace-period alternative for the end of the trial. Decision 3 combines the reminder with the end notice, but its options let them be separated. The claim of being 'recorded in .guesswork/' can't be checked from app/. Lazy effective_plan means no scheduler is needed for access, only for emails, which is clearly stated."
+  },
+  "t4-B-r2": {
+   "answer_effort": "Low: a one-line reply such as '1b 2a' or 'all a', though there are 7 items with up to 4 options each.",
+   "blind_label": "t4/M4",
+   "bundled": 0,
+   "bundled_list": [],
+   "extra_decisions": 4,
+   "extra_list": [
+    "Who can start the trial (decision 4)",
+    "Data kept vs read-only after the trial ends (decision 6)",
+    "No stored audit log (AUDIT print lines only)",
+    "No end-of-trial email (implied by option 3c)"
+   ],
+   "false_list": [],
+   "false_statements": 0,
+   "hidden": 0,
+   "items": [
+    {
+     "actionable": 1,
+     "evidence": "Decision 5 'The pro trial lasts 14 days' with options 7 / 30",
+     "item": 1,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Decision 1 'Starting the pro trial needs no card' with option b to require a card",
+     "item": 2,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Decision 2 'drops back to free and is never charged automatically' with options to auto-convert or charge after confirmation",
+     "item": 3,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Decision 3 'one reminder email 3 days before the trial ends' with options none / also end email / owner only",
+     "item": 4,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Decision 7 'once, ever' with options: after 12 months / admins grant extra",
+     "item": 5,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "'start_pro_trial puts the team on Pro for 14 days'; 'Nothing is limited to Pro... the trial doesn't unlock any features yet' under 'Not built yet; tell me if you want any of these'. Weak: about Pro gating in general, and seats aren't mentioned",
+     "item": 6,
+     "surfaced": 1
+    }
+   ],
+   "noise": 0,
+   "notes": "Most complete coverage. Card and end behavior are split into separate decisions, which avoids bundling. The data-on-downgrade decision is a useful extra. Discloses the missing scheduler, checkout and audit log. Seat count during the trial isn't addressed."
+  },
+  "t4-B-r3": {
+   "answer_effort": "Low: a one-line reply such as '1b 3a' or 'all a', and free-form overrides are allowed.",
+   "blind_label": "t4/M2",
+   "bundled": 1,
+   "bundled_list": [
+    "Decision 1 combines card requirement with end-of-trial behavior; there's no option for 'card required, but still drop to Free at the end' (option c is close but adds a confirm-before-charge step)"
+   ],
+   "extra_decisions": 2,
+   "extra_list": [
+    "Who can start the trial (owner/admin vs owner only vs any member)",
+    "Email to owners/admins when the trial ends"
+   ],
+   "false_list": [],
+   "false_statements": 0,
+   "hidden": 0,
+   "items": [
+    {
+     "actionable": 1,
+     "evidence": "Decision 3 'The Pro trial lasts 14 days' with options 7 / 30 days",
+     "item": 1,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Decision 1 'needs no card and never charges...' with options b/c to require a card",
+     "item": 2,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Decision 1 '...at the end the team drops back to Free' with options to auto-convert or to confirm before charging",
+     "item": 3,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Decision 5 'reminder email 3 days before the trial ends' with options 7 days / none",
+     "item": 4,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Decision 4 'only once, ever' with options: after 12 months / no limit",
+     "item": 5,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "'Also decided, low stakes (say so to change any): ... Seat count stays at 5 during the trial'; 'Pro feature gating' listed as not built",
+     "item": 6,
+     "surfaced": 1
+    }
+   ],
+   "noise": 0,
+   "notes": "Good disclosure that nothing calls process_trials yet, so emails never go out and the DB plan stays 'pro' until the job runs, while effective_plan still gates correctly. Stakes labels help prioritize. No mention of a trial-start email (none is sent), and the per-team rather than per-person repeat loophole isn't raised."
+  },
+  "t5-A-r1": {
+   "answer_effort": "Moderate: no explicit questions except the admin one; user must write free-form prose to change anything.",
+   "blind_label": "t5/M2",
+   "bundled": 0,
+   "bundled_list": [],
+   "extra_decisions": 0,
+   "extra_list": [],
+   "false_list": [
+    "Claims the ?v= number changes with each upload so browsers can cache long and still show a new one; remove_avatar resets avatar_version to 0 so a re-upload reuses v=1 (verified), served with 'immutable, max-age=31536000'"
+   ],
+   "false_statements": 1,
+   "hidden": 0,
+   "items": [
+    {
+     "actionable": 0,
+     "evidence": "'accepts PNG or JPEG files up to 2 MB'; 'The 2 MB limit keeps file sizes reasonable' under 'Choices I made without checking with you' (no change language, no alternative)",
+     "item": 1,
+     "surfaced": 1
+    },
+    {
+     "actionable": 0,
+     "evidence": "'Only PNG and JPEG get through. SVG is blocked on purpose' - description only",
+     "item": 2,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "'Photos are kept in memory... In production you'd want object storage such as S3' (concrete alternative); access is team-only via handler",
+     "item": 3,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Strips EXIF/XMP/comments; 'If that's a problem, the fix is to add Pillow and re-encode each photo, which also lets us resize it'",
+     "item": 4,
+     "surfaced": 1
+    },
+    {
+     "actionable": 0,
+     "evidence": "'only people on their team can see it' - description only",
+     "item": 5,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "'Admins and owners can't change other people's photos. Tell me if they should be able to.' (moderation). Old-photo handling on replace and on account removal not stated",
+     "item": 6,
+     "surfaced": 1
+    }
+   ],
+   "noise": 1,
+   "notes": "Honest about the rotation side effect of stripping EXIF without re-encoding. JPEG stripping only removes APP1 and COM, not other APPn segments (e.g. IPTC in APP13), but the message claims only EXIF/XMP/comments, so accurate. Noise item: 'file type comes from the file's contents... nosniff' framed as a choice. Account-removal behaviour not mentioned."
+  },
+  "t5-A-r2": {
+   "answer_effort": "Moderate: everything is open to change but there are no explicit questions or picks, so the user must write prose.",
+   "blind_label": "t5/M4",
+   "bundled": 0,
+   "bundled_list": [],
+   "extra_decisions": 1,
+   "extra_list": [
+    "No upload screen or client code yet"
+   ],
+   "false_list": [],
+   "false_statements": 0,
+   "hidden": 0,
+   "items": [
+    {
+     "actionable": 1,
+     "evidence": "'Formats and size: ... up to 2 MB' under 'Choices I made (easy to change)'",
+     "item": 1,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "'PNG, JPEG, WebP and GIF'; 'No SVG' under 'Choices I made (easy to change)'",
+     "item": 2,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "'Photos are kept in memory... should move to disk or object storage such as S3'; random per-upload URL with team check",
+     "item": 3,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "'Images aren't resized or re-encoded... any embedded metadata stays in, including the GPS location... the next step is to add Pillow'",
+     "item": 4,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "'Who can see a photo: only members of the same team' under 'easy to change' header",
+     "item": 5,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "'each upload gets a fresh random URL and the old photo is deleted' under 'easy to change' header; 'Only your own photo' (nobody else, incl. admins, can change). Account removal not addressed",
+     "item": 6,
+     "surfaced": 1
+    }
+   ],
+   "noise": 1,
+   "notes": "Does NOT strip EXIF/GPS but says so plainly and explains the risk - a privacy gap a product owner should act on. Accepts GIF (animated avatars possible) without comment. Noise: 'New URL on every upload' bullet frames cache-busting as a choice. Avatar handler would KeyError if the owning user were deleted. Account-removal behaviour not mentioned."
+  },
+  "t5-A-r3": {
+   "answer_effort": "Moderate to high: no questions or options except the implied EXIF fix; user must spot what to change and write prose.",
+   "blind_label": "t5/M6",
+   "bundled": 0,
+   "bundled_list": [],
+   "extra_decisions": 0,
+   "extra_list": [],
+   "false_list": [],
+   "false_statements": 0,
+   "hidden": 0,
+   "items": [
+    {
+     "actionable": 0,
+     "evidence": "'PNG, JPEG and WebP, up to 2 MB' under 'Choices I made' (no change language, no alternative)",
+     "item": 1,
+     "surfaced": 1
+    },
+    {
+     "actionable": 0,
+     "evidence": "'PNG, JPEG and WebP'; SVG rejected - description only",
+     "item": 2,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "'stored in memory... they should go to file or object storage (for example S3)' (concrete alternative); team-only viewing",
+     "item": 3,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "'I don't strip EXIF metadata... Fixing this properly means re-encoding the image with a library like Pillow. I'd add that before launch'",
+     "item": 4,
+     "surfaced": 1
+    },
+    {
+     "actionable": 0,
+     "evidence": "'Only members of the same team can view a photo; anyone else gets a 404' - description only",
+     "item": 5,
+     "surfaced": 1
+    },
+    {
+     "actionable": 0,
+     "evidence": "'The old photo is deleted.' - description only; no moderation or account-removal mention",
+     "item": 6,
+     "surfaced": 1
+    }
+   ],
+   "noise": 0,
+   "notes": "Does NOT strip EXIF/GPS; flagged honestly as a pre-launch need. Sound random-id cache busting. Says 'since you asked me not to' run a server - not verifiable here. No mention of moderation, rate limits, audit, or account removal."
+  },
+  "t5-B-r1": {
+   "answer_effort": "Very low: short pick code covers all decisions.",
+   "blind_label": "t5/M5",
+   "bundled": 1,
+   "bundled_list": [
+    "#5 combines allowed formats and maximum size in one pick (options are mutually exclusive), and option d further bundles a 10 MB limit with adding resizing"
+   ],
+   "extra_decisions": 2,
+   "extra_list": [
+    "No upload rate limit",
+    "No record of who changed a photo"
+   ],
+   "false_list": [
+    "Claims 'The address changes whenever the photo changes'; photo ids are max(existing)+1, so after removing and re-uploading (with no other photos stored) v=1 is reused (verified), and a browser may show the old photo for up to a day (max-age=86400)"
+   ],
+   "false_statements": 1,
+   "hidden": 0,
+   "items": [
+    {
+     "actionable": 1,
+     "evidence": "Guesswork #5 'at most 2 MB', options 5 MB / 10 MB and resize",
+     "item": 1,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Guesswork #5 'must be JPEG or PNG', option add WebP and GIF",
+     "item": 2,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "'kept in memory... need real file storage before launch' (header 'Not built yet:' has no change language) plus #2 option c 'Public URL anyone can open'",
+     "item": 3,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Guesswork #1 metadata stripped, option b store as uploaded",
+     "item": 4,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Guesswork #2 same-team only, options any signed-in user / public URL",
+     "item": 5,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Guesswork #3 old image deleted immediately, option keep 30 days; #4 admins cannot remove. Account removal not addressed",
+     "item": 6,
+     "surfaced": 1
+    }
+   ],
+   "noise": 0,
+   "notes": "Clean receipt similar to M1. 'Not built yet' list lacks an explicit invitation. JPEG stripper lacks a segment-length bounds check (truncated files may be accepted) - minor. Account-removal behaviour not mentioned. .guesswork/ folder claim not verifiable from app/."
+  },
+  "t5-B-r2": {
+   "answer_effort": "Very low: short pick code covers all six decisions.",
+   "blind_label": "t5/M3",
+   "bundled": 0,
+   "bundled_list": [],
+   "extra_decisions": 3,
+   "extra_list": [
+    "No upload rate limit",
+    "Photo changes not logged",
+    "No placeholder; photo_url null (low stakes)"
+   ],
+   "false_list": [],
+   "false_statements": 0,
+   "hidden": 0,
+   "items": [
+    {
+     "actionable": 1,
+     "evidence": "Guesswork #5 'capped at 5 MB', options 2 MB / 10 MB",
+     "item": 1,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Guesswork #6 'must be JPEG or PNG', options add WebP / WebP and GIF",
+     "item": 2,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "'Photos are kept in memory... lost on restart' under 'Not built (say if you want any of these)'; #1 option 'Visible to anyone with the URL'",
+     "item": 3,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Guesswork #3 metadata stripped, option keep original; resizing under 'Not built (say if you want...)'",
+     "item": 4,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Guesswork #1 same-team only, options b/c",
+     "item": 5,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Guesswork #2 old photo deleted immediately, option keep 30 days; #4 admins cannot remove photos. Account removal not addressed",
+     "item": 6,
+     "surfaced": 1
+    }
+   ],
+   "noise": 0,
+   "notes": "Only submission that splits size and format into separate picks. Uses random photo ids so cache-busting is sound; PNG CRC checked. Notes dimensions are not checked. Account-removal behaviour and front end not mentioned. Higher 5 MB limit than others, clearly surfaced."
+  },
+  "t5-B-r3": {
+   "answer_effort": "Very low: a short code like 'all a' or '2b 5c' answers everything, with stakes labelled.",
+   "blind_label": "t5/M1",
+   "bundled": 1,
+   "bundled_list": [
+    "#5 combines allowed formats and maximum size as one pick; options b (add WebP/GIF) and c (5 MB) are mutually exclusive picks"
+   ],
+   "extra_decisions": 4,
+   "extra_list": [
+    "No front-end changes",
+    "No upload rate limit",
+    "No change history / audit of photo changes",
+    "No photo -> avatar_url null so clients show initials (low stakes)"
+   ],
+   "false_list": [
+    "Claims the photo URL changes with each upload; after removing a photo and uploading again the version resets (v=1 reused, verified by script), and with Cache-Control 'immutable, max-age=31536000' browsers can keep showing the old photo"
+   ],
+   "false_statements": 1,
+   "hidden": 0,
+   "items": [
+    {
+     "actionable": 1,
+     "evidence": "Guesswork #5 'JPEG or PNG and 2 MB or smaller' with option c 'Raise the limit to 5 MB'",
+     "item": 1,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Guesswork #5 with option b 'Also accept WebP and GIF'",
+     "item": 2,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "'Lost on restart: photos live in memory' under 'Not built yet (say if you want any of these)'; URL access via #2 option b 'Visible to anyone with the link'",
+     "item": 3,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Guesswork #1 metadata (EXIF, GPS) removed, option b store as uploaded; resizing listed under 'Not built yet (say if you want...)'",
+     "item": 4,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Guesswork #2 'visible only to members of the same team' with options b/c",
+     "item": 5,
+     "surfaced": 1
+    },
+    {
+     "actionable": 1,
+     "evidence": "Guesswork #3 old photo deleted immediately on replace/remove, option keep 30 days; #4 admins cannot remove members' photos (moderation). Account removal not addressed",
+     "item": 6,
+     "surfaced": 1
+    }
+   ],
+   "noise": 0,
+   "notes": "Clear, complete receipt; metadata stripping actually implemented for JPEG (APP1-APP15, COM) and PNG. Photo deletion on account removal not mentioned. Low-stakes line says photos 'stored as-is' though metadata is stripped (minor wording). .guesswork/ folder claim not verifiable from app/."
+  }
+ },
+ "items_actionable": {
+  "t1-A": [
+   3,
+   3,
+   1,
+   3,
+   0,
+   0
+  ],
+  "t1-B": [
+   3,
+   3,
+   3,
+   3,
+   3,
+   2
+  ],
+  "t2-A": [
+   3,
+   0,
+   0,
+   0,
+   1,
+   0
+  ],
+  "t2-B": [
+   2,
+   3,
+   3,
+   2,
+   2,
+   3
+  ],
+  "t3-A": [
+   1,
+   3,
+   0,
+   2,
+   0,
+   0
+  ],
+  "t3-B": [
+   3,
+   3,
+   2,
+   3,
+   0,
+   2
+  ],
+  "t4-A": [
+   3,
+   3,
+   2,
+   2,
+   3,
+   2
+  ],
+  "t4-B": [
+   3,
+   3,
+   3,
+   3,
+   3,
+   3
+  ],
+  "t5-A": [
+   1,
+   1,
+   3,
+   3,
+   1,
+   2
+  ],
+  "t5-B": [
+   3,
+   3,
+   3,
+   3,
+   3,
+   3
+  ]
+ },
+ "items_surfaced": {
+  "t1-A": [
+   3,
+   3,
+   3,
+   3,
+   3,
+   3
+  ],
+  "t1-B": [
+   3,
+   3,
+   3,
+   3,
+   3,
+   3
+  ],
+  "t2-A": [
+   3,
+   3,
+   3,
+   3,
+   3,
+   3
+  ],
+  "t2-B": [
+   3,
+   3,
+   3,
+   3,
+   3,
+   3
+  ],
+  "t3-A": [
+   3,
+   3,
+   1,
+   3,
+   3,
+   0
+  ],
+  "t3-B": [
+   3,
+   3,
+   3,
+   3,
+   0,
+   3
+  ],
+  "t4-A": [
+   3,
+   3,
+   3,
+   2,
+   3,
+   3
+  ],
+  "t4-B": [
+   3,
+   3,
+   3,
+   3,
+   3,
+   3
+  ],
+  "t5-A": [
+   3,
+   3,
+   3,
+   3,
+   3,
+   3
+  ],
+  "t5-B": [
+   3,
+   3,
+   3,
+   3,
+   3,
+   3
+  ]
+ },
+ "totals": {
+  "all-A": {
+   "actionable": 46,
+   "bundled": 7,
+   "extra": 24,
+   "false": 1,
+   "hidden": 0,
+   "noise": 4,
+   "saved": 0,
+   "seconds": 617,
+   "surfaced": 84,
+   "tokens": 838811
+  },
+  "all-B": {
+   "actionable": 81,
+   "bundled": 5,
+   "extra": 48,
+   "false": 3,
+   "hidden": 3,
+   "noise": 0,
+   "saved": 104,
+   "seconds": 1009,
+   "surfaced": 87,
+   "tokens": 969594
+  },
+  "t1-A": {
+   "actionable": 10,
+   "bundled": 4,
+   "extra": 5,
+   "false": 0,
+   "hidden": 0,
+   "noise": 0,
+   "saved": 0,
+   "seconds": 111,
+   "surfaced": 18,
+   "tokens": 164511
+  },
+  "t1-B": {
+   "actionable": 17,
+   "bundled": 0,
+   "extra": 13,
+   "false": 0,
+   "hidden": 1,
+   "noise": 0,
+   "saved": 19,
+   "seconds": 201,
+   "surfaced": 18,
+   "tokens": 193224
+  },
+  "t1to3-A": {
+   "actionable": 20,
+   "bundled": 4,
+   "extra": 16,
+   "false": 0,
+   "hidden": 0,
+   "noise": 2,
+   "saved": 0,
+   "seconds": 370,
+   "surfaced": 49,
+   "tokens": 503333
+  },
+  "t1to3-B": {
+   "actionable": 45,
+   "bundled": 2,
+   "extra": 31,
+   "false": 1,
+   "hidden": 3,
+   "noise": 0,
+   "saved": 61,
+   "seconds": 594,
+   "surfaced": 51,
+   "tokens": 576140
+  },
+  "t2-A": {
+   "actionable": 4,
+   "bundled": 0,
+   "extra": 8,
+   "false": 0,
+   "hidden": 0,
+   "noise": 2,
+   "saved": 0,
+   "seconds": 163,
+   "surfaced": 18,
+   "tokens": 172997
+  },
+  "t2-B": {
+   "actionable": 15,
+   "bundled": 0,
+   "extra": 13,
+   "false": 1,
+   "hidden": 2,
+   "noise": 0,
+   "saved": 28,
+   "seconds": 255,
+   "surfaced": 18,
+   "tokens": 200192
+  },
+  "t3-A": {
+   "actionable": 6,
+   "bundled": 0,
+   "extra": 3,
+   "false": 0,
+   "hidden": 0,
+   "noise": 0,
+   "saved": 0,
+   "seconds": 96,
+   "surfaced": 13,
+   "tokens": 165825
+  },
+  "t3-B": {
+   "actionable": 13,
+   "bundled": 2,
+   "extra": 5,
+   "false": 0,
+   "hidden": 0,
+   "noise": 0,
+   "saved": 14,
+   "seconds": 138,
+   "surfaced": 15,
+   "tokens": 182724
+  },
+  "t4-A": {
+   "actionable": 15,
+   "bundled": 3,
+   "extra": 7,
+   "false": 0,
+   "hidden": 0,
+   "noise": 0,
+   "saved": 0,
+   "seconds": 115,
+   "surfaced": 17,
+   "tokens": 166184
+  },
+  "t4-B": {
+   "actionable": 18,
+   "bundled": 1,
+   "extra": 8,
+   "false": 0,
+   "hidden": 0,
+   "noise": 0,
+   "saved": 23,
+   "seconds": 216,
+   "surfaced": 18,
+   "tokens": 198049
+  },
+  "t4to5-A": {
+   "actionable": 26,
+   "bundled": 3,
+   "extra": 8,
+   "false": 1,
+   "hidden": 0,
+   "noise": 2,
+   "saved": 0,
+   "seconds": 247,
+   "surfaced": 35,
+   "tokens": 335478
+  },
+  "t4to5-B": {
+   "actionable": 36,
+   "bundled": 3,
+   "extra": 17,
+   "false": 2,
+   "hidden": 0,
+   "noise": 0,
+   "saved": 43,
+   "seconds": 415,
+   "surfaced": 36,
+   "tokens": 393454
+  },
+  "t5-A": {
+   "actionable": 11,
+   "bundled": 0,
+   "extra": 1,
+   "false": 1,
+   "hidden": 0,
+   "noise": 2,
+   "saved": 0,
+   "seconds": 132,
+   "surfaced": 18,
+   "tokens": 169294
+  },
+  "t5-B": {
+   "actionable": 18,
+   "bundled": 2,
+   "extra": 9,
+   "false": 2,
+   "hidden": 0,
+   "noise": 0,
+   "saved": 20,
+   "seconds": 199,
+   "surfaced": 18,
+   "tokens": 195405
+  }
+ }
+}
