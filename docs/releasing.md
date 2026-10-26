@@ -20,8 +20,8 @@ Releases publish the `guesswork` package to PyPI through trusted publishing, so 
 3. Tag the release commit and push the tag:
 
 ```bash
-git tag v3.0.0
-git push origin v3.0.0
+git tag v3.1.1
+git push origin v3.1.1
 ```
 
 The release workflow checks that the tag matches the package version, runs the tests, builds the package, and publishes it. After the first release, `pipx install guesswork` and `uvx guesswork` work without a Git URL.
