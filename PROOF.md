@@ -8,7 +8,7 @@ The repository can prove its packages are valid today. It cannot yet claim that 
 |---|---|---|
 | Do the CLI, hooks, receipts, pull request summaries, and report behave as specified? | Yes | Unit tests in `tests/test_guesswork.py` and `tests/test_plugin_package.py` |
 | Does the plugin load in Claude Code? | Yes | `claude plugin validate` passes for the plugin and the marketplace |
-| Do agents record the decisions they make without instructions? | Early signal, not proven | [Pilot, 2026-10-26](evaluation/pilot-2026-10-26/README.md): with Guesswork, 14 of 18 seeded decisions reached the user as answerable choices against 9 of 18 without it, and 15 were saved against 0. Both conditions mentioned 16 of 18. One run per cell. |
+| Do agents record the decisions they make without instructions? | Supported on one model and five tasks; the bar below is not met yet | [Evaluation of 3.1.0, 2026-10-26](evaluation/v3.1-2026-10-26/README.md): pre-registered, 30 builds, blind grading. With Guesswork, 81 of 90 checklist decisions reached the user as answerable choices against 46 of 90 without it, and 104 were saved against 0. Both conditions mentioned nearly all of them (87 and 84). Bundled picks and a receipt that hides decisions over its limit remain open. The [pilot](evaluation/pilot-2026-10-26/README.md) came first. |
 | Do owners answer receipts and keep using them? | Not proven yet | Return use, answer rates, and issues from real projects |
 
 We will call the first Guesswork result credible when all conditions hold:
