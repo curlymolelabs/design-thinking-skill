@@ -31,7 +31,7 @@ You didn't choose any of that. It's buried in 2,000 lines of diff, and nobody wi
 Guesswork makes your agent keep receipts:
 
 1. **It records every guess.** Each product decision made without instructions is logged in plain English, with why it was made and what else it could have been.
-2. **It ranks them by stakes.** Money, data, access, and privacy come first. Wording and layout are only counted.
+2. **It ranks them by stakes.** Money, data, access, and privacy come first. Wording and layout get a single short line.
 3. **You answer in one line.** Reply `1b 2c 3b`. The agent changes the code and records your answers.
 4. **It never forgets.** Your answers become locked decisions that every later session, pull request, and CI run respects.
 
@@ -49,7 +49,7 @@ Prefer pipx? `pipx run guesswork demo`. Both need Python 3.9 or newer.
 
 ### 1. Vibe coding a feature
 
-You ask for a feature and keep working. At the end of the turn, the agent hands you the receipt from the animation above: the decisions with real stakes, numbered, each with alternatives. Low-stakes guesses such as page sizes are recorded but only counted, so the receipt stays short.
+You ask for a feature and keep working. At the end of the turn, the agent hands you the receipt from the animation above: the decisions with real stakes, numbered, each with alternatives. Low-stakes guesses such as page sizes get one short line at the end, so the receipt stays short.
 
 Reply `1b 2c 3b`, `all a` to keep everything as built, or `2: something else` in your own words.
 
@@ -115,7 +115,7 @@ One Python file, no dependencies, Python 3.9 or newer.
 
 - **It guesses safely.** When the agent must guess, it picks the option that's cheapest to undo: soft delete, private by default, opt-in, a reminder before any charge.
 - **It asks first only when it matters.** The agent stops to ask only when a decision is high stakes and expensive to reverse, such as a payment flow or a data model.
-- **It keeps receipts short.** At most five decisions, ranked by stakes. Everything else is a count.
+- **It keeps receipts short.** At most five decisions, ranked by stakes. A few small ones share one line; beyond that they are counted.
 - **It nudges at most once.** In Claude Code, the end-of-turn check reminds the agent once per turn, and only when code changed and nothing was recorded. You can change that in `.guesswork/config.json`.
 
 ## The ledger is plain files in your repository

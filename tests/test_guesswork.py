@@ -203,10 +203,21 @@ class ReceiptAndDecisionTests(Sandbox):
         third = text.index("Any member can invite")
         self.assertLess(first, second)
         self.assertLess(second, third)
-        self.assertNotIn("Search results", text)
-        self.assertIn("1 low-stakes guess logged", text)
+        self.assertIn("Also decided, low stakes (say so to change any): Search results show 20 items per page", text)
         self.assertIn("3 decisions need you (2 high stakes)", text)
         self.assertIn("**a** Keep as built", text)
+
+    def test_receipt_counts_low_stakes_when_there_are_many(self) -> None:
+        many = [{"title": f"Page {n} shows 20 rows", "category": "ux", "stakes": "low"} for n in range(4)]
+        self.run_cli("log", input_text=json.dumps(many))
+        text = self.run_cli("receipt").stdout
+        self.assertIn("no decisions need you. 4 low-stakes guesses logged", text)
+        self.assertNotIn("Page 0", text)
+
+    def test_log_flags_titles_that_bundle_two_decisions(self) -> None:
+        bundled = {"title": "Billing is cancelled at once and the team is purged after 30 days", "category": "money", "stakes": "high"}
+        result = self.run_cli("log", input_text=json.dumps([bundled, SAMPLE[3]]))
+        self.assertEqual(result.stdout.count("may hold two decisions"), 1)
 
     def test_receipt_json_and_limit(self) -> None:
         self.log_sample()

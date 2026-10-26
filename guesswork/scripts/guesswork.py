@@ -25,7 +25,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Iterable, Optional
 
-__version__ = "3.0.0"
+__version__ = "3.1.0"
 
 SCHEMA = "guesswork/1"
 LEDGER_DIR = ".guesswork"
@@ -611,6 +611,21 @@ def build_guess(project: Project, data: Any, taken: set[str], by: str) -> dict[s
     return guess
 
 
+BUNDLE_SPLIT = re.compile(r";|,? and |,? while |,? but ", re.IGNORECASE)
+BUNDLE_VERB = re.compile(
+    r"\b(?:is|are|can|cannot|can't|gets?|stays?|expires?|joins?|cancel(?:s|led)?|purged?|deleted|"
+    r"sends?|sent|counts?|shows?|includes?|needs?|requires?|runs?|becomes?|loses?|converts?|"
+    r"charges?|keeps?|remains?|moves?|receives?|sees?|appears?|lasts?)\b",
+    re.IGNORECASE,
+)
+
+
+def looks_bundled(title: str) -> bool:
+    """True when a title reads like two decisions joined into one sentence."""
+    parts = [part for part in BUNDLE_SPLIT.split(title) if part.strip()]
+    return len(parts) > 1 and sum(1 for part in parts if BUNDLE_VERB.search(part)) > 1
+
+
 def read_log_input(args: argparse.Namespace) -> list[Any]:
     if args.file is not None:
         text = sys.stdin.read() if str(args.file) == "-" else Path(args.file).read_text(encoding="utf-8")
@@ -712,16 +727,26 @@ def receipt_items(guesses: list[dict[str, Any]], include_low: bool = False, sinc
     return sort_by_risk(items)
 
 
-def render_receipt(shown: list[dict[str, Any]], hidden: int, low_open: int, fmt: str = "md") -> str:
+LOW_INLINE_LIMIT = 3
+
+
+def low_stakes_note(low: list[dict[str, Any]], code: Any) -> Optional[str]:
+    """Name a few low-stakes guesses inline; only count them when there are many."""
+    if not low:
+        return None
+    if len(low) <= LOW_INLINE_LIMIT:
+        titles = "; ".join(guess["title"] for guess in low)
+        return f"Also decided, low stakes (say so to change any): {titles}"
+    return f"{plural(len(low), 'low-stakes guess', 'low-stakes guesses')} logged ({code('guesswork list --stakes low')})"
+
+
+def render_receipt(shown: list[dict[str, Any]], hidden: int, low: list[dict[str, Any]], fmt: str = "md") -> str:
     bold = (lambda text: f"**{text}**") if fmt == "md" else (lambda text: text)
     code = (lambda text: f"`{text}`") if fmt == "md" else (lambda text: text)
+    low_note = low_stakes_note(low, code)
     if not shown:
-        if low_open:
-            return (
-                f"{bold('Guesswork')}: no decisions need you. "
-                f"{plural(low_open, 'low-stakes guess', 'low-stakes guesses')} logged "
-                f"({code('guesswork list --stakes low')})."
-            )
+        if low_note:
+            return f"{bold('Guesswork')}: no decisions need you. {low_note}."
         return f"{bold('Guesswork')}: no open guesses."
     total = len(shown) + hidden
     high = sum(1 for g in shown if g["stakes"] == "high")
@@ -746,10 +771,10 @@ def render_receipt(shown: list[dict[str, Any]], hidden: int, low_open: int, fmt:
     extras = []
     if hidden:
         extras.append(f"{plural(hidden, 'more decision')} waiting ({code('guesswork receipt --limit 20')})")
-    if low_open:
-        extras.append(f"{plural(low_open, 'low-stakes guess', 'low-stakes guesses')} logged ({code('guesswork list --stakes low')})")
     if extras:
         lines.append("Also: " + "; ".join(extras) + ".")
+    if low_note:
+        lines.append(f"{low_note}.")
     return "\n".join(lines)
 
 
@@ -911,6 +936,8 @@ def cmd_log(args: argparse.Namespace) -> int:
         project.save(guess)
         marker = "+" if action == "logged" else "~"
         print(f"{marker} {guess['id']}  {guess['stakes'].upper():6} {guess['category']:13} {guess['title']}")
+        if looks_bundled(guess["title"]):
+            print(f"  note: {guess['id']} may hold two decisions; log them separately so the owner can answer each one")
         if supersedes:
             old = by_id[supersedes]
             old["superseded_by"] = guess["id"]
@@ -998,7 +1025,8 @@ def cmd_receipt(args: argparse.Namespace) -> int:
         raise GuessworkError("--since must be an ISO date or datetime")
     items = receipt_items(guesses, include_low=args.all, since=since)
     shown, hidden = items[:limit], max(0, len(items) - limit)
-    low_open = 0 if args.all else sum(1 for g in guesses if g["status"] == "open" and g["stakes"] == "low")
+    low = [] if args.all else sort_by_risk(g for g in guesses if g["status"] == "open" and g["stakes"] == "low")
+    low_open = len(low)
     if args.format == "json":
         payload = [
             {"n": number, "id": g["id"], "title": g["title"], "stakes": g["stakes"], "category": g["category"],
@@ -1007,7 +1035,7 @@ def cmd_receipt(args: argparse.Namespace) -> int:
         ]
         print(json.dumps({"items": payload, "more": hidden, "low_open": low_open}, indent=2, ensure_ascii=False))
     else:
-        print(render_receipt(shown, hidden, low_open, args.format))
+        print(render_receipt(shown, hidden, low, args.format))
     remember_receipt(project, shown)
     return 0
 
@@ -1916,12 +1944,12 @@ def cmd_demo(args: argparse.Namespace) -> int:
     report = project.ledger / REPORT_NAME
     write_text_atomic(report, render_report(project, guesses, "demo-workspace-app"))
     shown = receipt_items(guesses)[: project.config()["receipt_limit"]]
-    low_open = sum(1 for g in guesses if g["status"] == "open" and g["stakes"] == "low")
+    low = sort_by_risk(g for g in guesses if g["status"] == "open" and g["stakes"] == "low")
     remember_receipt(project, shown)
     print("An agent was asked to \"add team workspaces with invites, a free trial, and CSV export\".")
     print(f"It made {len(DEMO_GUESSES)} product decisions nobody specified. The owner already answered 2.")
     print()
-    print(render_receipt(shown, 0, low_open, "text"))
+    print(render_receipt(shown, 0, low, "text"))
     print()
     print(f"Demo project: {target}")
     print(f"Report:       {report}")

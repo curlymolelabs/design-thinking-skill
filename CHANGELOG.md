@@ -2,6 +2,14 @@
 
 This file records public changes that affect skill behavior, package structure, or the decision-record format.
 
+## Guesswork 3.1.0, 2026-10-26
+
+Changes from the [pilot evaluation](evaluation/pilot-2026-10-26/README.md):
+
+- The skill now sweeps every feature for the decisions agents usually forget: scale, abuse, who can see or do it, audit, failure and undo, and effects on people outside the app. In the pilot, agents with and without Guesswork missed the same export risks.
+- The skill asks for one decision per guess, and `guesswork log` flags a title that reads like two decisions, so the owner can answer each one.
+- Receipts name up to three low-stakes guesses inline instead of hiding them behind a command.
+
 ## Guesswork 3.0.0, 2026-10-26
 
 The first Guesswork release continues the repository's version numbers, which reached 2.1.1 with Design Thinking, so release tags stay in order and `@v2` keeps pointing at the Design Thinking releases.

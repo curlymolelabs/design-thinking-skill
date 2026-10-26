@@ -26,7 +26,7 @@ Reply with your picks, like `1b 2a 3a`. `all a` keeps everything as built. `2: y
 Paste it unchanged. The numbers are stored with the receipt, so `guesswork decide 1b` resolves to the right guess even after the conversation is compacted.
 
 - The receipt shows at most five items by default, ranked by stakes, reversibility, and category. Raise the limit with `--limit`.
-- Low-stakes guesses appear only as a count. `guesswork receipt --all` includes them.
+- Up to three low-stakes guesses are named in one closing line; more than three appear as a count. `guesswork receipt --all` lists them as numbered items.
 - Printing a new receipt replaces the stored numbering. Use ids when you refer to an older receipt.
 
 ## Read the reply grammar
