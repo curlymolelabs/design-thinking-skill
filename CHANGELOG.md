@@ -6,6 +6,8 @@ This file records public changes that affect skill behavior, package structure, 
 
 The first Guesswork release continues the repository's version numbers, which reached 2.1.1 with Design Thinking, so release tags stay in order and `@v2` keeps pointing at the Design Thinking releases.
 
+Published to PyPI as `guesswork` through trusted publishing, so `pipx install guesswork` and `uvx guesswork demo` work without a Git URL.
+
 ### Easier to try and understand
 
 - Added `guesswork demo`, which builds a fictional project with guesses, a receipt to answer, and a report in seconds.

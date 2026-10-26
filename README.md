@@ -9,6 +9,7 @@ Guesswork shows you the risky ones, and you answer them in one line.
 
 [![Verify package](https://github.com/curlymolelabs/guesswork/actions/workflows/verify.yml/badge.svg)](https://github.com/curlymolelabs/guesswork/actions/workflows/verify.yml)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![PyPI](https://img.shields.io/pypi/v/guesswork.svg?label=PyPI)](#install-it)
 [![Claude Code plugin](https://img.shields.io/badge/Claude%20Code-plugin-a5b4fc.svg)](#install-it)
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-Codex%20%C2%B7%20Cursor%20%C2%B7%20Gemini-4ade80.svg)](#install-it)
 
@@ -39,10 +40,10 @@ Guesswork makes your agent keep receipts:
 No project, no agent, no setup. This creates a fictional app with real guesses, a receipt to answer, and an HTML report:
 
 ```bash
-uvx --from git+https://github.com/curlymolelabs/guesswork guesswork demo --open
+uvx guesswork demo --open
 ```
 
-Use `pipx run --spec git+https://github.com/curlymolelabs/guesswork guesswork demo` if you prefer pipx. Both need Python 3.9 or newer.
+Prefer pipx? `pipx run guesswork demo`. Both need Python 3.9 or newer.
 
 ## See it work
 
@@ -105,7 +106,7 @@ These clients get receipts and memory through the skill and `AGENTS.md`, but not
 ### The CLI on its own
 
 ```bash
-pipx install git+https://github.com/curlymolelabs/guesswork
+pipx install guesswork
 ```
 
 One Python file, no dependencies, Python 3.9 or newer.
@@ -162,12 +163,12 @@ jobs:
       - uses: actions/checkout@v7
         with:
           fetch-depth: 0
-      - uses: curlymolelabs/guesswork@main
+      - uses: curlymolelabs/guesswork@v3.0.0
         with:
           comment: "true"
 ```
 
-By default the action only reports. Add `fail-on: high` to block merging while a pull request adds open high-stakes guesses. Pin it to a release tag once one exists.
+By default the action only reports. Add `fail-on: high` to block merging while a pull request adds open high-stakes guesses.
 
 ## How it differs from rules files and decision logs
 
