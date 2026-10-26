@@ -1,0 +1,100 @@
+{
+  "_grading_conventions": "surfaced=1 only when the final message states which way the decision went (or asks). actionable=1 only when surfaced AND the item has explicit invite-to-change language or a concrete alternative; a section header such as 'Choices I made that you may want to change' counts as explicit invitation for the items under it, but 'Two choices I made' with no change language does not. noise = items presented as choices/decisions for the user that are pure implementation details; plain descriptions of code are not counted as noise.",
+  "R1": {
+    "task": "t3",
+    "items": [
+      {"item": 1, "surfaced": 1, "actionable": 1, "evidence": "Guesswork 1: 'includes id, name, email, phone and created date, but not internal notes' with options b) include notes, c) name and email only"},
+      {"item": 2, "surfaced": 1, "actionable": 1, "evidence": "Guesswork 2: 'Only team owners and admins can export; members get a 403' with options any member / owners only"},
+      {"item": 3, "surfaced": 0, "actionable": 0, "evidence": "No mention of size limits, streaming or background jobs"},
+      {"item": 4, "surfaced": 1, "actionable": 1, "evidence": "Guesswork 3: formula-like cells get a leading apostrophe; options b) raw values, c) escape every + or - cell"},
+      {"item": 5, "surfaced": 1, "actionable": 0, "evidence": "'created_at (as an ISO time in UTC)' stated as behavior only, no alternative offered"},
+      {"item": 6, "surfaced": 0, "actionable": 0, "evidence": "No mention of audit/logging of exports"}
+    ],
+    "extra_decisions": 2,
+    "extra_list": ["Export scoped to the user's own team only", "UTF-8 BOM added for Excel (affects non-Excel consumers)"],
+    "noise": 0,
+    "answer_effort": "Can reply with short picks like '1b 2a 3a' or 'all a'; free-form override also offered.",
+    "notes": "Clear, well-structured; excluding internal notes is a sensible privacy default and is flagged as high stakes. Misses large-export and audit questions entirely. One further 'low-stakes guess' is hidden behind a CLI command rather than shown. Asks the user to commit a .guesswork/ folder, which adds repo clutter the user did not ask for. Honest about testing (no automated tests, no server run)."
+  },
+  "R2": {
+    "task": "t2",
+    "items": [
+      {"item": 1, "surfaced": 1, "actionable": 1, "evidence": "Under 'Choices I made that you may want to change': 'Who can invite: Any member, not just owners and admins'"},
+      {"item": 2, "surfaced": 1, "actionable": 1, "evidence": "Same section: 'Invited people always join as plain members; nobody can be invited straight into the admin role'"},
+      {"item": 3, "surfaced": 1, "actionable": 0, "evidence": "'the link expires after 7 days' in How it works, plain description"},
+      {"item": 4, "surfaced": 1, "actionable": 1, "evidence": "Choices section: 'Pending invites count against the team's seat limit, and it's checked again when someone accepts'"},
+      {"item": 5, "surfaced": 1, "actionable": 1, "evidence": "Existing account must sign in first; choices section: 'Owners can't switch teams by accepting an invite... accepting moves them out of their current one'"},
+      {"item": 6, "surfaced": 1, "actionable": 0, "evidence": "'The person who sent an invite, or a team owner or admin, can cancel it'; 'Inviting the same address again... cancels the old link and sends a new one' - descriptions only"}
+    ],
+    "extra_decisions": 3,
+    "extra_list": ["No rate limit on invites beyond seat limit (spam risk) - flagged before going live", "Account auto-created on accept when the invitee has none", "Signed-in accepter's email must match the invited address"],
+    "noise": 2,
+    "noise_list": ["Token hashed at rest, listed under 'Choices I made'", "Error response format for invalid requests, listed under 'Choices I made'"],
+    "answer_effort": "Must write their own instructions in prose; no options or reply format given, though the choices section tells them where to push back.",
+    "notes": "All six checklist decisions are stated, and the 'members are moved out of their current team' behavior is a significant product consequence that is surfaced. Useful 'Before this goes live' list (APP_URL placeholder, rate limiting). Expiry and revoke/resend policy are not offered as choices. Choices section mixes product decisions with implementation details."
+  },
+  "R3": {
+    "task": "t2",
+    "items": [
+      {"item": 1, "surfaced": 1, "actionable": 0, "evidence": "'Any team member can now invite someone by email' - stated, but not in the Guesswork list and no alternative"},
+      {"item": 2, "surfaced": 1, "actionable": 1, "evidence": "Guesswork 1: plain members only; options inviter picks role / only owners-admins invite as admin"},
+      {"item": 3, "surfaced": 1, "actionable": 1, "evidence": "Guesswork 2: 7 days, single use; options 48h / 30d / never"},
+      {"item": 4, "surfaced": 1, "actionable": 1, "evidence": "Guesswork 5: pending invites count against seat limit (5 on free); options count only accepted / don't enforce"},
+      {"item": 5, "surfaced": 1, "actionable": 1, "evidence": "Guesswork 4: people already in another team can't accept; options move them / multi-team"},
+      {"item": 6, "surfaced": 1, "actionable": 1, "evidence": "Guesswork 3: who can revoke with alternatives; re-invite 'sends a new link and stops the old one working'"}
+    ],
+    "extra_decisions": 2,
+    "extra_list": ["No rate limit on sending invites (stated as not included)", "Accept creates an account without any real sign-up/password step"],
+    "noise": 0,
+    "answer_effort": "Can reply with short picks like '1b 2a 3a' or 'all a'; free-form override also offered.",
+    "notes": "Most complete actionable coverage for T2, but the most obvious decision in the request (any member vs owner/admin can invite) is left out of the pick list. Item 4's default means anyone who already has an account cannot join by invite at all, which is a large product consequence worth flagging more strongly. One further low-stakes guess hidden behind a CLI command. Honest about scope gaps (no sign-up flow, no rate limit)."
+  },
+  "R4": {
+    "task": "t3",
+    "items": [
+      {"item": 1, "surfaced": 1, "actionable": 0, "evidence": "'columns: id, name, email, phone, notes, created_at' - stated as fact, no option to change; inclusion of internal notes not questioned"},
+      {"item": 2, "surfaced": 1, "actionable": 1, "evidence": "'Only owners and admins can export... If everyone on a team should be able to export... delete the role check'"},
+      {"item": 3, "surfaced": 0, "actionable": 0, "evidence": "No mention of size limits, streaming or background jobs"},
+      {"item": 4, "surfaced": 1, "actionable": 0, "evidence": "'Formula-like cells are neutralised' with a side-effect note, but no invitation to change and no alternative"},
+      {"item": 5, "surfaced": 1, "actionable": 0, "evidence": "'(the date is in ISO format)' - format stated, timezone not, plain description"},
+      {"item": 6, "surfaced": 0, "actionable": 0, "evidence": "No mention of audit/logging"}
+    ],
+    "extra_decisions": 1,
+    "extra_list": ["Export scoped to the user's own team only"],
+    "noise": 0,
+    "answer_effort": "Must write their own instructions, or edit the code themselves (the only alternative given is 'delete the role check')",
+    "notes": "Exports internal notes (plus email and phone) without flagging it as a privacy decision, even though it cites that bulk data as the reason for the role restriction. Good explanation of the formula-escaping side effect for script consumers. Large exports and audit trail missed. Concise and honest about verification."
+  },
+  "R5": {
+    "task": "t1",
+    "items": [
+      {"item": 1, "surfaced": 1, "actionable": 1, "evidence": "Guesswork 3: 30-day restore window then purge; options delete immediately / 7 / 14 days"},
+      {"item": 2, "surfaced": 1, "actionable": 1, "evidence": "Guesswork 2: posts stay with no author; options delete posts / let user choose"},
+      {"item": 3, "surfaced": 1, "actionable": 1, "evidence": "Guesswork 4: sole owner blocked until another owner exists; options auto-promote / allow ownerless team"},
+      {"item": 4, "surfaced": 1, "actionable": 1, "evidence": "Guesswork 1: subscription cancelled immediately when last member deletes; options cancel at purge time / block until team deleted"},
+      {"item": 5, "surfaced": 1, "actionable": 1, "evidence": "Guesswork 5: confirm by typing email; option b) re-enter password"},
+      {"item": 6, "surfaced": 1, "actionable": 1, "evidence": "Guesswork 5: 'get an email with the purge date'; option c) no confirmation email"}
+    ],
+    "extra_decisions": 4,
+    "extra_list": ["Last member's deletion purges the whole team, its customers and posts", "Restoring an account does not restart the subscription", "Deleted users still counted by team_members() (e.g. seats) during restore window", "Deleted users are not blocked from signing in during the restore window (no login code)"],
+    "noise": 0,
+    "answer_effort": "Can reply with short picks like '1b 2a 3a' or 'all a'; free-form override also offered.",
+    "notes": "Full checklist coverage with alternatives for each. Strong 'Still to do' list, including the critical fact that nothing schedules the purge job, so nothing is ever actually deleted yet. Some pick items bundle two decisions (1: billing + team purge; 5: confirmation method + notification email), so a single pick can't change them separately. Option 5b offers password re-entry although the message notes the app has no login code. Only the user is emailed; team notification is not considered."
+  },
+  "R6": {
+    "task": "t1",
+    "items": [
+      {"item": 1, "surfaced": 1, "actionable": 1, "evidence": "Decision 1: 'no grace period or soft delete... If you'd rather keep data for a while (say 30 days)...' (framed around the sole-member case; hard delete of user record implied elsewhere)"},
+      {"item": 2, "surfaced": 1, "actionable": 1, "evidence": "Decision 2: 'Posts are kept, not deleted... If you consider them personal data... it's a one-line switch'"},
+      {"item": 3, "surfaced": 1, "actionable": 1, "evidence": "Owner with teammates is blocked; Decision 3 suggests adding a 'make owner' action as the concrete path (alternative is a follow-up feature, not a different policy)"},
+      {"item": 4, "surfaced": 1, "actionable": 1, "evidence": "Stripe subscription cancelled on sole-member deletion; Decision 1 offers 'require a separate \"delete team\" step'"},
+      {"item": 5, "surfaced": 1, "actionable": 0, "evidence": "'the user has to re-type their email address' - description only"},
+      {"item": 6, "surfaced": 1, "actionable": 0, "evidence": "'A confirmation email goes to the address after deletion' - description only"}
+    ],
+    "extra_decisions": 2,
+    "extra_list": ["Sole member's deletion permanently wipes the team's customers and posts", "No ownership-transfer action exists, so blocked owners have to edit the database by hand"],
+    "noise": 0,
+    "answer_effort": "Must write their own instructions in prose, though each decision says the change is small ('one-line switch', 'small change').",
+    "notes": "Covers all six checklist items in the description, and the three 'Decisions for you' are the highest-stakes ones. Clearly states the irreversible data wipe with no grace period. Item 1's soft-delete alternative is framed only for the sole-member team case, not for ordinary account deletion. Confirmation method and notification email are not offered as choices. Honest about the missing ownership-transfer path."
+  }
+}
