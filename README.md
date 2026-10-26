@@ -115,7 +115,7 @@ One Python file, no dependencies, Python 3.9 or newer.
 
 - **It guesses safely.** When the agent must guess, it picks the option that's cheapest to undo: soft delete, private by default, opt-in, a reminder before any charge.
 - **It asks first only when it matters.** The agent stops to ask only when a decision is high stakes and expensive to reverse, such as a payment flow or a data model.
-- **It keeps receipts short.** At most five decisions, ranked by stakes. A few small ones share one line; beyond that they are counted.
+- **It keeps receipts short.** Five decisions in full, ranked by stakes, and any others on one line each. A few small ones share a closing line.
 - **It nudges at most once.** In Claude Code, the end-of-turn check reminds the agent once per turn, and only when code changed and nothing was recorded. You can change that in `.guesswork/config.json`.
 
 ## The ledger is plain files in your repository

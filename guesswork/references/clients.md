@@ -61,3 +61,27 @@ Any other CI system can run the CLI directly:
 python3 guesswork/scripts/guesswork.py pr --base origin/main
 python3 guesswork/scripts/guesswork.py check --base origin/main --fail-on high
 ```
+
+## Audit an existing codebase
+
+When the user asks what their app already decided, or installs Guesswork in an existing project:
+
+1. Run `guesswork scan` for candidate lines and `guesswork list --status all` for what the ledger already holds.
+2. Read the main flows: sign-up and sign-in, roles and sharing, billing, deletion and retention, exports, notifications, limits, and defaults.
+3. Record the decisions you find with `"basis": "inferred"` and `where` entries that include line numbers. Prefer 10 to 25 sharp entries over an exhaustive list.
+4. End with `guesswork receipt`. Do not change code during an audit.
+
+In Claude Code, `/guesswork:audit` runs these steps.
+
+## Other commands
+
+| Command | Use |
+|---|---|
+| `guesswork status` | One-line summary of open and decided guesses |
+| `guesswork list --stakes high` | Filter the ledger |
+| `guesswork show 2` | Full detail for a receipt item or id |
+| `guesswork dismiss <id> --note "reason"` | Close a guess that is not a real decision |
+| `guesswork reopen <id>` | Reopen a decided or dismissed guess |
+| `guesswork report` | HTML overview in `.guesswork/report.html` |
+| `guesswork pr --base origin/main` | Markdown summary of the decisions on a branch |
+| `guesswork check --fail-on high` | Exit with an error while high-stakes guesses are open |

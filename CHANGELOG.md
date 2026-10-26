@@ -2,6 +2,16 @@
 
 This file records public changes that affect skill behavior, package structure, or the decision-record format.
 
+## Guesswork 3.1.1, 2026-10-26
+
+Changes from the [evaluation of 3.1.0](evaluation/v3.1-2026-10-26/README.md), which found Guesswork cost 16 percent more tokens and 63 percent more time per feature, still bundled some decisions, and sometimes hid decisions past the receipt limit. This is the first PyPI release since 3.0.0 and includes the 3.1.0 changes below.
+
+- The skill is about half as long, so agents spend fewer tokens reading it. Audit steps and the command table moved to `references/clients.md`.
+- Agents record guesses and print the receipt in one call with `guesswork log --receipt`, and no longer repeat the receipt's decisions in their own words.
+- The check for forgotten decisions runs only for features that touch money, personal data, access, deletion, or people outside the app.
+- Receipts list up to ten decisions past the limit on one line each, with their options, instead of hiding them behind a command.
+- The bundling check now flags only titles that join two settings, such as "JPEG or PNG and at most 2 MB". It no longer flags restatements such as "Only admins can export; members get a 403", which had taught agents to ignore it. The skill adds a test: if an alternative changes only part of the title, split the guess.
+
 ## Guesswork 3.1.0, 2026-10-26
 
 Changes from the [pilot evaluation](evaluation/pilot-2026-10-26/README.md):
