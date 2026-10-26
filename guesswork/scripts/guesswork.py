@@ -769,8 +769,8 @@ def render_receipt(
         for key, label in options_for(guess):
             lines.append(f"   - {bold(key)} {label}")
     for number, guess in enumerate(brief, start=len(shown) + 1):
-        options = " · ".join(f"{bold(key)} {label}" for key, label in options_for(guess)[1:])
-        lines.append(f"{number}. {bold(guess['title'])} ({tag_line(guess)})" + (f" · {options}" if options else ""))
+        options = " · ".join(f"{bold(key)} {label}" for key, label in options_for(guess))
+        lines.append(f"{number}. {bold(guess['title'])} ({tag_line(guess)}): {options}")
     lines.append("")
     picks = []
     for number, guess in enumerate(shown[:3], start=1):

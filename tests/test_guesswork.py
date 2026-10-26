@@ -238,7 +238,7 @@ class ReceiptAndDecisionTests(Sandbox):
         self.assertNotIn("more decision", text)
         brief_lines = [line for line in text.splitlines() if line.startswith(("6. ", "7. "))]
         self.assertEqual(len(brief_lines), 2)
-        self.assertIn("**b** No limit", brief_lines[0])
+        self.assertIn("**a** Keep as built · **b** No limit", brief_lines[0])
         self.run_cli("decide", "7b")
         decided = [g for g in map(json.loads, (p.read_text() for p in (self.root / ".guesswork" / "guesses").glob("*.json"))) if g["status"] == "decided"]
         self.assertEqual(len(decided), 1)
