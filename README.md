@@ -115,7 +115,7 @@ One Python file, no dependencies, Python 3.9 or newer.
 
 - **It guesses safely.** When the agent must guess, it picks the option that's cheapest to undo: soft delete, private by default, opt-in, a reminder before any charge.
 - **It asks first only when it matters.** The agent stops to ask only when a decision is high stakes and expensive to reverse, such as a payment flow or a data model.
-- **It keeps receipts short.** At most five decisions, ranked by stakes. A few small ones share one line; beyond that they are counted.
+- **It keeps receipts short.** Five decisions in full, ranked by stakes, and any others on one line each. A few small ones share a closing line.
 - **It nudges at most once.** In Claude Code, the end-of-turn check reminds the agent once per turn, and only when code changed and nothing was recorded. You can change that in `.guesswork/config.json`.
 
 ## The ledger is plain files in your repository
@@ -182,7 +182,7 @@ By default the action only reports. Add `fail-on: high` to block merging while a
 |---|---|
 | Do the CLI, hooks, receipts, pull request summaries, and report behave as specified? | Yes, covered by unit tests that pass on Linux and Windows in CI |
 | Does the Claude Code plugin pass Claude Code's own validator? | Yes, for both the plugin and the marketplace |
-| Do agents reliably record the decisions they make? | Measured on one model, not yet across models. In a [pre-registered test of 30 builds](evaluation/v3.1-2026-10-26/README.md), both conditions mentioned nearly every seeded decision (87 of 90 with Guesswork, 84 without). With Guesswork, 81 of 90 came as answerable choices against 46 of 90, and 104 decisions were saved against 0. It cost 16 percent more tokens. |
+| Do agents reliably record the decisions they make? | Measured on one model, not yet across models. In a [pre-registered test of 30 builds](evaluation/v3.1-2026-10-26/README.md), both conditions mentioned nearly every seeded decision (87 of 90 with Guesswork, 84 without). With Guesswork, 81 of 90 came as answerable choices against 46 of 90, and 104 decisions were saved against 0. A [check of 3.1.1](evaluation/v3.1.1-2026-10-26/README.md) kept 81 of 90 and cut the extra cost to 12 percent more tokens and about 20 seconds per feature. |
 | Do owners answer receipts and keep using them? | Not measured yet |
 
 This repository uses Guesswork on itself. Its [`.guesswork/`](.guesswork/README.md) folder holds the real decisions made while building it, and how each one was settled. [PROOF.md](PROOF.md) describes the evidence bar for the behavior claims. The screenshots come from real CLI output on the [fictional example app](examples/fictional-workspace-app/README.md).

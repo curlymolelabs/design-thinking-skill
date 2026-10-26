@@ -25,7 +25,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Iterable, Optional
 
-__version__ = "3.1.0"
+__version__ = "3.1.1"
 
 SCHEMA = "guesswork/1"
 LEDGER_DIR = ".guesswork"
@@ -612,18 +612,21 @@ def build_guess(project: Project, data: Any, taken: set[str], by: str) -> dict[s
 
 
 BUNDLE_SPLIT = re.compile(r";|,? and |,? while |,? but ", re.IGNORECASE)
-BUNDLE_VERB = re.compile(
-    r"\b(?:is|are|can|cannot|can't|gets?|stays?|expires?|joins?|cancel(?:s|led)?|purged?|deleted|"
-    r"sends?|sent|counts?|shows?|includes?|needs?|requires?|runs?|becomes?|loses?|converts?|"
-    r"charges?|keeps?|remains?|moves?|receives?|sees?|appears?|lasts?)\b",
-    re.IGNORECASE,
-)
+BUNDLE_LIMIT_TAIL = re.compile(r"^\s*(?:at most |at least |up to |no more than |under |over )?\d", re.IGNORECASE)
 
 
 def looks_bundled(title: str) -> bool:
-    """True when a title reads like two decisions joined into one sentence."""
+    """True when a title joins two settings, like "JPEG or PNG and at most 2 MB" or two different numbers.
+
+    Kept narrow on purpose: restatements such as "Only admins can export; members get a 403" are one decision,
+    and a note that fires on them teaches agents to ignore it.
+    """
     parts = [part for part in BUNDLE_SPLIT.split(title) if part.strip()]
-    return len(parts) > 1 and sum(1 for part in parts if BUNDLE_VERB.search(part)) > 1
+    if len(parts) < 2:
+        return False
+    if any(BUNDLE_LIMIT_TAIL.match(part) for part in parts[1:]):
+        return True
+    return sum(1 for part in parts if re.search(r"\d", part)) > 1
 
 
 def read_log_input(args: argparse.Namespace) -> list[Any]:
@@ -728,6 +731,8 @@ def receipt_items(guesses: list[dict[str, Any]], include_low: bool = False, sinc
 
 
 LOW_INLINE_LIMIT = 3
+# Decisions past the receipt limit are listed one line each, up to this many, instead of hidden.
+BRIEF_LIMIT = 10
 
 
 def low_stakes_note(low: list[dict[str, Any]], code: Any) -> Optional[str]:
@@ -740,7 +745,11 @@ def low_stakes_note(low: list[dict[str, Any]], code: Any) -> Optional[str]:
     return f"{plural(len(low), 'low-stakes guess', 'low-stakes guesses')} logged ({code('guesswork list --stakes low')})"
 
 
-def render_receipt(shown: list[dict[str, Any]], hidden: int, low: list[dict[str, Any]], fmt: str = "md") -> str:
+def render_receipt(
+    shown: list[dict[str, Any]], hidden: int, low: list[dict[str, Any]], fmt: str = "md",
+    brief: Optional[list[dict[str, Any]]] = None,
+) -> str:
+    brief = brief or []
     bold = (lambda text: f"**{text}**") if fmt == "md" else (lambda text: text)
     code = (lambda text: f"`{text}`") if fmt == "md" else (lambda text: text)
     low_note = low_stakes_note(low, code)
@@ -748,8 +757,8 @@ def render_receipt(shown: list[dict[str, Any]], hidden: int, low: list[dict[str,
         if low_note:
             return f"{bold('Guesswork')}: no decisions need you. {low_note}."
         return f"{bold('Guesswork')}: no open guesses."
-    total = len(shown) + hidden
-    high = sum(1 for g in shown if g["stakes"] == "high")
+    total = len(shown) + len(brief) + hidden
+    high = sum(1 for g in shown + brief if g["stakes"] == "high")
     need_word = "needs" if total == 1 else "need"
     header = f"{bold('Guesswork')} · {plural(total, 'decision')} {need_word} you"
     if high:
@@ -759,6 +768,9 @@ def render_receipt(shown: list[dict[str, Any]], hidden: int, low: list[dict[str,
         lines.append(f"{number}. {bold(guess['title'])} ({tag_line(guess)})")
         for key, label in options_for(guess):
             lines.append(f"   - {bold(key)} {label}")
+    for number, guess in enumerate(brief, start=len(shown) + 1):
+        options = " · ".join(f"{bold(key)} {label}" for key, label in options_for(guess))
+        lines.append(f"{number}. {bold(guess['title'])} ({tag_line(guess)}): {options}")
     lines.append("")
     picks = []
     for number, guess in enumerate(shown[:3], start=1):
@@ -770,7 +782,7 @@ def render_receipt(shown: list[dict[str, Any]], hidden: int, low: list[dict[str,
     )
     extras = []
     if hidden:
-        extras.append(f"{plural(hidden, 'more decision')} waiting ({code('guesswork receipt --limit 20')})")
+        extras.append(f"{plural(hidden, 'more decision')} waiting ({code('guesswork receipt --limit 30')})")
     if extras:
         lines.append("Also: " + "; ".join(extras) + ".")
     if low_note:
@@ -937,7 +949,7 @@ def cmd_log(args: argparse.Namespace) -> int:
         marker = "+" if action == "logged" else "~"
         print(f"{marker} {guess['id']}  {guess['stakes'].upper():6} {guess['category']:13} {guess['title']}")
         if looks_bundled(guess["title"]):
-            print(f"  note: {guess['id']} may hold two decisions; log them separately so the owner can answer each one")
+            print(f"  split: {guess['id']} holds two decisions. Log each as its own guess, then dismiss this one.")
         if supersedes:
             old = by_id[supersedes]
             old["superseded_by"] = guess["id"]
@@ -1024,19 +1036,25 @@ def cmd_receipt(args: argparse.Namespace) -> int:
     if args.since and since is None:
         raise GuessworkError("--since must be an ISO date or datetime")
     items = receipt_items(guesses, include_low=args.all, since=since)
-    shown, hidden = items[:limit], max(0, len(items) - limit)
+    shown = items[:limit]
+    brief = items[limit:limit + BRIEF_LIMIT]
+    hidden = max(0, len(items) - limit - len(brief))
     low = [] if args.all else sort_by_risk(g for g in guesses if g["status"] == "open" and g["stakes"] == "low")
     low_open = len(low)
     if args.format == "json":
-        payload = [
-            {"n": number, "id": g["id"], "title": g["title"], "stakes": g["stakes"], "category": g["category"],
-             "reversible": g["reversible"], "options": [{"key": k, "label": label} for k, label in options_for(g)]}
-            for number, g in enumerate(shown, start=1)
-        ]
-        print(json.dumps({"items": payload, "more": hidden, "low_open": low_open}, indent=2, ensure_ascii=False))
+        def entry(number: int, g: dict[str, Any]) -> dict[str, Any]:
+            return {"n": number, "id": g["id"], "title": g["title"], "stakes": g["stakes"], "category": g["category"],
+                    "reversible": g["reversible"], "options": [{"key": k, "label": label} for k, label in options_for(g)]}
+        payload = {
+            "items": [entry(number, g) for number, g in enumerate(shown, start=1)],
+            "brief": [entry(number, g) for number, g in enumerate(brief, start=len(shown) + 1)],
+            "more": len(brief) + hidden,
+            "low_open": low_open,
+        }
+        print(json.dumps(payload, indent=2, ensure_ascii=False))
     else:
-        print(render_receipt(shown, hidden, low, args.format))
-    remember_receipt(project, shown)
+        print(render_receipt(shown, hidden, low, args.format, brief))
+    remember_receipt(project, shown + brief)
     return 0
 
 

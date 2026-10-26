@@ -1,7 +1,7 @@
 {
   "name": "guesswork",
   "displayName": "Guesswork",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "Review the decisions, not the diff. Your agent records every product decision it made without instructions, you answer the risky ones in one line, and every later session, pull request, and CI run respects your answers.",
   "author": {
     "name": "Curly Mole Labs",

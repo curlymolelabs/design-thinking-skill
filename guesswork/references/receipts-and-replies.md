@@ -23,9 +23,9 @@ Use this reference when you present open guesses to the user or interpret their 
 Reply with your picks, like `1b 2a 3a`. `all a` keeps everything as built. `2: your own answer` sets something else.
 ```
 
-Paste it unchanged. The numbers are stored with the receipt, so `guesswork decide 1b` resolves to the right guess even after the conversation is compacted.
+Paste it unchanged, and do not repeat its decisions in your own words above it. The numbers are stored with the receipt, so `guesswork decide 1b` resolves to the right guess even after the conversation is compacted.
 
-- The receipt shows at most five items by default, ranked by stakes, reversibility, and category. Raise the limit with `--limit`.
+- The receipt shows five items in full by default, ranked by stakes, reversibility, and category. Up to ten more follow on one line each, with their options, so nothing is hidden behind a command. Change the number of full items with `--limit`.
 - Up to three low-stakes guesses are named in one closing line; more than three appear as a count. `guesswork receipt --all` lists them as numbered items.
 - Printing a new receipt replaces the stored numbering. Use ids when you refer to an older receipt.
 

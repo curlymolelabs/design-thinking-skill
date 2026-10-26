@@ -215,9 +215,34 @@ class ReceiptAndDecisionTests(Sandbox):
         self.assertNotIn("Page 0", text)
 
     def test_log_flags_titles_that_bundle_two_decisions(self) -> None:
-        bundled = {"title": "Billing is cancelled at once and the team is purged after 30 days", "category": "money", "stakes": "high"}
+        bundled = {"title": "Photos must be JPEG or PNG and at most 2 MB", "category": "limits", "stakes": "medium"}
         result = self.run_cli("log", input_text=json.dumps([bundled, SAMPLE[3]]))
-        self.assertEqual(result.stdout.count("may hold two decisions"), 1)
+        self.assertEqual(result.stdout.count("holds two decisions"), 1)
+
+    def test_bundling_check_skips_restatements(self) -> None:
+        # Titles taken from the 3.1.0 evaluation: the first two join two settings, the rest are one decision each.
+        self.assertTrue(gw.looks_bundled("Photos must be JPEG or PNG and at most 2 MB"))
+        self.assertTrue(gw.looks_bundled("The trial lasts 14 days and owners get a reminder 3 days before it ends"))
+        self.assertFalse(gw.looks_bundled("Only team owners and admins can export customers; members get a 403"))
+        self.assertFalse(gw.looks_bundled("Inviting the same email again cancels the old link and sends a fresh one"))
+        self.assertFalse(gw.looks_bundled("Deleted accounts can be restored for 30 days before name and email are erased"))
+
+    def test_receipt_lists_decisions_past_the_limit_on_one_line(self) -> None:
+        many = [
+            {"title": f"Limit {n} allows {n + 1} exports a day", "category": "limits", "stakes": "medium", "alternatives": ["No limit"]}
+            for n in range(7)
+        ]
+        self.run_cli("log", input_text=json.dumps(many))
+        text = self.run_cli("receipt").stdout
+        self.assertIn("7 decisions need you", text)
+        self.assertNotIn("more decision", text)
+        brief_lines = [line for line in text.splitlines() if line.startswith(("6. ", "7. "))]
+        self.assertEqual(len(brief_lines), 2)
+        self.assertIn("**a** Keep as built · **b** No limit", brief_lines[0])
+        self.run_cli("decide", "7b")
+        decided = [g for g in map(json.loads, (p.read_text() for p in (self.root / ".guesswork" / "guesses").glob("*.json"))) if g["status"] == "decided"]
+        self.assertEqual(len(decided), 1)
+        self.assertEqual(decided[0]["resolution"]["decision"], "No limit")
 
     def test_receipt_json_and_limit(self) -> None:
         self.log_sample()
@@ -243,10 +268,10 @@ class ReceiptAndDecisionTests(Sandbox):
     def test_decide_all_and_custom(self) -> None:
         self.log_sample()
         self.run_cli("receipt", "--limit", "2")
+        self.run_cli("decide", "g-any-member", "--custom", "Admins and owners can invite")
+        # Item 3 sits past the limit, on one line, so "all a" covers it too unless it was already answered.
         self.run_cli("decide", "--all", "a")
         self.assertEqual(self.guess("g-deleting")["status"], "decided")
-        self.assertEqual(self.guess("g-any-member")["status"], "open")
-        self.run_cli("decide", "g-any-member", "--custom", "Admins and owners can invite")
         guess = self.guess("g-any-member")
         self.assertEqual(guess["resolution"]["choice"], "custom")
         self.assertEqual(guess["resolution"]["decision"], "Admins and owners can invite")
