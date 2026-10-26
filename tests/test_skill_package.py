@@ -124,6 +124,9 @@ class SkillPackageTests(unittest.TestCase):
         for path in ROOT.rglob("*"):
             if ".git" in path.parts or not path.is_file() or path.suffix != ".md":
                 continue
+            # Evaluation transcripts are kept verbatim, including any URLs the agents wrote.
+            if "evaluation" in path.parts and "outputs" in path.parts:
+                continue
             text = path.read_text(encoding="utf-8")
             for url in re.findall(r"https?://[^\s)]+", text):
                 self.assertTrue(

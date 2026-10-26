@@ -182,7 +182,7 @@ By default the action only reports. Add `fail-on: high` to block merging while a
 |---|---|
 | Do the CLI, hooks, receipts, pull request summaries, and report behave as specified? | Yes, covered by unit tests that pass on Linux and Windows in CI |
 | Does the Claude Code plugin pass Claude Code's own validator? | Yes, for both the plugin and the marketplace |
-| Do agents reliably record the decisions they make? | Not measured yet |
+| Do agents reliably record the decisions they make? | Early signal from a small [pilot](evaluation/pilot-2026-10-26/README.md): the same model mentioned 16 of 18 seeded decisions either way, but with Guesswork 14 of 18 came as answerable choices (9 of 18 without) and 15 were saved for later (0 without) |
 | Do owners answer receipts and keep using them? | Not measured yet |
 
 This repository uses Guesswork on itself. Its [`.guesswork/`](.guesswork/README.md) folder holds the real decisions made while building it, and how each one was settled. [PROOF.md](PROOF.md) describes the evidence bar for the behavior claims. The screenshots come from real CLI output on the [fictional example app](examples/fictional-workspace-app/README.md).
