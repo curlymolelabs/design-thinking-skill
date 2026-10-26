@@ -2,7 +2,7 @@
 
 Design Thinking is the companion skill to [Guesswork](../README.md). Guesswork records the product decisions an agent made without instructions. Design Thinking takes over when a decision depends on evidence about real people, such as demand, willingness to pay, or comprehension, and an owner's preference cannot settle it.
 
-[![Verify skill package](https://github.com/curlymolelabs/design-thinking-skill/actions/workflows/verify.yml/badge.svg)](https://github.com/curlymolelabs/design-thinking-skill/actions/workflows/verify.yml)
+[![Verify skill package](https://github.com/curlymolelabs/guesswork/actions/workflows/verify.yml/badge.svg)](https://github.com/curlymolelabs/guesswork/actions/workflows/verify.yml)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](../LICENSE)
 
 This skill helps AI agents turn uncertain product, service, workflow, policy, and experience ideas into decisions supported by evidence.
@@ -52,7 +52,7 @@ It gives agents concrete rules for:
 From a cloned repository, the simplest installer is:
 
 ```bash
-npx skills add https://github.com/curlymolelabs/design-thinking-skill --skill design-thinking
+npx skills add https://github.com/curlymolelabs/guesswork --skill design-thinking
 ```
 
 You can also copy the complete `design-thinking` folder into a client skill directory.

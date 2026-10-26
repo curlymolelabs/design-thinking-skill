@@ -8,10 +8,10 @@ Releases publish the `guesswork` package to PyPI through trusted publishing, so 
 2. Under your account's publishing settings, add a pending trusted publisher with these values:
    - PyPI project name: `guesswork`
    - Owner: `curlymolelabs`
-   - Repository name: `design-thinking-skill`, or the new name after a rename
+   - Repository name: `guesswork`
    - Workflow name: `release.yml`
    - Environment name: `pypi`
-3. If the repository is renamed later, update the trusted publisher to the new name before the next release.
+3. If the repository is renamed again, update the trusted publisher before the next release.
 
 ## Release a version
 

@@ -22,8 +22,8 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/curlymolelabs/design-thinking-skill"
-Issues = "https://github.com/curlymolelabs/design-thinking-skill/issues"
+Homepage = "https://github.com/curlymolelabs/guesswork"
+Issues = "https://github.com/curlymolelabs/guesswork/issues"
 
 [project.scripts]
 guesswork = "guesswork:main"

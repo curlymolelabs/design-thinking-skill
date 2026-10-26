@@ -1789,7 +1789,7 @@ NUMBER = re.compile(r"(?<![\w.])\d+(?:\.\d+)?(?![\w])")
 # Identifiers such as FREE_PLAN_LIMIT join words with underscores, so these rules use letter
 # boundaries ((?<![a-z]) and (?![a-z])) where a plain \b would miss them.
 SCAN_RULES: list[tuple[str, re.Pattern[str], Optional[re.Pattern[str]]]] = [
-    ("money", re.compile(r"(?<![a-z])(?:price|pricing|amount|fees?|trial|discount|coupon|refund|tax|vat|currency|subscription|seats?|cents|plan)(?![a-z])", re.I), LITERAL),
+    ("money", re.compile(r"(?<![a-z])(?:price|pricing|amount|fees?|trial|discount|coupon|refund|tax|vat|currency|subscription|seats?|cents)(?![a-z])", re.I), LITERAL),
     ("data", re.compile(r"on_?delete|cascade|soft_?delete|deleted_?at|paranoid|purge|retention|keep_?for|archive_?after|hard_?delete|destroy_?all", re.I), None),
     ("access", re.compile(r"(?<![a-z])(?:roles?(?![a-z])|is_?admin|admin_?only|permission|authori[sz]|can_?(?:edit|view|delete|invite|manage)|is_?public|visibility|invit|share_?link|anyone_?with)", re.I), LITERAL),
     ("privacy", re.compile(r"analytics|tracking|track_?event|\.track\(|telemetry|mixpanel|posthog|segment\.(?:track|identify)|gtag|ip_?address|user_?agent|geoloc|fingerprint", re.I), None),
@@ -1877,6 +1877,61 @@ def cmd_scan(args: argparse.Namespace) -> int:
         for _, path, number, text in rows:
             snippet = text if len(text) <= 110 else text[:107] + "..."
             print(f"  {path}:{number}  {snippet}")
+    return 0
+
+
+# ---------------------------------------------------------------------------
+# Demo: a fictional project to try Guesswork without an agent
+
+DEMO_GUESSES = [
+    {"id": "g-workspace-delete-permanent", "title": "Deleting a workspace erases it immediately with no restore", "why": "No retention rule was given, and a hard delete was the shortest path", "category": "data", "stakes": "high", "reversible": False, "where": ["src/workspaces/delete.ts:14"], "alternatives": ["30-day restore window", "Require typing the workspace name to confirm"]},
+    {"id": "g-export-includes-emails", "title": "CSV exports include every member's email address", "why": "Export copies all member columns from the members table", "category": "privacy", "stakes": "high", "where": ["src/export/members.ts:8"], "alternatives": ["Only admins can export email addresses", "Leave email addresses out of exports"]},
+    {"id": "g-trial-converts-silently", "title": "Trials convert to paid on day 14 without a reminder email", "category": "money", "stakes": "high", "where": ["src/billing/trial.ts:22"], "alternatives": ["Email a reminder 3 days before the trial ends", "Require an explicit upgrade"]},
+    {"id": "g-any-member-invites", "title": "Any member can invite new members", "category": "access", "stakes": "medium", "where": ["src/invites/create.ts:5"], "alternatives": ["Only admins can invite", "Members invite, admins approve"]},
+    {"id": "g-invite-links-expire-7-days", "title": "Invitation links expire after 7 days", "category": "security", "stakes": "medium", "where": ["src/invites/token.ts:3"], "alternatives": ["Links expire after 24 hours", "Links work until used"]},
+    {"id": "g-comment-emails-everyone", "title": "Every new comment emails all workspace members", "category": "notifications", "stakes": "medium", "where": ["src/notifications/comments.ts"], "alternatives": ["Email only people who are mentioned", "Send a daily digest instead"]},
+    {"id": "g-free-plan-50-members", "title": "A free workspace holds at most 50 members", "category": "limits", "stakes": "low", "where": ["src/billing/plans.ts:7"], "alternatives": ["10 members", "No member limit"]},
+]
+DEMO_ANSWERS = {"g-trial-converts-silently": "b", "g-any-member-invites": "b"}
+
+
+def cmd_demo(args: argparse.Namespace) -> int:
+    import tempfile
+
+    target = Path(args.dir) if args.dir else Path(tempfile.mkdtemp(prefix="guesswork-demo-"))
+    project = Project(target)
+    if project.initialized and any(project.guess_dir.glob("*.json")):
+        raise GuessworkError(f"{target} already has a ledger; pass an empty --dir")
+    project.ensure()
+    for data in DEMO_GUESSES:
+        project.save(build_guess(project, data, set(), "agent"))
+    guesses, _ = project.load()
+    by_id = {guess["id"]: guess for guess in guesses}
+    for guess_id, choice in DEMO_ANSWERS.items():
+        guess = by_id[guess_id]
+        guess["resolution"] = {"choice": choice, "decision": decision_for(guess, choice), "by": "owner", "at": now_iso(), "note": None}
+        record(guess, "decided", "owner")
+        project.save(guess)
+    guesses, _ = project.load()
+    report = project.ledger / REPORT_NAME
+    write_text_atomic(report, render_report(project, guesses, "demo-workspace-app"))
+    shown = receipt_items(guesses)[: project.config()["receipt_limit"]]
+    low_open = sum(1 for g in guesses if g["status"] == "open" and g["stakes"] == "low")
+    remember_receipt(project, shown)
+    print("An agent was asked to \"add team workspaces with invites, a free trial, and CSV export\".")
+    print(f"It made {len(DEMO_GUESSES)} product decisions nobody specified. The owner already answered 2.")
+    print()
+    print(render_receipt(shown, 0, low_open, "text"))
+    print()
+    print(f"Demo project: {target}")
+    print(f"Report:       {report}")
+    print()
+    print("Try it:")
+    print(f"  guesswork --root \"{target}\" decide 1b 2c      answer like the owner would")
+    print(f"  guesswork --root \"{target}\" context src/billing/trial.ts")
+    print(f"  guesswork --root \"{target}\" report --open")
+    if args.open:
+        webbrowser.open(report.resolve().as_uri())
     return 0
 
 
@@ -2275,6 +2330,10 @@ def build_parser() -> argparse.ArgumentParser:
     sub.add_argument("--json", action="store_true")
 
     add("validate", cmd_validate, "check every ledger file")
+
+    sub = add("demo", cmd_demo, "create a fictional project with guesses to try Guesswork in seconds")
+    sub.add_argument("--dir", help="empty folder for the demo (default: a new temporary folder)")
+    sub.add_argument("--open", action="store_true", help="open the demo report in a browser")
 
     sub = add("hook", cmd_hook, "handle a Claude Code hook event (reads JSON on stdin)")
     sub.add_argument("event", choices=sorted(HOOKS))

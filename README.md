@@ -1,94 +1,121 @@
+<div align="center">
+
 # Guesswork
 
 **Review the decisions, not the diff.**
 
-[![Verify package](https://github.com/curlymolelabs/design-thinking-skill/actions/workflows/verify.yml/badge.svg)](https://github.com/curlymolelabs/design-thinking-skill/actions/workflows/verify.yml)
+Your coding agent makes dozens of product decisions you never asked for.<br>
+Guesswork shows you the risky ones, and you answer them in one line.
+
+[![Verify package](https://github.com/curlymolelabs/guesswork/actions/workflows/verify.yml/badge.svg)](https://github.com/curlymolelabs/guesswork/actions/workflows/verify.yml)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Claude Code plugin](https://img.shields.io/badge/Claude%20Code-plugin-a5b4fc.svg)](#install-it)
+[![Agent Skills](https://img.shields.io/badge/Agent%20Skills-Codex%20%C2%B7%20Cursor%20%C2%B7%20Gemini-4ade80.svg)](#install-it)
 
-Your coding agent makes dozens of product decisions you never asked for: how long a session lasts, who can invite whom, whether a delete can be undone, when a trial starts charging. Those decisions hide inside diffs nobody reads, and they cause the bugs that cost money, data, and trust.
+<img src="docs/demo.svg" alt="An agent builds team workspaces, records seven decisions, and shows a receipt. The owner replies 1b 2c 3b, and the agent applies the answers and locks the decisions." width="880">
 
-Guesswork makes the agent keep receipts. It records every decision it made without instructions, ranks them by what it costs if the guess is wrong, and ends the turn with a receipt you can answer in one line:
+</div>
 
-```text
-Guesswork · 5 decisions need you (2 high stakes)
+## The problem nobody reviews
 
-1. Deleting a workspace erases it immediately with no restore (high stakes · data · hard to undo)
-   - a Keep as built
-   - b 30-day restore window
-   - c Require typing the workspace name to confirm
-2. CSV exports include every member's email address (high stakes · privacy)
-   - a Keep as built
-   - b Only admins can export email addresses
-   - c Leave email addresses out of exports
-3. Workspace names must be unique across the whole product (medium stakes · ux · hard to undo)
-   - a Keep as built
-   - b Names only need to be unique per owner
+You asked for "team workspaces with invites and a free trial". Your agent shipped it in four minutes, and along the way it decided:
 
-Reply with your picks, like `1b 2a 3a`. `all a` keeps everything as built.
+- deleting a workspace erases it forever;
+- the trial charges the card on day 14 without a reminder;
+- every CSV export includes every member's email address;
+- any member can invite anyone.
+
+You didn't choose any of that. It's buried in 2,000 lines of diff, and nobody will read it until a customer emails support. **The expensive bugs in agent-written code aren't syntax errors. They're decisions.**
+
+Guesswork makes your agent keep receipts:
+
+1. **It records every guess.** Each product decision made without instructions is logged in plain English, with why it was made and what else it could have been.
+2. **It ranks them by stakes.** Money, data, access, and privacy come first. Wording and layout are only counted.
+3. **You answer in one line.** Reply `1b 2c 3b`. The agent changes the code and records your answers.
+4. **It never forgets.** Your answers become locked decisions that every later session, pull request, and CI run respects.
+
+## Try it in 10 seconds
+
+No project, no agent, no setup. This creates a fictional app with real guesses, a receipt to answer, and an HTML report:
+
+```bash
+uvx --from git+https://github.com/curlymolelabs/guesswork guesswork demo --open
 ```
 
-You reply `1b 2c 3b`. The agent changes the code, records your answers, and every later session, pull request, and CI run respects them.
+Use `pipx run --spec git+https://github.com/curlymolelabs/guesswork guesswork demo` if you prefer pipx. Both need Python 3.9 or newer.
 
-![Guesswork report for a fictional workspace app](docs/report.png)
+## See it work
 
-## It closes the loop that code review misses
+### 1. Vibe coding a feature
 
-- **Receipts.** The agent records each unspecified decision as it works and ends the turn with the risky ones. Low-stakes guesses are counted, not shown.
-- **One-line answers.** Replies like `1b 2a`, `all a`, or `2: restore for 14 days` become code changes and permanent records.
-- **Decision memory.** In Claude Code, locked decisions load at session start and survive compaction. Editing a file that implements one reminds the agent that the owner chose it.
-- **A guardrail against forgetting.** Once per turn, a stop hook asks the agent to record guesses when code changed and nothing was recorded, or to show decisions it recorded but never showed you.
-- **Audit an existing app.** `/guesswork:audit` finds the decisions already hidden in your codebase, such as session lengths, deletion rules, export contents, and plan limits.
-- **Pull request review.** A GitHub Action summarizes the decisions in a pull request and can block merging while high-stakes guesses are open.
-- **Evidence when opinions are not enough.** When an answer depends on what users will do, the bundled [Design Thinking skill](docs/design-thinking.md) designs the smallest credible test.
+You ask for a feature and keep working. At the end of the turn, the agent hands you the receipt from the animation above: the decisions with real stakes, numbered, each with alternatives. Low-stakes guesses such as page sizes are recorded but only counted, so the receipt stays short.
 
-## Install it in under a minute
+Reply `1b 2c 3b`, `all a` to keep everything as built, or `2: something else` in your own words.
 
-### Claude Code gets the full loop
+### 2. Auditing an app you already built
+
+Run `/guesswork:audit` in an existing project. The agent scans for the lines where products usually hide decisions, reads the flows behind them, and turns what it finds into a receipt.
+
+<img src="docs/audit.png" alt="guesswork scan output listing money, data, access, privacy, security, notification, and limit decisions found in a small app" width="880">
+
+### 3. Reviewing a pull request
+
+The GitHub Action adds the decisions to every pull request, so reviewers read five decisions instead of two thousand lines. It can block merging while high-stakes guesses are still open.
+
+<img src="docs/pr-comment.png" alt="A pull request comment listing twelve product decisions with their stakes, status, and files" width="880">
+
+### 4. Remembering across sessions
+
+A week later, a new session starts already knowing what you decided. When the agent edits a file that implements one of your decisions, Guesswork reminds it before your choice gets quietly undone.
+
+<img src="docs/memory.png" alt="Session start context listing locked decisions, and a reminder shown when the agent edits the billing trial file" width="880">
+
+### 5. Seeing everything at once
+
+`guesswork report` writes a dashboard of every decision: what needs you, what's locked, which files hold the most guesses. Click an option to copy the command that records it.
+
+<img src="docs/report.png" alt="The Guesswork HTML report showing five decisions that need the owner, locked decisions, and a breakdown by category" width="880">
+
+### 6. Testing what you can't just decide
+
+Some guesses are about how users will behave, such as "will teams pay per seat?". Your opinion can't settle those. Reply `3 test` and the bundled [Design Thinking skill](docs/design-thinking.md) designs the smallest test that can.
+
+## Install it
+
+### Claude Code: the full experience
 
 ```text
-/plugin marketplace add curlymolelabs/design-thinking-skill
+/plugin marketplace add curlymolelabs/guesswork
 /plugin install guesswork@curlymolelabs
 ```
 
-On Claude Code 2.1.275 or later, one step also works:
+On Claude Code 2.1.275 or later, one step also works: `/plugin install guesswork --marketplace curlymolelabs/guesswork`.
 
-```text
-/plugin install guesswork --marketplace curlymolelabs/design-thinking-skill
-```
-
-Then build something, or run `/guesswork:audit` in an existing project. To skip permission prompts for the CLI, allow `Bash(guesswork:*)`.
+Then build something, or run `/guesswork:audit`. To skip permission prompts for the CLI, allow `Bash(guesswork:*)`.
 
 ### Codex, Cursor, Gemini CLI, OpenCode, and other Agent Skills clients
 
 ```bash
-npx skills add https://github.com/curlymolelabs/design-thinking-skill --skill guesswork
+npx skills add https://github.com/curlymolelabs/guesswork --skill guesswork
 python3 <skill folder>/scripts/guesswork.py init --agents-md
 ```
 
-`init --agents-md` adds a short convention to `AGENTS.md`, which most agents read on every task. These clients get receipts and memory through the skill but not the hooks. See [the client guide](guesswork/references/clients.md).
+These clients get receipts and memory through the skill and `AGENTS.md`, but not the hooks yet. Hook adapters are [open issues](https://github.com/curlymolelabs/guesswork/issues) if you want to help. See [the client guide](guesswork/references/clients.md).
 
 ### The CLI on its own
 
 ```bash
-pipx install git+https://github.com/curlymolelabs/design-thinking-skill
-uvx --from git+https://github.com/curlymolelabs/design-thinking-skill guesswork status
+pipx install git+https://github.com/curlymolelabs/guesswork
 ```
 
-The CLI is one Python file with no dependencies. It needs Python 3.9 or newer.
+One Python file, no dependencies, Python 3.9 or newer.
 
-## How the loop works
+## How it stays out of your way
 
-```mermaid
-flowchart LR
-    A[Agent builds] --> B[Records each unspecified decision]
-    B --> C[Receipt ranked by stakes]
-    C --> D{You reply 1b 2a}
-    D --> E[Agent changes code and records answers]
-    E --> F[Locked decisions]
-    F --> G[Later sessions, pull requests, and CI respect them]
-```
-
-Agents are told to guess the safe way when they must guess: soft delete over hard delete, private over public, opt-in over opt-out, a reminder before any charge. They ask before building only when a decision is high stakes and expensive to reverse.
+- **It guesses safely.** When the agent must guess, it picks the option that's cheapest to undo: soft delete, private by default, opt-in, a reminder before any charge.
+- **It asks first only when it matters.** The agent stops to ask only when a decision is high stakes and expensive to reverse, such as a payment flow or a data model.
+- **It keeps receipts short.** At most five decisions, ranked by stakes. Everything else is a count.
+- **It nudges at most once.** In Claude Code, the end-of-turn check reminds the agent once per turn, and only when code changed and nothing was recorded. You can change that in `.guesswork/config.json`.
 
 ## The ledger is plain files in your repository
 
@@ -100,14 +127,15 @@ Agents are told to guess the safe way when they must guess: soft delete over har
     `-- g-trial-converts-silently.json
 ```
 
-Each guess is one JSON file with the decision in plain language, why it was made, its category and stakes, whether it can be undone, the files that implement it, the alternatives, and the owner's answer. One file per guess keeps parallel agents and branches from colliding. Commit the folder with the code it describes. See [the ledger format](guesswork/references/ledger-format.md).
+Each guess is one JSON file: the decision, why it was made, its category and stakes, whether it can be undone, the files that implement it, the alternatives, and your answer. One file per guess keeps parallel agents and branches from colliding. Commit the folder with your code, or gitignore it to keep it private. See [the ledger format](guesswork/references/ledger-format.md).
 
-Agents are told never to write secrets, credentials, or personal data into the ledger. In a public repository, the ledger is public too.
+Agents are told never to write secrets, credentials, or personal data into the ledger.
 
 ## Commands
 
 | Command | What it does |
 |---|---|
+| `guesswork demo` | Create a fictional project to try everything in seconds |
 | `guesswork log` | Record guesses from flags or a JSON batch on standard input |
 | `guesswork receipt` | Show the open decisions that need you, numbered for one-line replies |
 | `guesswork decide 1b 2a` | Record answers to the latest receipt, or `g-id=b`, or `--custom "..."` |
@@ -134,37 +162,33 @@ jobs:
       - uses: actions/checkout@v7
         with:
           fetch-depth: 0
-      - uses: curlymolelabs/design-thinking-skill@main
+      - uses: curlymolelabs/guesswork@main
         with:
           comment: "true"
 ```
 
-The action writes the summary to the job summary and keeps one pull request comment up to date. By default it only reports. To block merging while a pull request adds open high-stakes guesses, add `fail-on: high`. Pin the action to a release tag once one exists.
+By default the action only reports. Add `fail-on: high` to block merging while a pull request adds open high-stakes guesses. Pin it to a release tag once one exists.
 
 ## How it differs from rules files and decision logs
 
-- **`CLAUDE.md` and `AGENTS.md`** hold rules you write before the work. Guesswork captures the decisions the agent made during the work that you never anticipated.
+- **`CLAUDE.md` and `AGENTS.md`** hold rules you write before the work. Guesswork captures the decisions the agent made during the work, the ones you never anticipated.
 - **Decision logs and ADRs** record what your team decided. Guesswork records what the agent decided for you, then asks you.
-- **Code review** reads the diff. Guesswork reads the decisions, so you can review a two-thousand-line change in five answers.
+- **Code review** reads the diff. Guesswork reads the decisions.
 
 ## What is proven so far
 
 | Question | Current answer |
 |---|---|
-| Do the CLI, hooks, receipts, pull request summaries, and report behave as specified? | Yes, covered by unit tests on Linux and Windows in CI |
-| Does the Claude Code plugin pass Claude Code's own validator? | Yes, `claude plugin validate` passes for the plugin and the marketplace |
+| Do the CLI, hooks, receipts, pull request summaries, and report behave as specified? | Yes, covered by unit tests that pass on Linux and Windows in CI |
+| Does the Claude Code plugin pass Claude Code's own validator? | Yes, for both the plugin and the marketplace |
 | Do agents reliably record the decisions they make? | Not measured yet |
 | Do owners answer receipts and keep using them? | Not measured yet |
 
-This repository uses Guesswork on itself. Its [`.guesswork/`](.guesswork/README.md) folder holds the real decisions made while building Guesswork and how each one was settled. The owner delegated those first calls to the agent, and every record says so. [PROOF.md](PROOF.md) describes the evidence bar for the behavior claims.
-
-## Design Thinking is the companion skill
-
-The original skill in this repository, Design Thinking, helps agents turn uncertain product ideas into decisions backed by evidence. Guesswork hands off to it when an owner's preference cannot settle a guess. Read [the Design Thinking guide](docs/design-thinking.md).
+This repository uses Guesswork on itself. Its [`.guesswork/`](.guesswork/README.md) folder holds the real decisions made while building it, and how each one was settled. [PROOF.md](PROOF.md) describes the evidence bar for the behavior claims. The screenshots come from real CLI output on the [fictional example app](examples/fictional-workspace-app/README.md).
 
 ## Contribute
 
-Hook adapters for Cursor, Codex, Gemini CLI, and OpenCode are the most useful contributions right now, followed by scan rules for more frameworks. Read [the contribution guide](CONTRIBUTING.md). Report vulnerabilities through [private security reporting](SECURITY.md).
+Hook adapters for Cursor, Codex, and Gemini CLI, plus scan rules for more frameworks, are open as [good first issues](https://github.com/curlymolelabs/guesswork/issues). Read [the contribution guide](CONTRIBUTING.md). Report vulnerabilities through [private security reporting](SECURITY.md).
 
 ## License
 
