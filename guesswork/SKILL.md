@@ -3,7 +3,7 @@ name: guesswork
 description: Record the product decisions you make without explicit instructions (defaults, limits, permissions, data handling, money, notifications, user-facing promises) in a .guesswork/ ledger, end the turn with a short receipt the user answers in one line, and respect the decisions they already made. Use whenever you build or change user-facing behavior that the user did not fully specify, when the user answers a Guesswork receipt with replies like "1b 2a", or when asked what product decisions a codebase already makes. Do not use for pure refactors, styling, or work the user specified completely.
 license: MIT
 metadata:
-  version: "0.1.0"
+  version: "3.0.0"
   short-description: "Review the decisions your agent made, not just the diff"
 ---
 

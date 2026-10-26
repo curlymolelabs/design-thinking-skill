@@ -25,7 +25,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Iterable, Optional
 
-__version__ = "0.1.0"
+__version__ = "3.0.0"
 
 SCHEMA = "guesswork/1"
 LEDGER_DIR = ".guesswork"

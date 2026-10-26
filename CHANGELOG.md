@@ -2,7 +2,9 @@
 
 This file records public changes that affect skill behavior, package structure, or the decision-record format.
 
-## Guesswork 0.1.0, 2026-10-26
+## Guesswork 3.0.0, 2026-10-26
+
+The first Guesswork release continues the repository's version numbers, which reached 2.1.1 with Design Thinking, so release tags stay in order and `@v2` keeps pointing at the Design Thinking releases.
 
 ### Easier to try and understand
 
