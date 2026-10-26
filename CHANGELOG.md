@@ -4,7 +4,7 @@ This file records public changes that affect skill behavior, package structure, 
 
 ## Guesswork 3.1.1, 2026-10-26
 
-Changes from the [evaluation of 3.1.0](evaluation/v3.1-2026-10-26/README.md), which found Guesswork cost 16 percent more tokens and 63 percent more time per feature, still bundled some decisions, and sometimes hid decisions past the receipt limit. This is the first PyPI release since 3.0.0 and includes the 3.1.0 changes below.
+Changes from the [evaluation of 3.1.0](evaluation/v3.1-2026-10-26/README.md), which found Guesswork cost 16 percent more tokens and 63 percent more time per feature, still bundled some decisions, and sometimes hid decisions past the receipt limit. This is the first PyPI release since 3.0.0 and includes the 3.1.0 changes below. A [pre-registered check](evaluation/v3.1.1-2026-10-26/README.md) found that 3.1.1 keeps the benefit (81 of 90 decisions answerable, against 47 without Guesswork), hides nothing, and cuts the extra cost from 16 to 12 percent more tokens. It missed its goal of halving the cost, and agents still sometimes bundle two decisions in one pick.
 
 - The skill is about half as long, so agents spend fewer tokens reading it. Audit steps and the command table moved to `references/clients.md`.
 - Agents record guesses and print the receipt in one call with `guesswork log --receipt`, and no longer repeat the receipt's decisions in their own words.
