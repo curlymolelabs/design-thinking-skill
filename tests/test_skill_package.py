@@ -118,7 +118,7 @@ class SkillPackageTests(unittest.TestCase):
 
     def test_external_links_stay_with_the_public_project(self) -> None:
         allowed_prefixes = {
-            "https://github.com/curlymolelabs/design-thinking-skill",
+            "https://github.com/curlymolelabs/guesswork",
             "https://img.shields.io/",
         }
         for path in ROOT.rglob("*"):

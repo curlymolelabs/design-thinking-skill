@@ -4,6 +4,13 @@ This file records public changes that affect skill behavior, package structure, 
 
 ## Guesswork 0.1.0, 2026-10-26
 
+### Easier to try and understand
+
+- Added `guesswork demo`, which builds a fictional project with guesses, a receipt to answer, and a report in seconds.
+- The README now opens with an animated demo and shows six use cases with images made from real CLI and hook output.
+- `guesswork scan` no longer files lines that mention a plan under money; analytics lines with personal data now land under privacy.
+- The repository is now named `guesswork`; all links point to the new name.
+
 ### Agents now keep receipts for the decisions nobody specified
 
 - Added the `guesswork` skill: what counts as a guess, how to rate stakes, how to guess safely, and how to end a turn with a receipt the owner answers in one line.

@@ -6,8 +6,8 @@ This guide shows where each supported client loads the skills. Client behavior c
 
 | Client | Support | Installation |
 |---|---|---|
-| Claude Code | Full: skill, CLI on the path, hooks, and slash commands | `/plugin marketplace add curlymolelabs/design-thinking-skill`, then `/plugin install guesswork@curlymolelabs` |
-| Codex, Cursor, OpenCode, Gemini CLI, Grok Build, Pi, and other Agent Skills clients | Skill and CLI without hooks | `npx skills add https://github.com/curlymolelabs/design-thinking-skill --skill guesswork`, then `python3 <skill folder>/scripts/guesswork.py init --agents-md` |
+| Claude Code | Full: skill, CLI on the path, hooks, and slash commands | `/plugin marketplace add curlymolelabs/guesswork`, then `/plugin install guesswork@curlymolelabs` |
+| Codex, Cursor, OpenCode, Gemini CLI, Grok Build, Pi, and other Agent Skills clients | Skill and CLI without hooks | `npx skills add https://github.com/curlymolelabs/guesswork --skill guesswork`, then `python3 <skill folder>/scripts/guesswork.py init --agents-md` |
 | Any CI system | CLI | `python3 guesswork/scripts/guesswork.py check --base origin/main` |
 
 Without hooks, agents rely on the skill and `AGENTS.md` to record guesses and show receipts, and nothing reminds them at the end of a turn. Hook adapters for these clients are welcome contributions.
@@ -24,16 +24,16 @@ Native support means the client discovers the complete `design-thinking` folder,
 
 | Client | Support | Recommended installation |
 |---|---|---|
-| Codex | Native | `npx skills add https://github.com/curlymolelabs/design-thinking-skill --skill design-thinking` |
+| Codex | Native | `npx skills add https://github.com/curlymolelabs/guesswork --skill design-thinking` |
 | Claude Code | Native | Use the same installer, or copy the folder to `.claude/skills/design-thinking/` |
 | Cursor | Native | Use the same installer, or copy the folder to `.agents/skills/design-thinking/` |
 | OpenCode | Native | Use the same installer, or copy the folder to `.agents/skills/design-thinking/` |
 | Grok Build | Native | Use the same installer, or copy the folder to `.grok/skills/design-thinking/` |
 | OpenClaw | Native | Clone the repository, then run `openclaw skills install ./design-thinking --as design-thinking` |
-| Hermes Agent | Native | Run `hermes skills install curlymolelabs/design-thinking-skill/design-thinking` |
+| Hermes Agent | Native | Run `hermes skills install curlymolelabs/guesswork/design-thinking` |
 | DeepSeek Harness | Native | Copy the folder to `.dsh/skills/design-thinking/` or `.agents/skills/design-thinking/` |
 | ZCode | Native | Import the Codex or Claude copy in Settings > Skills, or copy it to `~/.zcode/skills/design-thinking/` |
-| Gemini CLI | Native | Run `gemini skills install https://github.com/curlymolelabs/design-thinking-skill` |
+| Gemini CLI | Native | Run `gemini skills install https://github.com/curlymolelabs/guesswork` |
 | Google Antigravity | Native | Copy the folder to `.agents/skills/design-thinking/` for the current project |
 | Pi | Native | Use `.agents/skills/design-thinking/`, `.pi/skills/design-thinking/`, or `--skill <path>` |
 | ChatGPT | Managed upload | Upload the complete folder or its zip through the Skills interface when available |
@@ -51,8 +51,8 @@ Clients with slash commands may expose the skill as `/design-thinking`, `/skill:
 OpenClaw accepts an Agent Skills-compatible directory whose root contains `SKILL.md`.
 
 ```bash
-git clone https://github.com/curlymolelabs/design-thinking-skill.git
-cd design-thinking-skill
+git clone https://github.com/curlymolelabs/guesswork.git
+cd guesswork
 openclaw skills install ./design-thinking --as design-thinking
 ```
 
@@ -63,8 +63,8 @@ Add `--global` when every local OpenClaw agent should see the skill. Review thir
 Hermes supports direct GitHub repository and path identifiers. It scans and installs the referenced support files with the skill.
 
 ```bash
-hermes skills inspect curlymolelabs/design-thinking-skill/design-thinking
-hermes skills install curlymolelabs/design-thinking-skill/design-thinking
+hermes skills inspect curlymolelabs/guesswork/design-thinking
+hermes skills install curlymolelabs/guesswork/design-thinking
 ```
 
 Hermes may ask you to confirm the installation after its security scan.
@@ -97,7 +97,7 @@ You can also copy the package to `~/.zcode/skills/design-thinking/`.
 Gemini CLI can install the GitHub repository directly:
 
 ```bash
-gemini skills install https://github.com/curlymolelabs/design-thinking-skill
+gemini skills install https://github.com/curlymolelabs/guesswork
 ```
 
 For Antigravity, copy the folder into the shared project convention:

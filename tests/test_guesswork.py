@@ -441,7 +441,7 @@ class ReportScanValidateTests(Sandbox):
         self.assertIn("Only admins can invite", text)
 
     def test_scan_finds_decisions_and_skips_tests(self) -> None:
-        source = "SESSION_TTL_SECONDS = 60 * 60 * 24 * 30\nFREE_PLAN_PROJECT_LIMIT = 3\nanalytics.track('signup')\n"
+        source = "SESSION_TTL_SECONDS = 60 * 60 * 24 * 30\nTRIAL_PRICE_CENTS = 0\nFREE_PLAN_PROJECT_LIMIT = 3\nanalytics.track('signup', {'ip_address': ip, 'plan': plan})\n"
         self.write("src/settings.py", source)
         self.write("tests/test_settings.py", source)
         payload = json.loads(self.run_cli("scan", "--json").stdout)
@@ -449,6 +449,9 @@ class ReportScanValidateTests(Sandbox):
         categories = {item["category"] for item in payload}
         self.assertEqual(paths, {"src/settings.py"})
         self.assertTrue({"security", "money", "privacy"}.issubset(categories))
+        by_line = {item["line"]: item["category"] for item in payload}
+        self.assertEqual(by_line[4], "privacy")
+        self.assertEqual(by_line[3], "limits")
 
     def test_validate_reports_broken_files(self) -> None:
         self.log_sample()
@@ -456,6 +459,17 @@ class ReportScanValidateTests(Sandbox):
         self.write(".guesswork/guesses/g-bad.json", "{not json")
         result = self.run_cli("validate", expect=2)
         self.assertIn("g-bad.json: not valid JSON", result.stdout)
+
+
+class DemoTests(Sandbox):
+    def test_demo_builds_a_project_with_a_receipt_and_report(self) -> None:
+        target = self.root / "demo"
+        result = self.run_cli("demo", "--dir", str(target))
+        self.assertIn("4 decisions need you (2 high stakes)", result.stdout)
+        self.assertTrue((target / ".guesswork" / "report.html").exists())
+        self.assertIn("decided g-workspace", self.run_cli("--root", str(target), "decide", "1b").stdout)
+        again = self.run_cli("demo", "--dir", str(target), expect=2)
+        self.assertIn("already has a ledger", again.stderr)
 
 
 class HelperTests(unittest.TestCase):

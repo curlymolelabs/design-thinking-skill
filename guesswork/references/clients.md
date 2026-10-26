@@ -48,7 +48,7 @@ jobs:
       - uses: actions/checkout@v7
         with:
           fetch-depth: 0
-      - uses: curlymolelabs/design-thinking-skill@main
+      - uses: curlymolelabs/guesswork@main
         with:
           comment: "true"
 ```
