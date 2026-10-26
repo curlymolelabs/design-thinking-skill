@@ -3,7 +3,7 @@ name: guesswork
 description: Record the product decisions you make without explicit instructions (defaults, limits, permissions, data handling, money, notifications, user-facing promises) in a .guesswork/ ledger, end the turn with a short receipt the user answers in one line, and respect the decisions they already made. Use whenever you build or change user-facing behavior that the user did not fully specify, when the user answers a Guesswork receipt with replies like "1b 2a", or when asked what product decisions a codebase already makes. Do not use for pure refactors, styling, or work the user specified completely.
 license: MIT
 metadata:
-  version: "3.0.0"
+  version: "3.1.0"
   short-description: "Review the decisions your agent made, not just the diff"
 ---
 
@@ -84,7 +84,7 @@ EOF
 
 Write each field for the owner, not for yourself:
 
-- **title:** what the product now does, in present tense, from the user's side, with the real numbers. Write "Password reset links expire after 1 hour", not "Chose a token expiry".
+- **title:** what the product now does, in present tense, from the user's side, with the real numbers. Write "Password reset links expire after 1 hour", not "Chose a token expiry". Keep **one decision per guess**: if the owner could want one half and not the other, split it. "Billing is cancelled at once" and "The team is purged after 30 days" are two guesses, not one.
 - **why:** one sentence on what the choice rests on.
 - **category:** money, access, privacy, data, security, legal, safety, defaults, limits, notifications, ux, content, integration, performance, or other.
 - **stakes** and **reversible:** from the rules above.
@@ -93,6 +93,19 @@ Write each field for the owner, not for yourself:
 - **alternatives:** one to three credible options that work differently, each under about 60 characters. The CLI adds "Keep as built" as option `a`.
 
 Never write secrets, credentials, personal data, or customer names into the ledger. It is committed with the code.
+
+## Sweep for the decisions agents forget
+
+Before you write the receipt, check the feature against these questions. Each one either has an answer in your code, which may be a guess to record, or is a gap worth one line in your reply:
+
+- **Scale:** what happens with 10 times or 1,000 times the usual data, such as a large export, a long list, or a big upload?
+- **Abuse:** can someone repeat it, spam it, or use it to reach other people's data?
+- **Who can see or do it:** which roles, and does that match how the rest of the app works?
+- **Audit:** will anyone need to know later who did it and when?
+- **Failure and undo:** what happens when a step fails halfway, and can the user take it back?
+- **People outside the app:** does it email, charge, or expose anything to someone who is not the current user?
+
+Record the answers that are product decisions. Mention real gaps you did not build in one short line, so the owner can ask for them.
 
 ## End the turn with the receipt
 
