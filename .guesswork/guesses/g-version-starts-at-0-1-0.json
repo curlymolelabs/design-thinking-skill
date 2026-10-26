@@ -17,17 +17,17 @@
   "question": null,
   "status": "decided",
   "resolution": {
-    "choice": "a",
-    "decision": "Guesswork starts at version 0.1.0, and Design Thinking keeps version 2.1.1",
-    "by": "claude-code (delegated by owner)",
-    "at": "2026-10-26T09:18:02Z",
-    "note": "Owner delegated this call (\"you decide what is best\"). Low stakes and cheap to change later; kept as built."
+    "choice": "custom",
+    "decision": "Guesswork launches as 3.0.0, continuing the repository's v2 release tags",
+    "by": "claude-code (approved by owner)",
+    "at": "2026-10-26T12:05:45Z",
+    "note": "Existing v2.0.0 to v2.1.1 tags from Design Thinking would make a 0.1.0 release look older and leave @v2 without the Action. The owner went ahead with the 3.0.0 plan."
   },
   "test": null,
   "superseded_by": null,
   "created_by": "claude-code",
   "created_at": "2026-10-26T08:19:11Z",
-  "updated_at": "2026-10-26T09:18:02Z",
+  "updated_at": "2026-10-26T12:05:45Z",
   "history": [
     {
       "at": "2026-10-26T08:19:11Z",
@@ -40,6 +40,12 @@
       "status": "decided",
       "by": "claude-code (delegated by owner)",
       "note": "Owner delegated this call (\"you decide what is best\"). Low stakes and cheap to change later; kept as built."
+    },
+    {
+      "at": "2026-10-26T12:05:45Z",
+      "status": "decided",
+      "by": "claude-code (approved by owner)",
+      "note": "Existing v2.0.0 to v2.1.1 tags from Design Thinking would make a 0.1.0 release look older and leave @v2 without the Action. The owner went ahead with the 3.0.0 plan."
     }
   ]
 }
