@@ -48,12 +48,12 @@ jobs:
       - uses: actions/checkout@v7
         with:
           fetch-depth: 0
-      - uses: curlymolelabs/guesswork@v3.0.0
+      - uses: curlymolelabs/guesswork@v3.1.1
         with:
           comment: "true"
 ```
 
-Add `fail-on: high` to block merging while a pull request adds open high-stakes guesses, or `medium` to include medium stakes. Pin the action to a release tag such as `v3.0.0`, or to a commit. `fetch-depth: 0` lets Guesswork compare the branch with its base. Without the comment input, the action needs only `contents: read`.
+Add `fail-on: high` to block merging while a pull request adds open high-stakes guesses, or `medium` to include medium stakes. Pin the action to a release tag such as `v3.1.1`, or to a commit. `fetch-depth: 0` lets Guesswork compare the branch with its base. Without the comment input, the action needs only `contents: read`.
 
 Any other CI system can run the CLI directly:
 
