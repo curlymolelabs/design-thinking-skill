@@ -136,11 +136,10 @@ jobs:
           fetch-depth: 0
       - uses: curlymolelabs/design-thinking-skill@main
         with:
-          fail-on: high
           comment: "true"
 ```
 
-The action writes the summary to the job summary, keeps one pull request comment up to date, and fails while the pull request adds open guesses at or above `fail-on`. Use `fail-on: never` for report-only mode. Pin the action to a release tag once one exists.
+The action writes the summary to the job summary and keeps one pull request comment up to date. By default it only reports. To block merging while a pull request adds open high-stakes guesses, add `fail-on: high`. Pin the action to a release tag once one exists.
 
 ## How it differs from rules files and decision logs
 
@@ -157,7 +156,7 @@ The action writes the summary to the job summary, keeps one pull request comment
 | Do agents reliably record the decisions they make? | Not measured yet |
 | Do owners answer receipts and keep using them? | Not measured yet |
 
-This repository uses Guesswork on itself. Its [`.guesswork/`](.guesswork/README.md) folder holds the real decisions made while building Guesswork, and they stay open until the owner answers them. [PROOF.md](PROOF.md) describes the evidence bar for the behavior claims.
+This repository uses Guesswork on itself. Its [`.guesswork/`](.guesswork/README.md) folder holds the real decisions made while building Guesswork and how each one was settled. The owner delegated those first calls to the agent, and every record says so. [PROOF.md](PROOF.md) describes the evidence bar for the behavior claims.
 
 ## Design Thinking is the companion skill
 

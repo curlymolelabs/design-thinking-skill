@@ -18,6 +18,8 @@ python -m unittest tests.test_guesswork tests.test_plugin_package -v
 python guesswork/scripts/guesswork.py validate
 ```
 
+Maintainers release new versions as described in [the release guide](docs/releasing.md).
+
 ## Start with the observed failure
 
 Open an issue that includes:

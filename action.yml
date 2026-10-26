@@ -7,9 +7,9 @@ branding:
 
 inputs:
   fail-on:
-    description: Fail while open guesses changed in this pull request reach this stakes level (high, medium, low, or never).
+    description: Fail while open guesses changed in this pull request reach this stakes level (high, medium, low, or never). The default only reports.
     required: false
-    default: high
+    default: never
   base:
     description: Git ref to compare with. Defaults to the pull request base branch.
     required: false

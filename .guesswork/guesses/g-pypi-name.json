@@ -15,19 +15,31 @@
     "Rename the package to guesswork-cli"
   ],
   "question": null,
-  "status": "open",
-  "resolution": null,
+  "status": "decided",
+  "resolution": {
+    "choice": "b",
+    "decision": "Publish 0.1.0 now to reserve the name",
+    "by": "claude-code (delegated by owner)",
+    "at": "2026-10-26T09:18:00Z",
+    "note": "Owner delegated this call (\"you decide what is best\"). Added a trusted-publishing release workflow. Publishing waits for the owner to configure PyPI and push tag v0.1.0 (docs/releasing.md)."
+  },
   "test": null,
   "superseded_by": null,
   "created_by": "claude-code",
   "created_at": "2026-10-26T08:19:11Z",
-  "updated_at": "2026-10-26T08:19:11Z",
+  "updated_at": "2026-10-26T09:18:00Z",
   "history": [
     {
       "at": "2026-10-26T08:19:11Z",
       "status": "open",
       "by": "claude-code",
       "note": "recorded"
+    },
+    {
+      "at": "2026-10-26T09:18:00Z",
+      "status": "decided",
+      "by": "claude-code (delegated by owner)",
+      "note": "Owner delegated this call (\"you decide what is best\"). Added a trusted-publishing release workflow. Publishing waits for the owner to configure PyPI and push tag v0.1.0 (docs/releasing.md)."
     }
   ]
 }

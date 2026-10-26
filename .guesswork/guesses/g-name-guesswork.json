@@ -17,19 +17,31 @@
     "Name it Decision Inbox"
   ],
   "question": null,
-  "status": "open",
-  "resolution": null,
+  "status": "decided",
+  "resolution": {
+    "choice": "a",
+    "decision": "The new tool is named Guesswork: the command, plugin, and Python package all use that name",
+    "by": "claude-code (delegated by owner)",
+    "at": "2026-10-26T09:17:59Z",
+    "note": "Owner delegated this call (\"you decide what is best\"). Guesswork names the problem it solves; Receipts would collide with the receipt feature, and Decision Inbox is generic."
+  },
   "test": null,
   "superseded_by": null,
   "created_by": "claude-code",
   "created_at": "2026-10-26T08:19:11Z",
-  "updated_at": "2026-10-26T08:19:11Z",
+  "updated_at": "2026-10-26T09:17:59Z",
   "history": [
     {
       "at": "2026-10-26T08:19:11Z",
       "status": "open",
       "by": "claude-code",
       "note": "recorded"
+    },
+    {
+      "at": "2026-10-26T09:17:59Z",
+      "status": "decided",
+      "by": "claude-code (delegated by owner)",
+      "note": "Owner delegated this call (\"you decide what is best\"). Guesswork names the problem it solves; Receipts would collide with the receipt feature, and Decision Inbox is generic."
     }
   ]
 }

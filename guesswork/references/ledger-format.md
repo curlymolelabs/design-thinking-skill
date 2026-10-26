@@ -16,6 +16,8 @@ Use this reference when you cannot run the CLI, when you edit ledger files direc
 
 One file per guess keeps parallel agents and branches from colliding. Commit the folder with the code it describes.
 
+To keep the ledger private, add `.guesswork/` to the project's `.gitignore`. Receipts and hooks keep working on that machine, but pull request summaries, CI checks, and other machines no longer see the decisions.
+
 ## Each guess has a fixed set of fields
 
 ```json

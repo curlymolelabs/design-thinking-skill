@@ -19,7 +19,12 @@ This file records public changes that affect skill behavior, package structure, 
 
 ### Teams can review decisions in pull requests
 
-- Added a GitHub Action that summarizes the decisions in a pull request, keeps one comment up to date, and can fail while high-stakes guesses are open.
+- Added a GitHub Action that summarizes the decisions in a pull request and keeps one comment up to date. It only reports by default; `fail-on: high` blocks merging while high-stakes guesses are open.
+
+### Installs fail gently and publish without tokens
+
+- Without Python 3.9 or newer, the plugin warns once at session start and keeps every other hook silent.
+- Added a release workflow that publishes the `guesswork` package to PyPI through trusted publishing. See `docs/releasing.md`.
 
 ### The repository now leads with Guesswork
 

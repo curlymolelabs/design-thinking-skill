@@ -16,19 +16,31 @@
     "Warn once per session when Python is missing"
   ],
   "question": null,
-  "status": "open",
-  "resolution": null,
+  "status": "decided",
+  "resolution": {
+    "choice": "c",
+    "decision": "Warn once per session when Python is missing",
+    "by": "claude-code (delegated by owner)",
+    "at": "2026-10-26T09:18:00Z",
+    "note": "Owner delegated this call (\"you decide what is best\"). A Node.js port would swap one runtime requirement for another. The launcher now warns once at session start and keeps other hooks silent."
+  },
   "test": null,
   "superseded_by": null,
   "created_by": "claude-code",
   "created_at": "2026-10-26T08:19:11Z",
-  "updated_at": "2026-10-26T08:19:11Z",
+  "updated_at": "2026-10-26T09:18:00Z",
   "history": [
     {
       "at": "2026-10-26T08:19:11Z",
       "status": "open",
       "by": "claude-code",
       "note": "recorded"
+    },
+    {
+      "at": "2026-10-26T09:18:00Z",
+      "status": "decided",
+      "by": "claude-code (delegated by owner)",
+      "note": "Owner delegated this call (\"you decide what is best\"). A Node.js port would swap one runtime requirement for another. The launcher now warns once at session start and keeps other hooks silent."
     }
   ]
 }

@@ -16,19 +16,31 @@
     "Move Guesswork to its own new repository"
   ],
   "question": null,
-  "status": "open",
-  "resolution": null,
+  "status": "decided",
+  "resolution": {
+    "choice": "a",
+    "decision": "The repository now leads with Guesswork, and Design Thinking becomes its companion skill",
+    "by": "claude-code (delegated by owner)",
+    "at": "2026-10-26T09:18:00Z",
+    "note": "Owner delegated this call (\"you decide what is best\"). One repository keeps the history, stars, and contributors the open source program counts. Renaming the repository to guesswork is recommended; GitHub redirects old links."
+  },
   "test": null,
   "superseded_by": null,
   "created_by": "claude-code",
   "created_at": "2026-10-26T08:19:11Z",
-  "updated_at": "2026-10-26T08:19:11Z",
+  "updated_at": "2026-10-26T09:18:00Z",
   "history": [
     {
       "at": "2026-10-26T08:19:11Z",
       "status": "open",
       "by": "claude-code",
       "note": "recorded"
+    },
+    {
+      "at": "2026-10-26T09:18:00Z",
+      "status": "decided",
+      "by": "claude-code (delegated by owner)",
+      "note": "Owner delegated this call (\"you decide what is best\"). One repository keeps the history, stars, and contributors the open source program counts. Renaming the repository to guesswork is recommended; GitHub redirects old links."
     }
   ]
 }

@@ -33,7 +33,7 @@ Hook adapters for other clients are welcome contributions. The `guesswork hook` 
 
 ## Continuous integration reads the ledger from the branch
 
-The repository ships a GitHub Action. It writes a decision summary to the job summary, can post it as a pull request comment, and can fail the check while high-stakes guesses are open:
+The repository ships a GitHub Action. It writes a decision summary to the job summary and can post it as a pull request comment. By default it only reports:
 
 ```yaml
 name: Guesswork
@@ -45,16 +45,15 @@ jobs:
   decisions:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
       - uses: curlymolelabs/design-thinking-skill@main
         with:
-          fail-on: high
           comment: "true"
 ```
 
-Pin the action to a release tag or commit once one exists. `fetch-depth: 0` lets Guesswork compare the branch with its base. Without the comment input, the action needs only `contents: read`.
+Add `fail-on: high` to block merging while a pull request adds open high-stakes guesses, or `medium` to include medium stakes. Pin the action to a release tag or commit once one exists. `fetch-depth: 0` lets Guesswork compare the branch with its base. Without the comment input, the action needs only `contents: read`.
 
 Any other CI system can run the CLI directly:
 

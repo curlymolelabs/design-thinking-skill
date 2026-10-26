@@ -3,8 +3,10 @@ from __future__ import annotations
 import json
 import os
 import re
+import shutil
 import subprocess
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -105,10 +107,20 @@ class PluginManifestTests(unittest.TestCase):
         for command in commands:
             self.assertRegex(frontmatter(command), r"(?m)^description: \S")
 
-    def test_action_runs_the_bundled_cli(self) -> None:
+    def test_action_runs_the_bundled_cli_and_only_reports_by_default(self) -> None:
         action = (ROOT / "action.yml").read_text(encoding="utf-8")
         self.assertIn("guesswork/scripts/guesswork.py", action)
         self.assertIn("using: composite", action)
+        fail_on = re.search(r"^  fail-on:\n(?:    .*\n)*?    default: (\S+)$", action, re.MULTILINE)
+        assert fail_on is not None
+        self.assertEqual(fail_on.group(1), "never")
+
+    def test_release_workflow_uses_trusted_publishing(self) -> None:
+        workflow = (ROOT / ".github" / "workflows" / "release.yml").read_text(encoding="utf-8")
+        self.assertIn("id-token: write", workflow)
+        self.assertIn("pypa/gh-action-pypi-publish@release/v1", workflow)
+        self.assertIn('"v${version}" != "${GITHUB_REF_NAME}"', workflow)
+        self.assertNotIn("password:", workflow)
 
 
 class LauncherTests(unittest.TestCase):
@@ -120,6 +132,35 @@ class LauncherTests(unittest.TestCase):
         result = subprocess.run([str(launcher), "--version"], capture_output=True, text=True)
         self.assertEqual(result.returncode, 0, msg=result.stderr)
         self.assertEqual(result.stdout.strip(), f"guesswork {cli_version()}")
+
+    @unittest.skipIf(os.name == "nt", "the launcher is a POSIX shell script")
+    def test_launcher_without_python_warns_once_and_keeps_hooks_quiet(self) -> None:
+        launcher = ROOT / "bin" / "guesswork"
+        shell = shutil.which("sh")
+        assert shell is not None
+        with tempfile.TemporaryDirectory() as tmp:
+            tools = Path(tmp)
+            cat = shutil.which("cat")
+            if cat:
+                (tools / "cat").symlink_to(cat)
+            env = {"PATH": str(tools)}
+
+            def run(*args: str, stdin: str = "") -> subprocess.CompletedProcess:
+                return subprocess.run([shell, str(launcher), *args], input=stdin, env=env, capture_output=True, text=True)
+
+            start = run("hook", "session-start", stdin='{"source": "startup"}')
+            self.assertEqual(start.returncode, 0, msg=start.stderr)
+            payload = json.loads(start.stdout)
+            self.assertIn("Python 3.9 or newer", payload["systemMessage"])
+            self.assertEqual(payload["hookSpecificOutput"]["hookEventName"], "SessionStart")
+            compact = run("hook", "session-start", stdin='{"source": "compact"}')
+            self.assertEqual((compact.returncode, compact.stdout), (0, ""))
+            for event in ("prompt", "post-edit", "stop"):
+                quiet = run("hook", event, stdin="{}")
+                self.assertEqual((quiet.returncode, quiet.stdout), (0, ""), msg=event)
+            direct = run("--version")
+            self.assertEqual(direct.returncode, 1)
+            self.assertIn("Python 3.9 or newer is required", direct.stderr)
 
     def test_script_runs_with_this_interpreter(self) -> None:
         result = subprocess.run([sys.executable, str(SCRIPT), "--version"], capture_output=True, text=True)
